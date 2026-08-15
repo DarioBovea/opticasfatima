@@ -49,7 +49,7 @@ const servicios = [
 export default function ServiciosPage() {
   return (
     <section className="mt-36 flex flex-col px-6 py-12 md:flex-row md:px-[calc((100%-1180px)/2)]">
-      <aside className="hidden w-64 shrink-0 bg-light/10 py-10 pr-10 md:block">
+      <aside className="hidden w-64 shrink-0 bg-light/10 py-10 px-4 md:block">
         <BlogSidebar />
       </aside>
 
