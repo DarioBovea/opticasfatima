@@ -1,0 +1,172 @@
+export type BloqueContenido = { tipo: "p" | "h2" | "h3" | "h4"; texto: string };
+
+export type Articulo = {
+  slug: string;
+  titulo: string;
+  categoria: string;
+  descripcion: string;
+  imagen: string;
+  contenido: BloqueContenido[];
+};
+
+export const articulos: Articulo[] = [
+  {
+    slug: "lentes-formulados",
+    titulo: `Los lentes formulados`,
+    categoria: `Lentes Formulados`,
+    descripcion: `Los lentes formulados son una solución esencial para corregir problemas de visión como la miopía, hipermetropía, astigmatismo y presbicia.`,
+    imagen: "/img/lentes-formulados.jpg",
+    contenido: [
+      { tipo: "p", texto: `Los lentes formulados son una solución esencial para corregir problemas de visión como la miopía, hipermetropía, astigmatismo y presbicia. Estos lentes se fabrican con una prescripción óptica personalizada para cada individuo, lo que garantiza una corrección precisa y efectiva de la visión.` },
+      { tipo: "p", texto: `Para obtener lentes formulados, es necesario visitar a un optometrista u oftalmólogo, quien realizará un examen de la vista y determinará la prescripción adecuada. Una vez que tengas tu fórmula, puedes elegir entre una variedad de monturas y tipos de lentes que se adapten a tus necesidades y estilo personal.` },
+      { tipo: "p", texto: `Además, existen diferentes materiales y opciones de lentes, como los lentes de policarbonato, que son livianos y resistentes a impactos, y los lentes de alto índice, que son más delgados y desvían mejor los rayos de luz. También puedes agregar filtros especiales para proteger tus ojos de la luz azul o los rayos UV.` },
+      { tipo: "p", texto: `¿Tienes alguna pregunta específica sobre los lentes formulados o necesitas ayuda para elegir los adecuados para ti? ¡Estoy aquí para ayudarte!` },
+    ],
+  },
+  {
+    slug: "gafas-de-sol",
+    titulo: `Gafas de sol: Más que un Accesorio de Moda`,
+    categoria: `Gafas De Sol`,
+    descripcion: `Las gafas de sol son un accesorio multifacético que ofrece beneficios más allá de la moda.`,
+    imagen: "/img/gafas-de-sol.jpg",
+    contenido: [
+      { tipo: "p", texto: `Las gafas de sol han trascendido su función original de proteger nuestros ojos de la luz solar directa para convertirse en un complemento de moda indispensable en cualquier armario. No solo son un símbolo de estilo, sino que también desempeñan un papel crucial en la salud ocular.` },
+      { tipo: "p", texto: `La importancia de las gafas de sol radica en su capacidad para filtrar los rayos ultravioleta (UV) que pueden causar daños a largo plazo en nuestros ojos, como cataratas y degeneración macular. Además, las gafas de sol reducen el deslumbramiento, mejoran la visión en condiciones de mucha luz y protegen la piel delicada alrededor de los ojos.` },
+      { tipo: "p", texto: `En el mercado actual, existe una amplia variedad de gafas de sol para satisfacer todas las necesidades y gustos. Desde las clásicas Ray-Ban Aviator hasta las modernas lentes espejadas y fotocromáticas, las opciones son infinitas. Las gafas de sol polarizadas, por ejemplo, son ideales para conductores y deportistas, ya que reducen significativamente el reflejo de la luz en superficies planas, mejorando la claridad y el contraste de la visión.` },
+      { tipo: "p", texto: `Comprar gafas de sol en línea se ha vuelto cada vez más popular, gracias a la comodidad y la variedad de opciones disponibles. Tiendas como General Optica y Multiópticas ofrecen una extensa selección de gafas de sol de marcas reconocidas, permitiendo a los consumidores comparar estilos y precios cómodamente desde sus hogares.` },
+      { tipo: "p", texto: `Al elegir gafas de sol, es esencial considerar no solo el diseño y la marca, sino también la calidad de las lentes y la protección UV que ofrecen. Es recomendable buscar gafas que bloqueen el 100% de los rayos UVA y UVB para asegurar una protección óptima.` },
+      { tipo: "p", texto: `Además de su funcionalidad, las gafas de sol son un reflejo de la personalidad y el estilo individual. Pueden complementar un atuendo, destacar rasgos faciales y expresar individualidad. Con la variedad de formas, colores y diseños disponibles, encontrar el par perfecto es una aventura de estilo en sí misma.` },
+      { tipo: "p", texto: `En resumen, las gafas de sol son un accesorio multifacético que ofrece beneficios más allá de la moda. Protegen nuestros ojos, mejoran nuestra visión en condiciones de luz intensa y nos permiten expresar nuestro estilo único. La próxima vez que busques un nuevo par de gafas de sol, recuerda que estás invirtiendo en tu salud ocular y en tu imagen personal.` },
+    ],
+  },
+  {
+    slug: "gafas-de-sol-formuladas",
+    titulo: `Las gafas de sol formuladas`,
+    categoria: `Gafas De Sol Formuladas`,
+    descripcion: `Las gafas de sol formuladas son una innovación que combina la protección solar con la corrección visual personalizada.`,
+    imagen: "/img/lentessolformulados.jpg",
+    contenido: [
+      { tipo: "p", texto: `Las gafas de sol formuladas son una innovación que combina la protección solar con la corrección visual personalizada. Para aquellos que requieren lentes graduados, las gafas de sol formuladas ofrecen una solución práctica y estilizada para disfrutar del aire libre sin sacrificar la claridad visual. Con la capacidad de incorporar prescripciones ópticas específicas para condiciones como miopía, hipermetropía, astigmatismo o presbicia, estas gafas son diseñadas para proporcionar una visión nítida y cómoda en entornos luminosos.` },
+      { tipo: "p", texto: `La elección del modelo de gafas de sol es amplia y adaptable a las necesidades de cada individuo. Desde monturas redondas hasta cuadradas, hay opciones para todos los gustos y requerimientos de prescripción. Es importante considerar que las personas con prescripciones más altas pueden necesitar optar por monturas menos curvas, especialmente si tienen astigmatismo, para asegurar una correcta adaptación de los lentes.` },
+      { tipo: "p", texto: `Los lentes solares vienen en una variedad de materiales, incluyendo opciones estándar y de alta resistencia como el policarbonato, que es conocido por su durabilidad y tonos más claros. Además, los lentes multifocales se benefician de tonos degradados que facilitan la visión de cerca, como la lectura, en la parte inferior del lente.` },
+      { tipo: "p", texto: `Las ventajas de las gafas de sol formuladas son numerosas. Ofrecen practicidad al eliminar la necesidad de llevar dos pares de gafas y cambiar entre ellas. También proporcionan una visión clara y protegida en entornos con mucha luz, evitando la incomodidad que puede causar el exceso de brillo.` },
+      { tipo: "p", texto: `Para aquellos interesados en adquirir gafas de sol formuladas, es recomendable visitar una óptica especializada donde asesores y especialistas pueden ayudar en la selección del modelo adecuado y proporcionar una fórmula precisa según las necesidades visuales de cada persona.` },
+      { tipo: "p", texto: `En resumen, las gafas de sol formuladas son una excelente opción para quienes buscan comodidad, estilo y funcionalidad en un solo accesorio. Permiten disfrutar del sol y del exterior sin comprometer la salud visual, haciendo de la experiencia al aire libre algo más seguro y agradable.` },
+      { tipo: "h3", texto: `¿cual es la diferencia entre las gafas de sol formuladas y las normales?` },
+      { tipo: "p", texto: `La diferencia principal entre las gafas de sol formuladas y las normales radica en la personalización de la corrección visual. Las gafas de sol formuladas están equipadas con lentes que han sido adaptados a la prescripción óptica específica de un individuo, lo que significa que no solo protegen los ojos de la radiación ultravioleta del sol, sino que también corrigen problemas de visión como la miopía, hipermetropía, astigmatismo o presbicia.` },
+      { tipo: "p", texto: `Por otro lado, las gafas de sol normales ofrecen protección contra el sol pero no tienen ninguna capacidad de corrección visual. Son adecuadas para personas con visión normal o para aquellos que no necesitan corrección visual cuando están al aire libre. Estas gafas pueden tener diferentes niveles de protección UV y vienen en una variedad de estilos, pero todas comparten la característica común de no incluir prescripciones personalizadas.` },
+      { tipo: "p", texto: `En resumen, si necesitas corrección visual y protección solar al mismo tiempo, las gafas de sol formuladas son la opción adecuada. Si solo buscas proteger tus ojos del sol sin necesidad de corrección visual, entonces las gafas de sol normales serán suficientes. Es importante consultar con un especialista en cuidado de la vista para determinar cuál es la mejor opción para tus necesidades específicas.` },
+    ],
+  },
+  {
+    slug: "gafas-para-ninos",
+    titulo: `Gafas para niños`,
+    categoria: `Gafas Para Niños`,
+    descripcion: `La elección de gafas para niños es una decisión importante que puede influir en su desarrollo visual y su comodidad diaria.`,
+    imagen: "/img/gafasparaninos.jpg",
+    contenido: [
+      { tipo: "p", texto: `La elección de gafas para niños es una decisión importante que puede influir en su desarrollo visual y su comodidad diaria. Las gafas no son solo un medio para corregir problemas de visión, sino también un accesorio que puede afectar la autoestima y la interacción social de los niños. Por lo tanto, es esencial considerar varios factores al seleccionar las gafas adecuadas para los más jóvenes.` },
+      { tipo: "h3", texto: `Diseño y Comodidad` },
+      { tipo: "p", texto: `El diseño de las gafas debe ser atractivo para los niños, con colores vivos y formas que les gusten, lo que puede motivarlos a usarlas con regularidad. Además, la comodidad es crucial, ya que las gafas deben ajustarse bien sin causar molestias o marcas en la nariz o detrás de las orejas. Las monturas de silicona son una excelente opción debido a su durabilidad y flexibilidad, lo que las hace ideales para el estilo de vida activo de los niños.` },
+      { tipo: "h3", texto: `Durabilidad y Seguridad` },
+      { tipo: "p", texto: `Las gafas para niños deben ser resistentes a los impactos y seguras. Las monturas de plástico resistente y los lentes de policarbonato son recomendables porque son menos propensos a romperse y, por lo tanto, son más seguros para los juegos y actividades diarias. Además, es importante que las gafas tengan bisagras flexibles que puedan soportar el uso frecuente y los movimientos bruscos.` },
+      { tipo: "h3", texto: `Protección UV` },
+      { tipo: "p", texto: `La protección contra los rayos ultravioleta es un aspecto que no debe pasarse por alto. Los niños pasan mucho tiempo al aire libre, por lo que es fundamental que sus gafas ofrezcan una protección UV adecuada para prevenir daños en los ojos a largo plazo.` },
+      { tipo: "h3", texto: `Adaptabilidad` },
+      { tipo: "p", texto: `A medida que los niños crecen, su visión y la forma de su rostro cambian. Por ello, es importante elegir gafas que puedan adaptarse a estos cambios. Las monturas ajustables o las que ofrecen diferentes tamaños de almohadillas nasales pueden ser una buena inversión a largo plazo.` },
+      { tipo: "h3", texto: `Asesoramiento Profesional` },
+      { tipo: "p", texto: `Finalmente, es imprescindible contar con el asesoramiento de un profesional de la óptica. Un optometrista puede ayudar a determinar la prescripción correcta y sugerir las mejores opciones de monturas y lentes basadas en las necesidades específicas del niño.` },
+      { tipo: "p", texto: `En resumen, al elegir gafas para niños, es importante buscar monturas que sean cómodas, seguras, duraderas y estéticamente agradables. Con la orientación adecuada y una selección cuidadosa, las gafas pueden mejorar significativamente la calidad de vida y la confianza de los niños. Para obtener más información y explorar una variedad de opciones, puede visitar sitios especializados como General Optica y Multiópticas, que ofrecen una amplia gama de gafas graduadas para niños.` },
+    ],
+  },
+  {
+    slug: "gafas-progresivas",
+    titulo: `¿Qué son las gafas progresivas?`,
+    categoria: `Gafas Progresivas`,
+    descripcion: `Las gafas progresivas, también conocidas como lentes multifocales, son una solución innovadora para las personas que sufren de presbicia.`,
+    imagen: "/img/progresivos.jpg",
+    contenido: [
+      { tipo: "p", texto: `Las gafas progresivas, también conocidas como lentes multifocales, son una solución innovadora para las personas que sufren de presbicia, comúnmente conocida como vista cansada. Este tipo de lentes se caracteriza por tener varias graduaciones en una misma lente, lo que permite al usuario ver claramente a diferentes distancias sin la necesidad de cambiar de gafas.` },
+      { tipo: "p", texto: `La presbicia es una condición que suele aparecer a partir de los 40 años y se debe a la pérdida de flexibilidad del cristalino, lo que dificulta enfocar objetos cercanos. Las gafas progresivas ofrecen una transición suave entre las diferentes zonas de graduación: la parte superior para ver de lejos, la central para distancias intermedias y la inferior para la visión cercana.` },
+      { tipo: "p", texto: `Una de las principales ventajas de las gafas progresivas es la comodidad que ofrecen, ya que eliminan la necesidad de tener múltiples pares de gafas para diferentes tareas, como leer o conducir. Además, su diseño moderno y la ausencia de líneas divisivas en las lentes las hacen estéticamente atractivas en comparación con las bifocales tradicionales` },
+      { tipo: "p", texto: `Existen diferentes tipos de gafas progresivas adaptadas a las necesidades y estilos de vida de cada persona. Por ejemplo, hay lentes progresivas graduadas y lentes progresivas de sol, que proporcionan protección UV mientras corrigen la visión. Los precios varían según la calidad y la tecnología de las lentes, pero generalmente representan una inversión a largo plazo en la salud visual.` },
+      { tipo: "p", texto: `En resumen, las gafas progresivas son una excelente opción para quienes buscan una solución práctica y cómoda para la presbicia, permitiendo una visión clara y continua a todas las distancias.` },
+    ],
+  },
+  {
+    slug: "lentes-progresivos",
+    titulo: `Lentes progresivos: Una visión clara en todas las distancias`,
+    categoria: `Lentes Progresivos`,
+    descripcion: `Los lentes progresivos ofrecen una transición suave entre las zonas de visión de lejos, intermedia y de cerca.`,
+    imagen: "/img/lentes-progresivos.jpg",
+    contenido: [
+      { tipo: "p", texto: `Los lentes progresivos han revolucionado la forma en que las personas con presbicia, o vista cansada, experimentan el mundo visual. A diferencia de los lentes bifocales o trifocales tradicionales, que tienen líneas visibles y saltos abruptos entre diferentes niveles de aumento, los lentes progresivos ofrecen una transición suave entre las zonas de visión de lejos, intermedia y de cerca. Esto permite a los usuarios disfrutar de una visión clara a todas las distancias sin necesidad de cambiar de gafas para diferentes tareas.` },
+      { tipo: "h2", texto: `¿Qué son exactamente los lentes progresivos?` },
+      { tipo: "p", texto: `Los lentes progresivos son lentes multifocales sin líneas divisorias. Presentan una graduación que aumenta progresivamente desde la parte superior del lente, destinada a la visión de lejos, hasta la parte inferior, diseñada para la visión de cerca. La zona intermedia se adapta para tareas como el uso de la computadora o la visualización de objetos a una distancia intermedia.` },
+      { tipo: "h3", texto: `Ventajas de los lentes progresivos` },
+      { tipo: "p", texto: `- Visión nítida a cualquier distancia: Los lentes progresivos eliminan la necesidad de tener múltiples pares de gafas para diferentes distancias.` },
+      { tipo: "p", texto: `- Estética mejorada: Al no tener líneas visibles, los lentes progresivos se ven como lentes monofocales normales, lo que los hace más atractivos.` },
+      { tipo: "p", texto: `- Comodidad: La transición suave entre las zonas de aumento reduce la fatiga visual y el "salto de imagen" que a menudo se experimenta con lentes bifocales o trifocales.` },
+      { tipo: "p", texto: `- Adaptabilidad: Los lentes progresivos se pueden personalizar para adaptarse al estilo de vida y las necesidades visuales de cada persona, ofreciendo opciones desde lentes de fabricación digital de alta tecnología hasta personalización total.` },
+      { tipo: "h3", texto: `Consideraciones al elegir lentes progresivos` },
+      { tipo: "p", texto: `A pesar de sus numerosas ventajas, los lentes progresivos requieren un período de adaptación. Los nuevos usuarios deben aprender a mirar a través de la parte correcta del lente para diferentes tareas. Además, es crucial elegir el tipo correcto de lente progresivo y asegurarse de que estén correctamente ajustados por un profesional para maximizar la comodidad y la eficacia visual.` },
+      { tipo: "p", texto: `En resumen, los lentes progresivos son una excelente opción para aquellos que buscan una solución integral para la presbicia. Ofrecen una visión clara y continua a todas las distancias, mejoran la estética y proporcionan comodidad en la vida cotidiana. Si está considerando lentes progresivos, consulte con su optometrista para obtener más información y encontrar la opción que mejor se adapte a sus necesidades visuales y estilo de vida.` },
+    ],
+  },
+  {
+    slug: "como-prevenir-la-fatiga-visual",
+    titulo: `¿Cómo Prevenir la Fatiga Visual?`,
+    categoria: `Estrés Digital`,
+    descripcion: `La fatiga visual, también conocida como astenopia, es una condición común en la era digital.`,
+    imagen: "/img/estres.jpg",
+    contenido: [
+      { tipo: "p", texto: `La fatiga visual, también conocida como astenopia, es una condición común en la era digital, donde las horas frente a pantallas de dispositivos electrónicos pueden pasar factura a nuestros ojos. Afortunadamente, hay varias estrategias que podemos implementar para prevenir y aliviar la fatiga visual.` },
+      { tipo: "h2", texto: `Entendiendo la Fatiga Visual` },
+      { tipo: "p", texto: `La fatiga visual puede manifestarse de diversas maneras, incluyendo dolor de cabeza, ojos secos, visión borrosa, y sensibilidad a la luz. Estos síntomas pueden ser el resultado de mirar fijamente pantallas durante períodos prolongados sin descansos adecuados.` },
+      { tipo: "h2", texto: `Consejos para Prevenir la Fatiga Visual` },
+      { tipo: "h3", texto: `Regla del 20-20-20` },
+      { tipo: "p", texto: `Una de las recomendaciones más efectivas es seguir la regla del 20-20-20. Esto significa que cada 20 minutos, debes mirar algo que esté a 20 pies de distancia (aproximadamente 6 metros) durante al menos 20 segundos. Esta práctica ayuda a relajar los músculos de los ojos y a reducir la tensión ocular.` },
+      { tipo: "h3", texto: `Ajuste de Iluminación` },
+      { tipo: "p", texto: `Asegúrate de que tu espacio de trabajo esté bien iluminado, pero evita el exceso de brillo o reflejos en la pantalla, ya que pueden aumentar la tensión en los ojos.` },
+      { tipo: "h3", texto: `Uso de Lágrimas Artificiales` },
+      { tipo: "p", texto: `El uso de lágrimas artificiales puede ayudar a mantener los ojos lubricados, especialmente si sientes sequedad ocular después de largas horas frente al monitor.` },
+      { tipo: "h3", texto: `Posición Adecuada de la Pantalla` },
+      { tipo: "p", texto: `La pantalla debe estar a una distancia cómoda de los ojos y ligeramente por debajo del nivel de la vista. Esto reduce la necesidad de abrir demasiado los ojos y ayuda a disminuir la evaporación de las lágrimas.` },
+      { tipo: "h3", texto: `Parpadeo Consciente` },
+      { tipo: "p", texto: `Hacer un esfuerzo consciente por parpadear con regularidad puede prevenir la sequedad ocular y la irritación.` },
+      { tipo: "h3", texto: `Reducción de Reflejos` },
+      { tipo: "p", texto: `Utiliza protectores de pantalla o ajusta la posición de tu monitor para minimizar los reflejos que pueden causar fatiga visual.` },
+      { tipo: "h3", texto: `Revisión Periódica de la Vista` },
+      { tipo: "p", texto: `Es importante tener chequeos regulares con un oftalmólogo para asegurarse de que cualquier problema de visión no contribuya a la fatiga visual.` },
+      { tipo: "h3", texto: `Implementando Cambios en el Estilo de Vida` },
+      { tipo: "p", texto: `Además de estos consejos específicos, es beneficioso adoptar un enfoque holístico para prevenir la fatiga visual. Esto incluye mantener una dieta equilibrada rica en vitaminas y minerales, asegurar una hidratación adecuada, y practicar ejercicios regulares para mejorar la circulación general, lo que también beneficia la salud ocular.` },
+      { tipo: "h2", texto: `Conclusión` },
+      { tipo: "p", texto: `La fatiga visual es un problema creciente, pero con las estrategias adecuadas, puedes proteger tus ojos y mejorar tu comodidad mientras trabajas o disfrutas del entretenimiento digital. Recuerda tomar descansos regulares, ajustar tu entorno de trabajo y consultar a un profesional de la salud visual si experimentas síntomas persistentes de fatiga visual. Tu visión es invaluable; cuídala con la misma diligencia que cuidas el resto de tu cuerpo.` },
+    ],
+  },
+  {
+    slug: "vision-del-futuro",
+    titulo: `La Visión del Futuro: Innovación y Cuidado en la Óptica Moderna`,
+    categoria: `La Visión del Futuro`,
+    descripcion: `En el mundo acelerado de hoy, la tecnología avanza a pasos agigantados, y la industria óptica no se queda atrás.`,
+    imagen: "/img/retinografo.webp",
+    contenido: [
+      { tipo: "p", texto: `En el mundo acelerado de hoy, la tecnología avanza a pasos agigantados, y la industria óptica no se queda atrás. Con innovaciones que transforman la manera en que vemos el mundo, las ópticas modernas ofrecen mucho más que corrección visual; ofrecen una ventana a un futuro más claro y saludable para nuestros ojos.` },
+      { tipo: "h2", texto: `Innovación Tecnológica` },
+      { tipo: "p", texto: `Las ópticas de hoy en día están equipadas con tecnología de punta para realizar exámenes visuales más precisos y personalizados. Desde topógrafos corneales que mapean la superficie del ojo con exactitud milimétrica, hasta retinógrafos que capturan imágenes detalladas del fondo de ojo, la tecnología está al servicio de la salud visual.` },
+      { tipo: "h2", texto: `Lentes Personalizados` },
+      { tipo: "p", texto: `La personalización es clave en la experiencia óptica moderna. Con la ayuda de software avanzado, los ópticos pueden diseñar lentes a medida que se adaptan no solo a la prescripción del usuario, sino también a su estilo de vida. Ya sea para el trabajo frente a pantallas digitales, para deportistas que necesitan una visión periférica amplia, o para amantes de la lectura que buscan comodidad, hay una solución visual personalizada.` },
+      { tipo: "h2", texto: `Materiales Avanzados` },
+      { tipo: "p", texto: `Los materiales de los lentes también han evolucionado. Con opciones más ligeras, resistentes y con tratamientos antirreflejantes, los usuarios disfrutan de una experiencia visual sin precedentes. Además, los materiales biocompatibles y ecológicos ganan popularidad, reflejando el compromiso de la industria con el medio ambiente y la salud de los usuarios.` },
+      { tipo: "h2", texto: `Moda y Funcionalidad` },
+      { tipo: "p", texto: `Las ópticas no solo se centran en la salud visual, sino también en la moda. Con una amplia gama de monturas que siguen las últimas tendencias, los usuarios pueden expresar su personalidad y estilo sin sacrificar comodidad y funcionalidad. Las colaboraciones con diseñadores de moda y el uso de materiales innovadores en monturas ponen a la óptica a la vanguardia del diseño.` },
+      { tipo: "h2", texto: `Educación y Prevención` },
+      { tipo: "p", texto: `Una parte fundamental del servicio que ofrecen las ópticas modernas es la educación sobre el cuidado de la vista. Con campañas de concientización y consejos prácticos, los profesionales ópticos juegan un rol crucial en la prevención de enfermedades visuales y en la promoción de hábitos saludables para la vista.` },
+      { tipo: "p", texto: `La óptica moderna es un campo emocionante y en constante evolución. Con una mezcla perfecta de tecnología, personalización, moda y cuidado, las ópticas de hoy están preparadas para enfrentar los desafíos visuales del mañana y garantizar que cada persona pueda disfrutar de la belleza del mundo con la mejor visión posible.` },
+    ],
+  },
+];
+
+export function obtenerArticulo(slug: string) {
+  return articulos.find((a) => a.slug === slug);
+}
