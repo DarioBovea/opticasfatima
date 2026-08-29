@@ -16,12 +16,21 @@ export async function PATCH(
   }
 
   try {
-    const { confirmado } = await request.json();
+    const cambios = await request.json();
+    // Solo dejamos que el admin cambie estos 2 campos, nunca el resto
+    // de la fila (código, correo, etc.) a través de esta ruta.
+    const actualizacion: Record<string, unknown> = {};
+    if (typeof cambios.confirmado === "boolean") actualizacion.confirmado = cambios.confirmado;
+    if (typeof cambios.usado === "boolean") {
+      actualizacion.usado = cambios.usado;
+      actualizacion.usado_en = cambios.usado ? new Date().toISOString() : null;
+    }
+
     const supabase = crearClienteSupabase();
 
     const { error } = await supabase
       .from("bonos")
-      .update({ confirmado })
+      .update(actualizacion)
       .eq("id", params.id);
 
     if (error) throw error;

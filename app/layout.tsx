@@ -4,12 +4,12 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: SITE_NAME,
-    // Las páginas hijas ponen su propio título y queda "Su título | Ópticas Fátima"
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -30,7 +30,14 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Verificación de Google Search Console. Solo aparece en el HTML si
+  // configuras la variable de entorno — mientras tanto, no hace nada.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
 };
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export default function RootLayout({
   children,
@@ -45,6 +52,8 @@ export default function RootLayout({
           {children}
           <Footer />
         </CartProvider>
+        {/* Google Analytics — solo se carga si configuraste NEXT_PUBLIC_GA_ID */}
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
       </body>
     </html>
   );

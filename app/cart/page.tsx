@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { obtenerProductoPorId } from "@/lib/productos";
 
@@ -7,6 +8,12 @@ const NUMERO_WHATSAPP = "573206740505";
 
 export default function CartPage() {
   const { items, eliminarItem, vaciarCarrito } = useCart();
+
+  const [codigoIngresado, setCodigoIngresado] = useState("");
+  const [bonoAplicado, setBonoAplicado] = useState<{ codigo: string; descuento: number } | null>(null);
+  const [errorBono, setErrorBono] = useState("");
+  const [verificando, setVerificando] = useState(false);
+  const [comprando, setComprando] = useState(false);
 
   const filas = items
     .map((item) => {
@@ -18,7 +25,9 @@ export default function CartPage() {
     })
     .filter((f): f is NonNullable<typeof f> => f !== null);
 
-  const total = filas.reduce((acc, f) => acc + f.subtotal, 0);
+  const subtotalGeneral = filas.reduce((acc, f) => acc + f.subtotal, 0);
+  const descuento = bonoAplicado ? Math.min(bonoAplicado.descuento, subtotalGeneral) : 0;
+  const total = subtotalGeneral - descuento;
 
   function handleVaciar() {
     if (confirm(`Se van a borrar ${filas.reduce((a, f) => a + f.unidades, 0)} productos. ¿Estás seguro?`)) {
@@ -26,7 +35,58 @@ export default function CartPage() {
     }
   }
 
-  function handleComprar() {
+  async function handleAplicarBono(e: React.FormEvent) {
+    e.preventDefault();
+    setErrorBono("");
+    setVerificando(true);
+    try {
+      const res = await fetch("/api/bono/verificar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ codigo: codigoIngresado }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setBonoAplicado({ codigo: data.codigo, descuento: data.descuento });
+    } catch (err) {
+      setBonoAplicado(null);
+      setErrorBono(err instanceof Error ? err.message : "No se pudo verificar el código.");
+    } finally {
+      setVerificando(false);
+    }
+  }
+
+  function quitarBono() {
+    setBonoAplicado(null);
+    setCodigoIngresado("");
+    setErrorBono("");
+  }
+
+  async function handleComprar() {
+    setComprando(true);
+    setErrorBono("");
+
+    if (bonoAplicado) {
+      try {
+        const res = await fetch("/api/bono/canjear", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ codigo: bonoAplicado.codigo }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          setErrorBono(data.error || "El bono ya no está disponible.");
+          setBonoAplicado(null);
+          setComprando(false);
+          return;
+        }
+      } catch {
+        setErrorBono("No se pudo aplicar el bono. Intenta de nuevo.");
+        setComprando(false);
+        return;
+      }
+    }
+
     const lineas = filas.map(({ item, producto }) => {
       const rxOd = `${item.selectPowerOd || "-"} ${item.selectCylOd} ${item.selectAxisOd ? "X " + item.selectAxisOd : ""}`.trim();
       const rxOi = `${item.selectPowerOi || "-"} ${item.selectCylOi} ${item.selectAxisOi ? "X " + item.selectAxisOi : ""}`.trim();
@@ -42,11 +102,16 @@ export default function CartPage() {
       "",
       ...lineas,
       "",
+      `Subtotal: $${subtotalGeneral.toLocaleString("es-CO")}`,
+      ...(bonoAplicado
+        ? [`Bono aplicado (${bonoAplicado.codigo}): -$${descuento.toLocaleString("es-CO")}`]
+        : []),
       `Total: $${total.toLocaleString("es-CO")}`,
     ].join("\n");
 
     const url = `https://api.whatsapp.com/send?phone=${NUMERO_WHATSAPP}&text=${encodeURIComponent(mensaje)}`;
     window.open(url, "_blank");
+    setComprando(false);
   }
 
   return (
@@ -111,6 +176,42 @@ export default function CartPage() {
             ))}
           </div>
 
+          {/* Bono Regalo */}
+          <div className="rounded-xl border border-line p-4">
+            {bonoAplicado ? (
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="text-primary">
+                  ✅ Bono <strong>{bonoAplicado.codigo}</strong> aplicado — descuento de $
+                  {descuento.toLocaleString("es-CO")}
+                </p>
+                <button onClick={quitarBono} className="text-sm text-primary underline">
+                  Quitar
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleAplicarBono} className="flex flex-wrap items-end gap-3">
+                <label className="flex flex-col gap-1 text-sm text-primary">
+                  ¿Tienes un código de Bono Regalo?
+                  <input
+                    type="text"
+                    value={codigoIngresado}
+                    onChange={(e) => setCodigoIngresado(e.target.value)}
+                    placeholder="Ej: A3F7K9Q2"
+                    className="border border-line px-3 py-2 uppercase text-primary outline-none focus:border-primary"
+                  />
+                </label>
+                <button
+                  type="submit"
+                  disabled={verificando || !codigoIngresado.trim()}
+                  className="rounded-lg bg-primary px-4 py-2 text-sm font-bold uppercase text-white transition hover:bg-light disabled:opacity-60"
+                >
+                  {verificando ? "Verificando..." : "Aplicar"}
+                </button>
+              </form>
+            )}
+            {errorBono && <p className="mt-2 text-sm text-[#961818]">{errorBono}</p>}
+          </div>
+
           <div className="flex flex-col items-stretch justify-between gap-4 sm:flex-row sm:items-center">
             <button
               onClick={handleVaciar}
@@ -119,17 +220,26 @@ export default function CartPage() {
               Vaciar carrito
             </button>
 
-            <div className="flex overflow-hidden rounded-2xl">
-              <div className="flex items-center gap-3 bg-[#e2e2e2] px-6 font-semibold uppercase text-primary">
-                <span>Total:</span>
-                <span>${total.toLocaleString("es-CO")}</span>
+            <div className="flex flex-col items-end gap-2">
+              {bonoAplicado && (
+                <p className="text-sm text-primary/70">
+                  Subtotal: ${subtotalGeneral.toLocaleString("es-CO")} — Bono: -$
+                  {descuento.toLocaleString("es-CO")}
+                </p>
+              )}
+              <div className="flex overflow-hidden rounded-2xl">
+                <div className="flex items-center gap-3 bg-[#e2e2e2] px-6 font-semibold uppercase text-primary">
+                  <span>Total:</span>
+                  <span>${total.toLocaleString("es-CO")}</span>
+                </div>
+                <button
+                  onClick={handleComprar}
+                  disabled={comprando}
+                  className="bg-primary px-6 py-4 font-semibold uppercase text-white transition hover:bg-light disabled:opacity-60"
+                >
+                  {comprando ? "Procesando..." : "Comprar ahora"}
+                </button>
               </div>
-              <button
-                onClick={handleComprar}
-                className="bg-primary px-6 py-4 font-semibold uppercase text-white transition hover:bg-light"
-              >
-                Comprar ahora
-              </button>
             </div>
           </div>
         </div>

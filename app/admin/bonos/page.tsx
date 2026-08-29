@@ -10,6 +10,8 @@ type Bono = {
   email: string;
   codigo: string;
   confirmado: boolean;
+  usado: boolean;
+  usado_en: string | null;
   creado_en: string;
 };
 
@@ -32,8 +34,6 @@ export default function PanelBonosPage() {
     setCargando(true);
     setError("");
     try {
-      // La sesión viaja sola en las cookies — no hace falta mandar
-      // ninguna clave a mano.
       const res = await fetch("/api/admin/bonos");
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
@@ -45,17 +45,15 @@ export default function PanelBonosPage() {
     }
   }
 
-  async function toggleConfirmado(bono: Bono) {
+  async function actualizarCampo(bono: Bono, cambios: Partial<Pick<Bono, "confirmado" | "usado">>) {
     try {
       const res = await fetch(`/api/admin/bonos/${bono.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ confirmado: !bono.confirmado }),
+        body: JSON.stringify(cambios),
       });
       if (!res.ok) throw new Error("No se pudo actualizar.");
-      setBonos((prev) =>
-        prev.map((b) => (b.id === bono.id ? { ...b, confirmado: !b.confirmado } : b))
-      );
+      setBonos((prev) => prev.map((b) => (b.id === bono.id ? { ...b, ...cambios } : b)));
     } catch {
       setError("No se pudo actualizar ese bono, intenta de nuevo.");
     }
@@ -77,10 +75,17 @@ export default function PanelBonosPage() {
   });
 
   const pendientes = bonos.filter((b) => !b.confirmado).length;
+  const usados = bonos.filter((b) => b.usado).length;
+
+  function estadoDe(b: Bono) {
+    if (b.usado) return { texto: "Utilizado", clase: "bg-primary text-white" };
+    if (b.confirmado) return { texto: "Confirmado", clase: "bg-light/20 text-primary" };
+    return { texto: "Pendiente", clase: "bg-[#f0e0b0] text-[#7a5b00]" };
+  }
 
   return (
     <div className="mt-36 px-6 pb-24">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="text-2xl font-bold text-primary">Panel de Bonos Regalo</h1>
@@ -100,7 +105,8 @@ export default function PanelBonosPage() {
             className="w-full max-w-xs border border-line px-3 py-2 text-primary outline-none focus:border-primary sm:w-auto"
           />
           <span className="text-sm text-primary">
-            {pendientes} pendiente{pendientes !== 1 && "s"} de {bonos.length} total
+            {pendientes} pendiente{pendientes !== 1 && "s"} · {usados} utilizado
+            {usados !== 1 && "s"} · {bonos.length} total
           </span>
         </div>
 
@@ -124,35 +130,45 @@ export default function PanelBonosPage() {
                 </tr>
               </thead>
               <tbody>
-                {filtrados.map((b) => (
-                  <tr key={b.id} className="border-b border-line">
-                    <td className="py-2 pr-4 whitespace-nowrap">
-                      {new Date(b.creado_en).toLocaleDateString("es-CO")}
-                    </td>
-                    <td className="py-2 pr-4">{b.nombre}</td>
-                    <td className="py-2 pr-4">{b.email}</td>
-                    <td className="py-2 pr-4 font-mono font-bold">{b.codigo}</td>
-                    <td className="py-2 pr-4">
-                      <span
-                        className={`rounded-full px-2 py-1 text-xs font-semibold ${
-                          b.confirmado
-                            ? "bg-light/20 text-primary"
-                            : "bg-[#f0e0b0] text-[#7a5b00]"
-                        }`}
-                      >
-                        {b.confirmado ? "Confirmado" : "Pendiente"}
-                      </span>
-                    </td>
-                    <td className="py-2 pr-4">
-                      <button
-                        onClick={() => toggleConfirmado(b)}
-                        className="text-sm text-primary underline"
-                      >
-                        {b.confirmado ? "Revertir" : "Marcar confirmado"}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {filtrados.map((b) => {
+                  const estado = estadoDe(b);
+                  return (
+                    <tr key={b.id} className="border-b border-line align-top">
+                      <td className="py-2 pr-4 whitespace-nowrap">
+                        {new Date(b.creado_en).toLocaleDateString("es-CO")}
+                      </td>
+                      <td className="py-2 pr-4">{b.nombre}</td>
+                      <td className="py-2 pr-4">{b.email}</td>
+                      <td className="py-2 pr-4 font-mono font-bold">{b.codigo}</td>
+                      <td className="py-2 pr-4">
+                        <span className={`rounded-full px-2 py-1 text-xs font-semibold ${estado.clase}`}>
+                          {estado.texto}
+                        </span>
+                        {b.usado_en && (
+                          <p className="mt-1 text-xs text-primary/50">
+                            {new Date(b.usado_en).toLocaleDateString("es-CO")}
+                          </p>
+                        )}
+                      </td>
+                      <td className="space-y-1 py-2 pr-4">
+                        <button
+                          onClick={() => actualizarCampo(b, { confirmado: !b.confirmado })}
+                          className="block text-sm text-primary underline"
+                        >
+                          {b.confirmado ? "Revertir confirmación" : "Marcar confirmado"}
+                        </button>
+                        {b.confirmado && (
+                          <button
+                            onClick={() => actualizarCampo(b, { usado: !b.usado })}
+                            className="block text-sm text-primary underline"
+                          >
+                            {b.usado ? "Revertir uso" : "Marcar como usado"}
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

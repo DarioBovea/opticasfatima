@@ -21,7 +21,7 @@ declare global {
 export default function FormularioBono() {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
-  const [sitioWeb, setSitioWeb] = useState(""); // campo trampa (honeypot)
+  const [sitioWeb, setSitioWeb] = useState(""); // ct
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
   const [codigo, setCodigo] = useState<string | null>(null);
@@ -42,10 +42,6 @@ export default function FormularioBono() {
     e.preventDefault();
     setError("");
 
-    // Campo trampa: un visitante real nunca ve ni llena este campo (está
-    // oculto con CSS), así que si viene lleno, es casi seguro un bot.
-    // Respondemos como si todo saliera bien, sin gastar un código real
-    // ni tocar la base de datos, para no delatarle al bot que lo detectamos.
     if (sitioWeb) {
       setCodigo("XXXXXXXX");
       return;
@@ -141,9 +137,6 @@ export default function FormularioBono() {
                 className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary"
               />
             </label>
-
-            {/* Campo trampa: invisible para personas, visible para bots que
-                llenan todos los inputs de un formulario sin mirar el CSS. */}
             <label
               className="absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
               aria-hidden="true"
