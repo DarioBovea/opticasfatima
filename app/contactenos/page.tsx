@@ -31,7 +31,8 @@ export default function ContactenosPage() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
-            <p>Carrera 15 # 14 - 43</p>
+            <p>Calle 8 # 19B - 06</p>
+            <p>Consultorio 2</p>
             <p className="mt-2">
               Horarios:
               <br />
@@ -45,7 +46,7 @@ export default function ContactenosPage() {
             </p>
           </div>
           <div>
-            <p>Teléfonos: 320 578 71 43 - 317 797 99 76</p>
+            <p>Teléfonos: 320 578 71 43 - 304 344 65 74</p>
             <p>Correo: info@opticasfatima.com</p>
             <p>Website: opticasfatima.com</p>
           </div>
