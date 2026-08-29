@@ -56,8 +56,16 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto mt-6 max-w-[97%] border-t border-white/40" />
-      <div className="py-2 text-center text-sm">
-        Ópticas Fátima 2026 - 2027. © Todos los derechos reservados.
+      <div className="flex flex-col items-center gap-2 py-3 text-center text-sm">
+        <div className="flex gap-4 text-xs">
+          <a href="/terminos-y-condiciones" className="underline hover:text-light">
+            Términos y Condiciones
+          </a>
+          <a href="/politica-de-privacidad" className="underline hover:text-light">
+            Política de Privacidad
+          </a>
+        </div>
+        <span>Ópticas Fátima 2026 - 2027. © Todos los derechos reservados.</span>
       </div>
     </footer>
   );

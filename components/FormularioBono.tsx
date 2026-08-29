@@ -1,26 +1,67 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import Script from "next/script";
 
 const NUMERO_WHATSAPP = "573043446574";
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        container: HTMLElement,
+        opts: { sitekey: string; callback: (token: string) => void; "error-callback"?: () => void }
+      ) => string;
+      reset: (widgetId?: string) => void;
+    };
+  }
+}
 
 export default function FormularioBono() {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
+  const [sitioWeb, setSitioWeb] = useState(""); // campo trampa (honeypot)
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
   const [codigo, setCodigo] = useState<string | null>(null);
+  const [tokenCaptcha, setTokenCaptcha] = useState("");
+  const captchaRef = useRef<HTMLDivElement>(null);
+  const widgetId = useRef<string>();
+
+  function onTurnstileLoad() {
+    if (!TURNSTILE_SITE_KEY || !captchaRef.current || !window.turnstile) return;
+    widgetId.current = window.turnstile.render(captchaRef.current, {
+      sitekey: TURNSTILE_SITE_KEY,
+      callback: (token) => setTokenCaptcha(token),
+      "error-callback": () => setTokenCaptcha(""),
+    });
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    setCargando(true);
 
+    // Campo trampa: un visitante real nunca ve ni llena este campo (está
+    // oculto con CSS), así que si viene lleno, es casi seguro un bot.
+    // Respondemos como si todo saliera bien, sin gastar un código real
+    // ni tocar la base de datos, para no delatarle al bot que lo detectamos.
+    if (sitioWeb) {
+      setCodigo("XXXXXXXX");
+      return;
+    }
+
+    if (TURNSTILE_SITE_KEY && !tokenCaptcha) {
+      setError("Por favor completa la verificación de seguridad.");
+      return;
+    }
+
+    setCargando(true);
     try {
       const res = await fetch("/api/bono", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, email }),
+        body: JSON.stringify({ nombre, email, tokenCaptcha }),
       });
       const data = await res.json();
 
@@ -30,8 +71,6 @@ export default function FormularioBono() {
 
       setCodigo(data.codigo);
 
-      // Abrimos WhatsApp con el mensaje ya armado para que el cliente
-      // solo tenga que darle a "Enviar" y confirmar su registro.
       const mensaje = [
         "Hola, quiero confirmar mi registro para el Bono Regalo.",
         `Código: ${data.codigo}`,
@@ -42,6 +81,10 @@ export default function FormularioBono() {
       window.open(url, "_blank");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Algo salió mal.");
+      // Si falló, reseteamos el captcha para que pueda volver a intentar
+      // (un token de Turnstile solo se puede usar una vez).
+      if (widgetId.current && window.turnstile) window.turnstile.reset(widgetId.current);
+      setTokenCaptcha("");
     } finally {
       setCargando(false);
     }
@@ -49,6 +92,15 @@ export default function FormularioBono() {
 
   return (
     <div className="w-full md:w-[70%]">
+      {TURNSTILE_SITE_KEY && (
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          async
+          defer
+          onLoad={onTurnstileLoad}
+        />
+      )}
+
       <fieldset className="border-0">
         <legend className="leading-relaxed text-primary">
           Introduce tu correo electrónico y te enviaremos{" "}
@@ -90,6 +142,26 @@ export default function FormularioBono() {
               />
             </label>
 
+            {/* Campo trampa: invisible para personas, visible para bots que
+                llenan todos los inputs de un formulario sin mirar el CSS. */}
+            <label
+              className="absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+              aria-hidden="true"
+              tabIndex={-1}
+            >
+              No llenar este campo
+              <input
+                type="text"
+                name="sitio_web"
+                autoComplete="off"
+                tabIndex={-1}
+                value={sitioWeb}
+                onChange={(e) => setSitioWeb(e.target.value)}
+              />
+            </label>
+
+            {TURNSTILE_SITE_KEY && <div ref={captchaRef} className="m-3" />}
+
             {error && <p className="mx-3 text-sm text-[#961818]">{error}</p>}
 
             <button
@@ -103,11 +175,11 @@ export default function FormularioBono() {
               <input type="checkbox" required id="terminos" className="mt-1" />
               <label htmlFor="terminos" className="text-sm text-primary">
                 He leído y acepto los{" "}
-                <a href="#" className="underline">
+                <a href="/terminos-y-condiciones" target="_blank" className="underline">
                   Términos y condiciones
                 </a>{" "}
                 y la{" "}
-                <a href="#" className="underline">
+                <a href="/politica-de-privacidad" target="_blank" className="underline">
                   Política de Privacidad.
                 </a>
               </label>
