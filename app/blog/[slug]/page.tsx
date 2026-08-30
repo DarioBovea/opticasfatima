@@ -31,7 +31,7 @@ export default function ArticuloPage({ params }: { params: { slug: string } }) {
   const otros = articulos.filter((a) => a.slug !== articulo.slug);
 
   const Sidebar = () => (
-    <ul className="m-0 flex list-none flex-col gap-3 px-4">
+    <ul className="m-0 flex list-none flex-col gap-3 p-0">
       {otros.map((a) => (
         <li key={a.slug}>
           <Link

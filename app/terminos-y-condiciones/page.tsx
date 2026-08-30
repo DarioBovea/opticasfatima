@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function TerminosCondicionesPage() {
   return (
-    <section className="mt-36 px-6 py-12">
+    <section className="mt-36 px-6 pb-24">
       <div className="mx-auto max-w-3xl text-primary">
         <h1 className="mb-2 text-3xl font-bold text-light md:text-4xl">
           Términos y Condiciones

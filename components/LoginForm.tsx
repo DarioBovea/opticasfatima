@@ -32,7 +32,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="mt-36 flex justify-center px-6 pt-12 pb-24">
+    <div className="mt-36 flex justify-center px-6 pb-24">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-sm rounded-lg border border-primary p-6 text-primary"

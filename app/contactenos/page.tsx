@@ -45,7 +45,7 @@ export default function ContactenosPage() {
             </p>
           </div>
           <div>
-            <p>Teléfonos: 320 578 71 43 - 304 344 65 74</p>
+            <p>Teléfonos: 320 578 71 43 - 317 797 99 76</p>
             <p>Correo: info@opticasfatima.com</p>
             <p>Website: opticasfatima.com</p>
           </div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { obtenerProductoPorId } from "@/lib/productos";
 
-const NUMERO_WHATSAPP = "573043446574";
+const NUMERO_WHATSAPP = "573206740505";
 
 export default function CartPage() {
   const { items, eliminarItem, vaciarCarrito } = useCart();
@@ -120,7 +120,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mt-36 min-h-[calc(100vh-344px)] px-6 py-12 md:px-[calc((100%-1180px)/2)]">
+    <div className="mt-36 min-h-[calc(100vh-344px)] px-6 pb-24 md:px-[calc((100%-1180px)/2)]">
       <h2 className="mb-8 text-2xl font-bold text-primary">Carrito De Compras</h2>
 
       {filas.length === 0 ? (

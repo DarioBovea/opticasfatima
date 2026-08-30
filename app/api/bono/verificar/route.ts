@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { crearClienteSupabase } from "@/lib/supabase";
-
-export const VALOR_BONO = 50000;
+import { VALOR_BONO_PESOS } from "@/lib/tipos-bono";
 
 export async function POST(request: Request) {
   try {
@@ -44,7 +43,7 @@ export async function POST(request: Request) {
       );
     }
 
-    return NextResponse.json({ valido: true, codigo: data.codigo, descuento: VALOR_BONO });
+    return NextResponse.json({ valido: true, codigo: data.codigo, descuento: VALOR_BONO_PESOS });
   } catch (err) {
     console.error(err);
     return NextResponse.json(
