@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: SITE_NAME,
+    // Las páginas hijas ponen su propio título y queda "Su título | Ópticas Fátima"
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,

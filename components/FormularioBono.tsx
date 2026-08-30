@@ -21,7 +21,10 @@ declare global {
 export default function FormularioBono() {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
-  const [sitioWeb, setSitioWeb] = useState(""); // ct
+  const [telefono, setTelefono] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [fechaNacimiento, setFechaNacimiento] = useState("");
+  const [sitioWeb, setSitioWeb] = useState(""); // campo trampa (honeypot)
   const [cargando, setCargando] = useState(false);
   const [error, setError] = useState("");
   const [codigo, setCodigo] = useState<string | null>(null);
@@ -42,6 +45,10 @@ export default function FormularioBono() {
     e.preventDefault();
     setError("");
 
+    // Campo trampa: un visitante real nunca ve ni llena este campo (está
+    // oculto con CSS), así que si viene lleno, es casi seguro un bot.
+    // Respondemos como si todo saliera bien, sin gastar un código real
+    // ni tocar la base de datos, para no delatarle al bot que lo detectamos.
     if (sitioWeb) {
       setCodigo("XXXXXXXX");
       return;
@@ -57,7 +64,14 @@ export default function FormularioBono() {
       const res = await fetch("/api/bono", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, email, tokenCaptcha }),
+        body: JSON.stringify({
+          nombre,
+          email,
+          telefono,
+          direccion,
+          fechaNacimiento,
+          tokenCaptcha,
+        }),
       });
       const data = await res.json();
 
@@ -72,6 +86,7 @@ export default function FormularioBono() {
         `Código: ${data.codigo}`,
         `Nombre: ${nombre}`,
         `Correo: ${email}`,
+        `Teléfono: ${telefono}`,
       ].join("\n");
       const url = `https://api.whatsapp.com/send?phone=${NUMERO_WHATSAPP}&text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
@@ -99,9 +114,9 @@ export default function FormularioBono() {
 
       <fieldset className="border-0">
         <legend className="leading-relaxed text-primary">
-          Introduce tu correo electrónico y te enviaremos{" "}
-          <strong>GRATIS un BONO de $50.000</strong> que podrás utilizar en la
-          compra de cualquiera de nuestros productos.
+          Regístrate y te enviaremos <strong>GRATIS un BONO de $50.000</strong>{" "}
+          que podrás utilizar en la compra de cualquiera de nuestros
+          productos.
         </legend>
 
         {codigo ? (
@@ -120,11 +135,11 @@ export default function FormularioBono() {
             <label className="m-3">
               <input
                 type="text"
-                placeholder="Nombre y apellido*"
+                placeholder="Nombre completo*"
                 required
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
-                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary"
+                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
               />
             </label>
             <label className="m-3">
@@ -134,9 +149,42 @@ export default function FormularioBono() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary"
+                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
               />
             </label>
+            <label className="m-3">
+              <input
+                type="tel"
+                placeholder="Teléfono / WhatsApp*"
+                required
+                value={telefono}
+                onChange={(e) => setTelefono(e.target.value)}
+                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
+              />
+            </label>
+            <label className="m-3">
+              <input
+                type="text"
+                placeholder="Dirección*"
+                required
+                value={direccion}
+                onChange={(e) => setDireccion(e.target.value)}
+                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
+              />
+            </label>
+            <label className="m-3 flex flex-col gap-1 text-sm text-primary">
+              Fecha de nacimiento*
+              <input
+                type="date"
+                required
+                value={fechaNacimiento}
+                onChange={(e) => setFechaNacimiento(e.target.value)}
+                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
+              />
+            </label>
+
+            {/* Campo trampa: invisible para personas, visible para bots que
+                llenan todos los inputs de un formulario sin mirar el CSS. */}
             <label
               className="absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
               aria-hidden="true"
@@ -160,9 +208,9 @@ export default function FormularioBono() {
             <button
               type="submit"
               disabled={cargando}
-              className="m-3 w-1/2 rounded-lg bg-primary px-6 py-3 font-bold uppercase text-white shadow-btn transition hover:bg-light disabled:opacity-60"
+              className="m-3 w-full rounded-lg bg-primary px-6 py-3 font-bold uppercase text-white shadow-btn transition hover:bg-light disabled:opacity-60 md:w-1/2"
             >
-              {cargando ? "Generando código..." : "Canjea un cupón por 50Mil"}
+              {cargando ? "Generando código..." : "Registrarme y canjear 50Mil"}
             </button>
             <div className="m-3 flex items-start gap-2">
               <input type="checkbox" required id="terminos" className="mt-1" />

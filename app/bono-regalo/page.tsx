@@ -21,7 +21,7 @@ export default function BonoRegaloPage() {
         </h1>
         <h2 className="mt-2 text-xl font-bold">Para que compres tus primeras gafas</h2>
 
-        {/*Bono*/}
+        {/* Misma tarjeta que en el home (components/Bono.tsx) */}
         <div
           className="my-8 w-full rounded-xl bg-cover bg-center p-9 shadow-header md:w-[90%]"
           style={{

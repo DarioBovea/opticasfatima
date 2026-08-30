@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/nosotros`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/servicios`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/contactenos`, changeFrequency: "monthly", priority: 0.5 },
-    { url: `${SITE_URL}/registro`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${SITE_URL}/bono-regalo`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/productos/lentesdecontacto`, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/terminos-y-condiciones`, changeFrequency: "yearly", priority: 0.2 },

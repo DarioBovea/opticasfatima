@@ -18,10 +18,14 @@ export async function GET() {
   try {
     // Para leer la tabla usamos la Service Role Key (permisos completos),
     // ya que confirmamos arriba que quien pide esto es un admin logueado.
+    // El "personas(...)" trae los datos de la persona relacionada en el
+    // mismo viaje, gracias a la relación (foreign key) entre las tablas.
     const supabase = crearClienteSupabase();
     const { data, error } = await supabase
       .from("bonos")
-      .select("*")
+      .select(
+        "id, codigo, estado, creado_en, confirmado_en, usado_en, personas(id, nombre, email, telefono, direccion, fecha_nacimiento)"
+      )
       .order("creado_en", { ascending: false });
 
     if (error) throw error;

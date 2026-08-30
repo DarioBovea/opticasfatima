@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     const supabase = crearClienteSupabase();
     const { data, error } = await supabase
       .from("bonos")
-      .select("codigo, confirmado, usado")
+      .select("codigo, estado")
       .eq("codigo", codigo.trim().toUpperCase())
       .maybeSingle();
 
@@ -27,14 +27,14 @@ export async function POST(request: Request) {
       );
     }
 
-    if (data.usado) {
+    if (data.estado === "utilizado") {
       return NextResponse.json(
         { error: "Este bono ya fue utilizado." },
         { status: 409 }
       );
     }
 
-    if (!data.confirmado) {
+    if (data.estado === "pendiente") {
       return NextResponse.json(
         {
           error:

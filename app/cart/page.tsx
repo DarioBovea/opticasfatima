@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { obtenerProductoPorId } from "@/lib/productos";
 
-const NUMERO_WHATSAPP = "573206740505";
+const NUMERO_WHATSAPP = "573043446574";
 
 export default function CartPage() {
   const { items, eliminarItem, vaciarCarrito } = useCart();
@@ -66,6 +66,9 @@ export default function CartPage() {
     setComprando(true);
     setErrorBono("");
 
+    // Si hay un bono aplicado, lo marcamos como usado justo antes de
+    // pasar a WhatsApp — así queda registrado el canje aunque la
+    // conversación de WhatsApp no la veamos nosotros directamente.
     if (bonoAplicado) {
       try {
         const res = await fetch("/api/bono/canjear", {
@@ -75,6 +78,8 @@ export default function CartPage() {
         });
         const data = await res.json();
         if (!res.ok) {
+          // Alguien más lo usó primero, o pasó algo raro: no dejamos
+          // continuar la compra con un descuento que ya no es válido.
           setErrorBono(data.error || "El bono ya no está disponible.");
           setBonoAplicado(null);
           setComprando(false);
@@ -115,7 +120,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mt-36 min-h-[calc(100vh-344px)] px-6 pb-24 md:px-[calc((100%-1180px)/2)]">
+    <div className="mt-36 min-h-[calc(100vh-344px)] px-6 py-12 md:px-[calc((100%-1180px)/2)]">
       <h2 className="mb-8 text-2xl font-bold text-primary">Carrito De Compras</h2>
 
       {filas.length === 0 ? (

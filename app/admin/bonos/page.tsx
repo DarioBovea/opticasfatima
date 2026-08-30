@@ -3,16 +3,37 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { crearClienteSupabaseNavegador } from "@/lib/supabase-browser";
+import type { EstadoBono } from "@/lib/tipos-bono";
 
-type Bono = {
+type Persona = {
   id: string;
   nombre: string;
   email: string;
+  telefono: string | null;
+  direccion: string | null;
+  fecha_nacimiento: string | null;
+};
+
+type Bono = {
+  id: string;
   codigo: string;
-  confirmado: boolean;
-  usado: boolean;
-  usado_en: string | null;
+  estado: EstadoBono;
   creado_en: string;
+  confirmado_en: string | null;
+  usado_en: string | null;
+  personas: Persona | null;
+};
+
+const ESTILOS_ESTADO: Record<EstadoBono, string> = {
+  pendiente: "bg-[#f0e0b0] text-[#7a5b00]",
+  confirmado: "bg-light/20 text-primary",
+  utilizado: "bg-primary text-white",
+};
+
+const ETIQUETA_ESTADO: Record<EstadoBono, string> = {
+  pendiente: "Pendiente",
+  confirmado: "Confirmado",
+  utilizado: "Utilizado",
 };
 
 export default function PanelBonosPage() {
@@ -45,17 +66,37 @@ export default function PanelBonosPage() {
     }
   }
 
-  async function actualizarCampo(bono: Bono, cambios: Partial<Pick<Bono, "confirmado" | "usado">>) {
+  async function cambiarEstado(bono: Bono, nuevoEstado: EstadoBono) {
     try {
       const res = await fetch(`/api/admin/bonos/${bono.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(cambios),
+        body: JSON.stringify({ estado: nuevoEstado }),
       });
       if (!res.ok) throw new Error("No se pudo actualizar.");
-      setBonos((prev) => prev.map((b) => (b.id === bono.id ? { ...b, ...cambios } : b)));
+      setBonos((prev) =>
+        prev.map((b) => (b.id === bono.id ? { ...b, estado: nuevoEstado } : b))
+      );
     } catch {
       setError("No se pudo actualizar ese bono, intenta de nuevo.");
+    }
+  }
+
+  async function eliminarBono(bono: Bono) {
+    const nombre = bono.personas?.nombre ?? "este registro";
+    if (
+      !confirm(
+        `¿Eliminar el bono de "${nombre}" (${bono.codigo})? Esto no se puede deshacer.`
+      )
+    ) {
+      return;
+    }
+    try {
+      const res = await fetch(`/api/admin/bonos/${bono.id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("No se pudo eliminar.");
+      setBonos((prev) => prev.filter((b) => b.id !== bono.id));
+    } catch {
+      setError("No se pudo eliminar ese registro, intenta de nuevo.");
     }
   }
 
@@ -68,20 +109,14 @@ export default function PanelBonosPage() {
   const filtrados = bonos.filter((b) => {
     const q = busqueda.toLowerCase();
     return (
-      b.nombre.toLowerCase().includes(q) ||
-      b.email.toLowerCase().includes(q) ||
+      b.personas?.nombre.toLowerCase().includes(q) ||
+      b.personas?.email.toLowerCase().includes(q) ||
       b.codigo.toLowerCase().includes(q)
     );
   });
 
-  const pendientes = bonos.filter((b) => !b.confirmado).length;
-  const usados = bonos.filter((b) => b.usado).length;
-
-  function estadoDe(b: Bono) {
-    if (b.usado) return { texto: "Utilizado", clase: "bg-primary text-white" };
-    if (b.confirmado) return { texto: "Confirmado", clase: "bg-light/20 text-primary" };
-    return { texto: "Pendiente", clase: "bg-[#f0e0b0] text-[#7a5b00]" };
-  }
+  const pendientes = bonos.filter((b) => b.estado === "pendiente").length;
+  const usados = bonos.filter((b) => b.estado === "utilizado").length;
 
   return (
     <div className="mt-36 px-6 pb-24">
@@ -123,52 +158,90 @@ export default function PanelBonosPage() {
                 <tr className="border-b border-primary">
                   <th className="py-2 pr-4">Fecha</th>
                   <th className="py-2 pr-4">Nombre</th>
-                  <th className="py-2 pr-4">Correo</th>
+                  <th className="py-2 pr-4">Contacto</th>
                   <th className="py-2 pr-4">Código</th>
                   <th className="py-2 pr-4">Estado</th>
                   <th className="py-2 pr-4"></th>
                 </tr>
               </thead>
               <tbody>
-                {filtrados.map((b) => {
-                  const estado = estadoDe(b);
-                  return (
-                    <tr key={b.id} className="border-b border-line align-top">
-                      <td className="py-2 pr-4 whitespace-nowrap">
-                        {new Date(b.creado_en).toLocaleDateString("es-CO")}
-                      </td>
-                      <td className="py-2 pr-4">{b.nombre}</td>
-                      <td className="py-2 pr-4">{b.email}</td>
-                      <td className="py-2 pr-4 font-mono font-bold">{b.codigo}</td>
-                      <td className="py-2 pr-4">
-                        <span className={`rounded-full px-2 py-1 text-xs font-semibold ${estado.clase}`}>
-                          {estado.texto}
-                        </span>
-                        {b.usado_en && (
-                          <p className="mt-1 text-xs text-primary/50">
-                            {new Date(b.usado_en).toLocaleDateString("es-CO")}
-                          </p>
-                        )}
-                      </td>
-                      <td className="space-y-1 py-2 pr-4">
+                {filtrados.map((b) => (
+                  <tr key={b.id} className="border-b border-line align-top">
+                    <td className="py-2 pr-4 whitespace-nowrap">
+                      {new Date(b.creado_en).toLocaleDateString("es-CO")}
+                    </td>
+                    <td className="py-2 pr-4">
+                      {b.personas?.nombre ?? (
+                        <span className="italic text-primary/40">(sin datos)</span>
+                      )}
+                      {b.personas?.direccion && (
+                        <p className="text-xs text-primary/50">{b.personas.direccion}</p>
+                      )}
+                      {b.personas?.fecha_nacimiento && (
+                        <p className="text-xs text-primary/50">
+                          Nace: {new Date(b.personas.fecha_nacimiento).toLocaleDateString("es-CO")}
+                        </p>
+                      )}
+                    </td>
+                    <td className="py-2 pr-4">
+                      {b.personas?.email}
+                      {b.personas?.telefono && (
+                        <p className="text-xs text-primary/50">{b.personas.telefono}</p>
+                      )}
+                    </td>
+                    <td className="py-2 pr-4 font-mono font-bold">{b.codigo}</td>
+                    <td className="py-2 pr-4">
+                      <span className={`rounded-full px-2 py-1 text-xs font-semibold ${ESTILOS_ESTADO[b.estado]}`}>
+                        {ETIQUETA_ESTADO[b.estado]}
+                      </span>
+                      {b.estado === "utilizado" && b.usado_en && (
+                        <p className="mt-1 text-xs text-primary/50">
+                          {new Date(b.usado_en).toLocaleDateString("es-CO")}
+                        </p>
+                      )}
+                    </td>
+                    <td className="space-y-1 py-2 pr-4">
+                      {b.estado === "pendiente" && (
                         <button
-                          onClick={() => actualizarCampo(b, { confirmado: !b.confirmado })}
+                          onClick={() => cambiarEstado(b, "confirmado")}
                           className="block text-sm text-primary underline"
                         >
-                          {b.confirmado ? "Revertir confirmación" : "Marcar confirmado"}
+                          Marcar confirmado
                         </button>
-                        {b.confirmado && (
+                      )}
+                      {b.estado === "confirmado" && (
+                        <>
                           <button
-                            onClick={() => actualizarCampo(b, { usado: !b.usado })}
+                            onClick={() => cambiarEstado(b, "utilizado")}
                             className="block text-sm text-primary underline"
                           >
-                            {b.usado ? "Revertir uso" : "Marcar como usado"}
+                            Marcar como usado
                           </button>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
+                          <button
+                            onClick={() => cambiarEstado(b, "pendiente")}
+                            className="block text-sm text-primary underline"
+                          >
+                            Revertir a pendiente
+                          </button>
+                        </>
+                      )}
+                      {b.estado === "utilizado" && (
+                        <button
+                          onClick={() => cambiarEstado(b, "confirmado")}
+                          className="block text-sm text-primary underline"
+                        >
+                          Revertir a confirmado
+                        </button>
+                      )}
+                      <button
+                        onClick={() => eliminarBono(b)}
+                        className="block text-sm text-[#961818] underline"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

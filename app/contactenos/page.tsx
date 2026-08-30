@@ -31,8 +31,7 @@ export default function ContactenosPage() {
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
-            <p>Calle 8 # 19B - 06</p>
-            <p>Consultorio 2</p>
+            <p>Carrera 15 # 14 - 43</p>
             <p className="mt-2">
               Horarios:
               <br />

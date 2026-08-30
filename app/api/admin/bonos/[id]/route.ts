@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { crearClienteSupabase } from "@/lib/supabase";
 import { crearClienteSupabaseServidor } from "@/lib/supabase-server";
+import type { EstadoBono } from "@/lib/tipos-bono";
+
+const ESTADOS_VALIDOS: EstadoBono[] = ["pendiente", "confirmado", "utilizado"];
 
 export async function PATCH(
   request: Request,
@@ -16,22 +19,64 @@ export async function PATCH(
   }
 
   try {
-    const cambios = await request.json();
-    // Solo dejamos que el admin cambie estos 2 campos, nunca el resto
-    // de la fila (código, correo, etc.) a través de esta ruta.
-    const actualizacion: Record<string, unknown> = {};
-    if (typeof cambios.confirmado === "boolean") actualizacion.confirmado = cambios.confirmado;
-    if (typeof cambios.usado === "boolean") {
-      actualizacion.usado = cambios.usado;
-      actualizacion.usado_en = cambios.usado ? new Date().toISOString() : null;
+    const { estado } = await request.json();
+
+    if (!ESTADOS_VALIDOS.includes(estado)) {
+      return NextResponse.json({ error: "Estado no válido." }, { status: 400 });
+    }
+
+    // Cada estado trae consigo su propia marca de tiempo. Al retroceder
+    // (ej. de "utilizado" a "confirmado"), limpiamos la marca de tiempo
+    // del estado que se está abandonando.
+    const ahora = new Date().toISOString();
+    const actualizacion: Record<string, unknown> = { estado };
+
+    if (estado === "pendiente") {
+      actualizacion.confirmado_en = null;
+      actualizacion.usado_en = null;
+    } else if (estado === "confirmado") {
+      actualizacion.confirmado_en = ahora;
+      actualizacion.usado_en = null;
+    } else if (estado === "utilizado") {
+      actualizacion.usado_en = ahora;
     }
 
     const supabase = crearClienteSupabase();
+    const { error } = await supabase.from("bonos").update(actualizacion).eq("id", params.id);
 
-    const { error } = await supabase
-      .from("bonos")
-      .update(actualizacion)
-      .eq("id", params.id);
+    if (error) throw error;
+
+    return NextResponse.json({ ok: true, ...actualizacion });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json(
+      { error: "No se pudo actualizar el bono." },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const supabaseAuth = crearClienteSupabaseServidor();
+  const {
+    data: { user },
+  } = await supabaseAuth.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  }
+
+  try {
+    // Solo borramos el bono, no la persona — así, si más adelante esa
+    // persona tiene otras compras o historial, esos datos no se pierden
+    // por eliminar un bono suyo. Un bono "huérfano" (persona borrada
+    // aparte) no puede pasar al revés porque personas nunca se borra
+    // desde aquí.
+    const supabase = crearClienteSupabase();
+    const { error } = await supabase.from("bonos").delete().eq("id", params.id);
 
     if (error) throw error;
 
@@ -39,7 +84,7 @@ export async function PATCH(
   } catch (err) {
     console.error(err);
     return NextResponse.json(
-      { error: "No se pudo actualizar el bono." },
+      { error: "No se pudo eliminar el registro." },
       { status: 500 }
     );
   }

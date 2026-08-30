@@ -34,8 +34,8 @@ export default function PoliticaPrivacidadPage() {
             <li>Nombre completo</li>
             <li>Correo electrónico</li>
             <li>Número de WhatsApp / teléfono</li>
-            <li>Dirección (formulario de registro)</li>
-            <li>Fecha de nacimiento (formulario de registro)</li>
+            <li>Dirección</li>
+            <li>Fecha de nacimiento</li>
             <li>
               Fórmula óptica (esfera, cilindro, eje) que usted mismo ingresa al
               agregar lentes de contacto al carrito
