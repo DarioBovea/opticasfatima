@@ -12,9 +12,9 @@ export default function Footer() {
     // El original usa img/background-footer.svg como fondo decorativo.
     // Cópialo a public/img/background-footer.svg y descomenta el estilo
     // de abajo si quieres el patrón exacto; por ahora uso el azul sólido.
-    <footer className="w-full bg-primary pt-16 text-white">
+    <footer className="w-full bg-primary pt-[70px] text-white min-[1920px]:pt-[120px]">
       <div className="mx-auto flex w-4/5 flex-col items-center gap-10 py-6 md:flex-row">
-        <div className="w-full text-center md:w-1/3">
+        <div className="w-full text-center md:w-1/3 max-[768px]:mt-6">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/img/logotipos/logoblanco.png"

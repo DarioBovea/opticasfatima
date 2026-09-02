@@ -21,7 +21,7 @@ export default function BuscarPage({
   const resultados = buscar(consulta);
 
   return (
-    <section className="mt-36 px-6 pb-24">
+    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 pb-24">
       <div className="mx-auto max-w-3xl">
         <h1 className="mb-2 text-2xl font-bold text-primary">
           Resultados para &ldquo;{consulta}&rdquo;

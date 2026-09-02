@@ -1,4 +1,4 @@
-import BlogSidebar from "@/components/BlogSidebar";
+import PaginaConSidebar from "@/components/PaginaConSidebar";
 
 export const metadata = {
   title: "Nuestros Servicios",
@@ -48,13 +48,8 @@ const servicios = [
 
 export default function ServiciosPage() {
   return (
-    <section className="mt-36 flex flex-col px-6 py-12 md:flex-row md:px-[calc((100%-1180px)/2)]">
-      <aside className="hidden w-64 shrink-0 bg-light/10 py-10 pr-10 md:block">
-        <BlogSidebar />
-      </aside>
-
-      <div className="flex-1 space-y-4 py-4 text-primary md:py-10 md:pl-10 md:pr-5">
-        <h1 className="text-3xl font-bold text-light md:text-4xl">Nuestros Servicios</h1>
+    <PaginaConSidebar>
+      <h1 className="text-3xl font-bold text-light md:text-4xl">Nuestros Servicios</h1>
 
         {servicios.map((s) => (
           <p key={s.titulo} className="text-justify leading-relaxed">
@@ -67,11 +62,6 @@ export default function ServiciosPage() {
           alguno de nuestros servicios, no dudes en contactarnos. ¡Estamos
           aquí para ayudarte a ver mejor!
         </p>
-      </div>
-
-      <aside className="mt-10 bg-light/10 p-6 md:hidden">
-        <BlogSidebar />
-      </aside>
-    </section>
+    </PaginaConSidebar>
   );
 }

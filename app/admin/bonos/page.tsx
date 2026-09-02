@@ -119,7 +119,7 @@ export default function PanelBonosPage() {
   const usados = bonos.filter((b) => b.estado === "utilizado").length;
 
   return (
-    <div className="mt-36 px-6 pb-24">
+    <div className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 pb-24">
       <div className="mx-auto max-w-5xl">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>

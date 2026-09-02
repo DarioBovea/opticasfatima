@@ -102,7 +102,7 @@ export default function FormularioBono() {
   }
 
   return (
-    <div className="w-full md:w-[70%]">
+    <div className="w-[70%] max-[768px]:w-[90%] max-[320px]:w-full">
       {TURNSTILE_SITE_KEY && (
         <Script
           src="https://challenges.cloudflare.com/turnstile/v0/api.js"
@@ -139,7 +139,7 @@ export default function FormularioBono() {
                 required
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
-                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
             <label className="m-3">
@@ -149,7 +149,7 @@ export default function FormularioBono() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
             <label className="m-3">
@@ -159,7 +159,7 @@ export default function FormularioBono() {
                 required
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
-                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
             <label className="m-3">
@@ -169,7 +169,7 @@ export default function FormularioBono() {
                 required
                 value={direccion}
                 onChange={(e) => setDireccion(e.target.value)}
-                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
             <label className="m-3 flex flex-col gap-1 text-sm text-primary">
@@ -179,7 +179,7 @@ export default function FormularioBono() {
                 required
                 value={fechaNacimiento}
                 onChange={(e) => setFechaNacimiento(e.target.value)}
-                className="w-full border border-line px-2 py-2 text-primary outline-none focus:border-primary md:w-1/2"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
 
@@ -208,7 +208,7 @@ export default function FormularioBono() {
             <button
               type="submit"
               disabled={cargando}
-              className="m-3 w-full rounded-lg bg-primary px-6 py-3 font-bold uppercase text-white shadow-btn transition hover:bg-light disabled:opacity-60 md:w-1/2"
+              className="m-3 w-1/2 rounded-lg bg-primary px-6 py-3 font-bold uppercase text-white shadow-btn transition hover:bg-light disabled:opacity-60 max-[768px]:w-4/5 max-[320px]:w-full"
             >
               {cargando ? "Generando código..." : "Registrarme y canjear 50Mil"}
             </button>

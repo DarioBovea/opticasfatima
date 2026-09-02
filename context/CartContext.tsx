@@ -9,10 +9,12 @@ export type ItemCarrito = {
   selectPowerOd: string;
   selectCylOd: string;
   selectAxisOd: string;
+  selectAddOd: string;
   cantidadOd: string;
   selectPowerOi: string;
   selectCylOi: string;
   selectAxisOi: string;
+  selectAddOi: string;
   cantidadOi: string;
 };
 

@@ -1,4 +1,4 @@
-import BlogSidebar from "@/components/BlogSidebar";
+import PaginaConSidebar from "@/components/PaginaConSidebar";
 
 export const metadata = {
   title: "Sobre Nosotros",
@@ -10,13 +10,8 @@ export const metadata = {
 
 export default function NosotrosPage() {
   return (
-    <section className="mt-36 flex flex-col px-6 py-12 md:flex-row md:px-[calc((100%-1180px)/2)]">
-      <aside className="hidden w-64 shrink-0 bg-light/10 py-10 pr-10 md:block">
-        <BlogSidebar />
-      </aside>
-
-      <div className="flex-1 space-y-4 py-4 text-primary md:py-10 md:pl-10 md:pr-5">
-        <h1 className="text-3xl font-bold text-light md:text-4xl">Sobre Nosotros</h1>
+    <PaginaConSidebar>
+      <h1 className="text-3xl font-bold text-light md:text-4xl">Sobre Nosotros</h1>
 
         <h2 className="pt-2 text-2xl font-bold">Innovación y Cuidado en Nuestra Óptica</h2>
         <p className="text-justify leading-relaxed">
@@ -78,11 +73,6 @@ export default function NosotrosPage() {
           posible. Le invitamos a visitarnos y descubrir por qué somos la
           opción preferida para el cuidado de su visión.
         </p>
-      </div>
-
-      <aside className="mt-10 bg-light/10 p-6 md:hidden">
-        <BlogSidebar />
-      </aside>
-    </section>
+    </PaginaConSidebar>
   );
 }

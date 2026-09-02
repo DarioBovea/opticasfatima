@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { articulos, obtenerArticulo } from "@/lib/articulos";
+import PaginaConSidebar from "@/components/PaginaConSidebar";
 
 // Genera las 8 rutas estáticas en build time: /blog/lentes-progresivos, etc.
 export function generateStaticParams() {
@@ -30,7 +31,7 @@ export default function ArticuloPage({ params }: { params: { slug: string } }) {
   // El menú lateral muestra los otros artículos (igual al sidebar original)
   const otros = articulos.filter((a) => a.slug !== articulo.slug);
 
-  const Sidebar = () => (
+  const sidebar = (
     <ul className="m-0 flex list-none flex-col gap-3 p-0">
       {otros.map((a) => (
         <li key={a.slug}>
@@ -49,14 +50,8 @@ export default function ArticuloPage({ params }: { params: { slug: string } }) {
   );
 
   return (
-    <section className="mt-36 flex flex-col px-6 py-12 md:flex-row md:px-[calc((100%-1180px)/2)]">
-      {/* Sidebar — versión escritorio */}
-      <aside className="hidden w-64 shrink-0 bg-light/10 py-10 px-4 md:block">
-        <Sidebar />
-      </aside>
-
-      <div className="flex-1 py-4 md:py-10 md:pl-10 md:pr-5">
-        <h1 className="mb-6 text-3xl font-bold text-light md:text-4xl">
+    <PaginaConSidebar sidebar={sidebar}>
+      <h1 className="mb-6 text-3xl font-bold text-light md:text-4xl">
           {articulo.titulo}
         </h1>
 
@@ -93,12 +88,6 @@ export default function ArticuloPage({ params }: { params: { slug: string } }) {
             );
           })}
         </div>
-      </div>
-
-      {/* Sidebar — versión móvil, debajo del contenido */}
-      <aside className="mt-10 bg-light/10 p-6 md:hidden">
-        <Sidebar />
-      </aside>
-    </section>
+    </PaginaConSidebar>
   );
 }

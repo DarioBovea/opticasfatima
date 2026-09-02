@@ -11,7 +11,10 @@ export default function Blog() {
   return (
     <article className="mb-24 flex flex-wrap justify-center">
       {items.map((a) => (
-        <div key={a!.slug} className="m-4 w-full sm:w-[calc(50%-32px)] lg:w-[calc(33.3%-32px)]">
+        <div
+          key={a!.slug}
+          className="m-4 w-[calc(33.3%-32px)] max-[820px]:w-[calc(50%-32px)] max-[720px]:w-[calc(100%-32px)]"
+        >
           <Link
             href={`/blog/${a!.slug}`}
             title={a!.categoria}

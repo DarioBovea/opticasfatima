@@ -16,3 +16,9 @@ export const opcionesEje = [
   "10°","20°","30°","40°","50°","60°","70°","80°","90°","100°",
   "110°","120°","130°","140°","150°","160°","170°","180°",
 ];
+
+// Acuvue Oasys Multifocal (y la mayoría de multifocales Acuvue) no usan
+// un valor numérico de adición como otras marcas — usan estas 3
+// categorías fijas. Verificado con la ficha técnica pública del
+// fabricante (agosto 2026).
+export const opcionesAdicion = ["LOW", "MID", "HIGH"];

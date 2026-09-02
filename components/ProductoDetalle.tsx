@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { Producto } from "@/lib/productos";
-import { opcionesEsfera, opcionesCilindro, opcionesEje } from "@/lib/formula";
+import { opcionesEsfera, opcionesCilindro, opcionesEje, opcionesAdicion } from "@/lib/formula";
 import { useCart } from "@/context/CartContext";
 
 function Select({
@@ -63,6 +63,78 @@ function Cantidad({ valor, onChange }: { valor: number; onChange: (v: number) =>
   );
 }
 
+type CamposFormula = {
+  power: string;
+  setPower: (v: string) => void;
+  cyl: string;
+  setCyl: (v: string) => void;
+  axis: string;
+  setAxis: (v: string) => void;
+  add: string;
+  setAdd: (v: string) => void;
+};
+
+// Los campos que se muestran dependen del tipo de lente:
+// - esférico (miopía/hipermetropía): solo Esfera
+// - tórico (astigmatismo): Esfera + Cilindro + Eje
+// - multifocal (presbicia): Esfera + Adición
+function CamposOjo({
+  tipoFormula,
+  prefijo,
+  campos,
+}: {
+  tipoFormula: Producto["tipoFormula"];
+  prefijo: "OD" | "OI";
+  campos: CamposFormula;
+}) {
+  const columnas =
+    tipoFormula === "esferico" ? "grid-cols-1" : tipoFormula === "multifocal" ? "grid-cols-2" : "grid-cols-3";
+
+  return (
+    <div className={`mt-2 grid gap-4 rounded border border-light/40 p-4 max-[430px]:!grid-cols-1 ${columnas}`}>
+      <div>
+        <label className="mb-1 block text-center text-xs font-semibold text-primary">Esfera (sph)</label>
+        <Select
+          label={`Esfera ${prefijo}`}
+          value={campos.power}
+          onChange={campos.setPower}
+          opciones={opcionesEsfera}
+        />
+      </div>
+
+      {tipoFormula === "torico" && (
+        <>
+          <div>
+            <label className="mb-1 block text-center text-xs font-semibold text-primary">Cilindro (cyl)</label>
+            <Select
+              label={`Cilindro ${prefijo}`}
+              value={campos.cyl}
+              onChange={campos.setCyl}
+              opciones={opcionesCilindro}
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-center text-xs font-semibold text-primary">Eje</label>
+            <Select label={`Eje ${prefijo}`} value={campos.axis} onChange={campos.setAxis} opciones={opcionesEje} />
+          </div>
+        </>
+      )}
+
+      {tipoFormula === "multifocal" && (
+        <div>
+          <label className="mb-1 block text-center text-xs font-semibold text-primary">Adición (ADD)</label>
+          <Select
+            label={`Adición ${prefijo}`}
+            value={campos.add}
+            onChange={campos.setAdd}
+            opciones={opcionesAdicion}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ProductoDetalle({ producto }: { producto: Producto }) {
   const router = useRouter();
   const { agregarItem } = useCart();
@@ -72,11 +144,13 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
   const [powerOd, setPowerOd] = useState("");
   const [cylOd, setCylOd] = useState("");
   const [axisOd, setAxisOd] = useState("");
+  const [addOd, setAddOd] = useState("");
   const [cantidadOd, setCantidadOd] = useState(1);
 
   const [powerOi, setPowerOi] = useState("");
   const [cylOi, setCylOi] = useState("");
   const [axisOi, setAxisOi] = useState("");
+  const [addOi, setAddOi] = useState("");
   const [cantidadOi, setCantidadOi] = useState(1);
 
   function agregarAlCarrito(e: React.FormEvent) {
@@ -87,11 +161,13 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
       selectPowerOd: powerOd,
       selectCylOd: cylOd,
       selectAxisOd: axisOd,
+      selectAddOd: addOd,
       cantidadOd: String(cantidadOd),
       // Si es "misma fórmula", el ojo izquierdo replica al derecho
       selectPowerOi: mismaFormula ? powerOd : powerOi,
       selectCylOi: mismaFormula ? cylOd : cylOi,
       selectAxisOi: mismaFormula ? axisOd : axisOi,
+      selectAddOi: mismaFormula ? addOd : addOi,
       cantidadOi: mismaFormula ? String(cantidadOd) : String(cantidadOi),
     });
 
@@ -122,18 +198,25 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
 
         {/* Formulario de fórmula */}
         <div>
-          <div className="rounded-lg border border-primary p-6 shadow-header">
+          <div className="rounded-lg border border-primary p-8 shadow-header max-[1024px]:p-4 max-[768px]:p-8">
             <div className="text-center">
               <p className="text-lg font-medium text-primary">
                 Ingresa tu fórmula de lentes de contacto
               </p>
+              {/* Aviso claro de qué tipo de lente es, ya que el
+                  formulario cambia según esto */}
+              <p className="mt-1 text-xs uppercase tracking-wide text-light">
+                {producto.tipoFormula === "esferico" && "Lente esférico — solo esfera (sph)"}
+                {producto.tipoFormula === "torico" && "Lente tórico — esfera, cilindro y eje"}
+                {producto.tipoFormula === "multifocal" && "Lente multifocal — esfera y adición"}
+              </p>
             </div>
 
-            <div className="mt-5 flex gap-4">
+            <div className="mt-5 flex flex-wrap gap-4">
               <button
                 type="button"
                 onClick={() => setMismaFormula(true)}
-                className={`w-1/2 rounded border px-2 py-2 text-xs font-semibold ${
+                className={`w-1/2 rounded border px-2 py-2 text-xs font-semibold max-[430px]:w-full ${
                   mismaFormula ? "border-light text-light" : "border-light/40 text-light/40"
                 }`}
               >
@@ -142,7 +225,7 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
               <button
                 type="button"
                 onClick={() => setMismaFormula(false)}
-                className={`w-1/2 rounded border px-2 py-2 text-xs font-semibold ${
+                className={`w-1/2 rounded border px-2 py-2 text-xs font-semibold max-[430px]:w-full ${
                   !mismaFormula ? "border-light text-light" : "border-light/40 text-light/40"
                 }`}
               >
@@ -154,32 +237,20 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
               {mismaFormula ? "Misma Fórmula" : "Ojo Derecho"}
             </p>
 
-            <div
-              className={`mt-2 grid gap-4 rounded border border-light/40 p-4 ${
-                mismaFormula ? "grid-cols-1" : "grid-cols-3"
-              }`}
-            >
-              <div>
-                <label className="mb-1 block text-center text-xs font-semibold text-primary">
-                  Esfera (sph)
-                </label>
-                <Select label="Esfera OD" value={powerOd} onChange={setPowerOd} opciones={opcionesEsfera} />
-              </div>
-              {!mismaFormula && (
-                <>
-                  <div>
-                    <label className="mb-1 block text-center text-xs font-semibold text-primary">
-                      Cilindro (cyl)
-                    </label>
-                    <Select label="Cilindro OD" value={cylOd} onChange={setCylOd} opciones={opcionesCilindro} />
-                  </div>
-                  <div>
-                    <label className="mb-1 block text-center text-xs font-semibold text-primary">Eje</label>
-                    <Select label="Eje OD" value={axisOd} onChange={setAxisOd} opciones={opcionesEje} />
-                  </div>
-                </>
-              )}
-            </div>
+            <CamposOjo
+              tipoFormula={producto.tipoFormula}
+              prefijo="OD"
+              campos={{
+                power: powerOd,
+                setPower: setPowerOd,
+                cyl: cylOd,
+                setCyl: setCylOd,
+                axis: axisOd,
+                setAxis: setAxisOd,
+                add: addOd,
+                setAdd: setAddOd,
+              }}
+            />
 
             <div className="mt-4 flex justify-center">
               <Cantidad valor={cantidadOd} onChange={setCantidadOd} />
@@ -189,24 +260,22 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
               <>
                 <div className="my-5 h-px bg-light/40" />
                 <p className="text-center text-sm font-bold text-primary">Ojo Izquierdo</p>
-                <div className="mt-2 grid grid-cols-3 gap-4 rounded border border-light/40 p-4">
-                  <div>
-                    <label className="mb-1 block text-center text-xs font-semibold text-primary">
-                      Esfera (sph)
-                    </label>
-                    <Select label="Esfera OI" value={powerOi} onChange={setPowerOi} opciones={opcionesEsfera} />
-                  </div>
-                  <div>
-                    <label className="mb-1 block text-center text-xs font-semibold text-primary">
-                      Cilindro (cyl)
-                    </label>
-                    <Select label="Cilindro OI" value={cylOi} onChange={setCylOi} opciones={opcionesCilindro} />
-                  </div>
-                  <div>
-                    <label className="mb-1 block text-center text-xs font-semibold text-primary">Eje</label>
-                    <Select label="Eje OI" value={axisOi} onChange={setAxisOi} opciones={opcionesEje} />
-                  </div>
-                </div>
+
+                <CamposOjo
+                  tipoFormula={producto.tipoFormula}
+                  prefijo="OI"
+                  campos={{
+                    power: powerOi,
+                    setPower: setPowerOi,
+                    cyl: cylOi,
+                    setCyl: setCylOi,
+                    axis: axisOi,
+                    setAxis: setAxisOi,
+                    add: addOi,
+                    setAdd: setAddOi,
+                  }}
+                />
+
                 <div className="mt-4 flex justify-center">
                   <Cantidad valor={cantidadOi} onChange={setCantidadOi} />
                 </div>
@@ -229,28 +298,28 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
       </form>
 
       {/* Ficha técnica */}
-      <div className="my-10 flex flex-wrap justify-center gap-6 rounded-xl border border-line p-6">
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary">
+      <div className="my-10 flex flex-wrap justify-center gap-6 rounded-xl border border-line p-6 max-[550px]:gap-4 max-[550px]:p-4">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Tiempo de uso</h4>
           <span>{producto.reemplazo}</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Contenido</h4>
           <span>{producto.contenido}</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Afección Visual</h4>
           <span>{producto.afeccion}</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Marca</h4>
           <span>Acuvue</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Contenido en agua</h4>
           <span>{producto.contenidoAgua}</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Material</h4>
           <span>{producto.material}</span>
         </div>

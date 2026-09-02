@@ -1,4 +1,4 @@
-import BlogSidebar from "@/components/BlogSidebar";
+import PaginaConSidebar from "@/components/PaginaConSidebar";
 
 export const metadata = {
   title: "Contáctenos",
@@ -9,13 +9,8 @@ export const metadata = {
 
 export default function ContactenosPage() {
   return (
-    <section className="mt-36 flex flex-col px-6 py-12 md:flex-row md:px-[calc((100%-1180px)/2)]">
-      <aside className="hidden w-64 shrink-0 bg-light/10 py-10 pr-10 md:block">
-        <BlogSidebar />
-      </aside>
-
-      <div className="flex-1 space-y-6 py-4 text-primary md:py-10 md:pl-10 md:pr-5">
-        <h1 className="text-3xl font-bold text-light md:text-4xl">Contáctenos</h1>
+    <PaginaConSidebar>
+      <h1 className="text-3xl font-bold text-light md:text-4xl">Contáctenos</h1>
         <h2 className="text-2xl font-bold">Descripción Breve</h2>
 
         <iframe
@@ -50,11 +45,6 @@ export default function ContactenosPage() {
             <p>Website: opticasfatima.com</p>
           </div>
         </div>
-      </div>
-
-      <aside className="mt-10 bg-light/10 p-6 md:hidden">
-        <BlogSidebar />
-      </aside>
-    </section>
+    </PaginaConSidebar>
   );
 }

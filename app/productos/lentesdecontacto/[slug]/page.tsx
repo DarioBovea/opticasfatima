@@ -29,7 +29,7 @@ export default function ProductoPage({ params }: { params: { slug: string } }) {
   if (!producto) notFound();
 
   return (
-    <section className="mt-36 pb-12">
+    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] pb-12">
       <ProductoDetalle producto={producto} />
     </section>
   );

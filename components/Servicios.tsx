@@ -22,7 +22,10 @@ export default function Servicios() {
   return (
     <section className="mb-24 flex flex-wrap">
       {servicios.map((s) => (
-        <div key={s.titulo} className="group relative w-full sm:w-1/2 lg:w-1/3">
+        <div
+          key={s.titulo}
+          className="group relative w-1/3 max-[820px]:w-1/2 max-[720px]:mx-auto max-[720px]:w-[95%]"
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={s.imagen} alt={s.titulo} className="h-full w-full object-cover" />
 

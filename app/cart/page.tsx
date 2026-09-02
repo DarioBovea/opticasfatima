@@ -6,6 +6,28 @@ import { obtenerProductoPorId } from "@/lib/productos";
 
 const NUMERO_WHATSAPP = "573206740505";
 
+// Arma el texto de la fórmula (RX) de un ojo según el tipo de lente:
+// esférico solo muestra la esfera, tórico agrega cilindro/eje, y
+// multifocal agrega la adición — nunca mezclamos campos que no
+// aplican al tipo de lente comprado.
+function formatearRx(
+  tipoFormula: "esferico" | "torico" | "multifocal",
+  power: string,
+  cyl: string,
+  axis: string,
+  add: string
+) {
+  const partes = [power || "-"];
+  if (tipoFormula === "torico") {
+    if (cyl) partes.push(cyl);
+    if (axis) partes.push(`X ${axis}`);
+  }
+  if (tipoFormula === "multifocal" && add) {
+    partes.push(`ADD ${add}`);
+  }
+  return partes.join(" ");
+}
+
 export default function CartPage() {
   const { items, eliminarItem, vaciarCarrito } = useCart();
 
@@ -93,8 +115,8 @@ export default function CartPage() {
     }
 
     const lineas = filas.map(({ item, producto }) => {
-      const rxOd = `${item.selectPowerOd || "-"} ${item.selectCylOd} ${item.selectAxisOd ? "X " + item.selectAxisOd : ""}`.trim();
-      const rxOi = `${item.selectPowerOi || "-"} ${item.selectCylOi} ${item.selectAxisOi ? "X " + item.selectAxisOi : ""}`.trim();
+      const rxOd = formatearRx(producto.tipoFormula, item.selectPowerOd, item.selectCylOd, item.selectAxisOd, item.selectAddOd);
+      const rxOi = formatearRx(producto.tipoFormula, item.selectPowerOi, item.selectCylOi, item.selectAxisOi, item.selectAddOi);
       return (
         `• ${producto.titulo}\n` +
         `  OD: ${rxOd} (x${item.cantidadOd})\n` +
@@ -120,7 +142,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mt-36 min-h-[calc(100vh-344px)] px-6 pb-24 md:px-[calc((100%-1180px)/2)]">
+    <div className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] min-h-[calc(100vh-344px)] px-6 pb-24 md:px-[calc((100%-1180px)/2)]">
       <h2 className="mb-8 text-2xl font-bold text-primary">Carrito De Compras</h2>
 
       {filas.length === 0 ? (
@@ -133,27 +155,27 @@ export default function CartPage() {
             {filas.map(({ item, producto, subtotal }) => (
               <div
                 key={item.id}
-                className="flex w-full flex-col gap-4 rounded-xl border border-primary p-4 text-primary sm:flex-row sm:items-center sm:pl-8"
+                className="flex w-full flex-row items-center gap-4 rounded-xl border border-primary p-4 pl-8 text-primary max-[430px]:flex-col max-[430px]:items-stretch max-[430px]:p-2"
               >
-                <div className="w-full sm:w-1/5">
+                <div className="w-1/5 max-[430px]:w-[90%] max-[430px]:mx-auto">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={producto.imagen} alt={producto.alt} className="rounded-lg" />
                 </div>
 
-                <div className="w-full border-t border-primary pt-3 sm:w-3/5 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0">
+                <div className="w-3/5 border-l border-primary pl-6 text-justify max-[430px]:w-[90%] max-[430px]:mx-auto max-[430px]:border-l-0 max-[430px]:border-y max-[430px]:py-4 max-[430px]:pl-0 max-[430px]:text-center">
                   <small className="text-light">{producto.laboratorio}</small>
                   <h3 className="m-0 font-bold">{producto.titulo}</h3>
 
                   <div className="mt-2 text-sm">
                     <h5 className="mb-0 mt-2 font-semibold">Ojo Derecho</h5>
                     <p className="m-0">
-                      RX: {item.selectPowerOd} {item.selectCylOd} {item.selectAxisOd && `X ${item.selectAxisOd}`}
+                      RX: {formatearRx(producto.tipoFormula, item.selectPowerOd, item.selectCylOd, item.selectAxisOd, item.selectAddOd)}
                     </p>
                     <p className="m-0">Cantidad: {item.cantidadOd}</p>
 
                     <h5 className="mb-0 mt-2 font-semibold">Ojo Izquierdo</h5>
                     <p className="m-0">
-                      RX: {item.selectPowerOi} {item.selectCylOi} {item.selectAxisOi && `X ${item.selectAxisOi}`}
+                      RX: {formatearRx(producto.tipoFormula, item.selectPowerOi, item.selectCylOi, item.selectAxisOi, item.selectAddOi)}
                     </p>
                     <p className="m-0">Cantidad: {item.cantidadOi}</p>
                   </div>
@@ -168,7 +190,7 @@ export default function CartPage() {
                   </p>
                 </div>
 
-                <div className="flex w-full justify-end sm:w-1/5">
+                <div className="flex w-1/5 justify-end max-[430px]:w-full max-[430px]:justify-center">
                   <button
                     onClick={() => eliminarItem(item.id)}
                     title="Eliminar"
@@ -217,7 +239,7 @@ export default function CartPage() {
             {errorBono && <p className="mt-2 text-sm text-[#961818]">{errorBono}</p>}
           </div>
 
-          <div className="flex flex-col items-stretch justify-between gap-4 sm:flex-row sm:items-center">
+          <div className="flex flex-row items-center justify-between gap-4 max-[430px]:flex-col max-[430px]:items-end max-[430px]:gap-6">
             <button
               onClick={handleVaciar}
               className="rounded-2xl bg-[#e2e2e2] px-6 py-4 font-semibold uppercase text-primary transition hover:bg-[#d5d5d5]"

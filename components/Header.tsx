@@ -71,8 +71,8 @@ export default function Header() {
       }`}
     >
       {/* Barra superior */}
-      <div className="h-[34px] bg-primary">
-        <div className="mx-auto flex h-full w-4/5 items-center justify-end gap-6 text-white">
+      <div className="h-[34px] bg-primary min-[1920px]:h-[46px]">
+        <div className="mx-auto flex h-full w-4/5 items-center justify-end gap-6 text-white max-[820px]:w-[90%] min-[1920px]:w-[70%]">
           <div className="flex items-center gap-3">
             {redes.map(({ href, label, Icon }) => (
               <a
@@ -89,7 +89,7 @@ export default function Header() {
           </div>
           <a
             href="mailto:info@opticasfatima.com"
-            className="hidden font-bold tracking-wide transition hover:text-light sm:inline"
+            className="font-bold tracking-wide transition hover:text-light max-[375px]:hidden"
           >
             info@opticasfatima.com
           </a>
@@ -105,13 +105,17 @@ export default function Header() {
       </div>
 
       {/* Navegación */}
-      <nav className="mx-auto flex h-[6.875em] w-4/5 items-center justify-between">
+      <nav className="mx-auto flex h-[6.875em] w-4/5 items-center justify-between max-[820px]:h-[86px] max-[820px]:w-[90%] min-[1920px]:h-[8.375em] min-[1920px]:w-[70%]">
         <Link href="/" title="Ópticas Fátima">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/logotipos/azul-letras.png" alt="Ópticas Fátima" className="h-20" />
+          <img
+            src="/img/logotipos/azul-letras.png"
+            alt="Ópticas Fátima"
+            className="h-20 max-[820px]:h-[3.125rem] min-[1920px]:h-[6.875em]"
+          />
         </Link>
 
-        <ul className="hidden items-center md:flex">
+        <ul className="flex items-center gap-0 max-[720px]:hidden">
           {menu.map((item) => {
             const activo = pathname === item.href;
             return (
@@ -127,45 +131,46 @@ export default function Header() {
               </li>
             );
           })}
-          <li>
-            <button
-              onClick={() => setBuscadorAbierto((v) => !v)}
-              aria-label="Buscar"
-              className="text-primary transition hover:text-light"
-            >
-              <Search size={20} />
-            </button>
-          </li>
         </ul>
 
-        {/* Hamburguesa animada */}
-        <button
-          className="flex h-[30px] w-[30px] flex-col justify-center gap-1.5 md:hidden"
-          aria-label="Abrir menú"
-          onClick={() => setMenuAbierto((v) => !v)}
-        >
-          <span
-            className={`block h-0.5 w-full origin-bottom-left bg-primary transition-all duration-300 ${
-              menuAbierto ? "translate-y-px rotate-45" : ""
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-full bg-primary transition-all duration-300 ${
-              menuAbierto ? "-ml-8 opacity-0" : ""
-            }`}
-          />
-          <span
-            className={`block h-0.5 w-full origin-bottom-left bg-primary transition-all duration-300 ${
-              menuAbierto ? "translate-y-0.5 -rotate-45" : ""
-            }`}
-          />
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => setBuscadorAbierto((v) => !v)}
+            aria-label="Buscar"
+            className="text-primary transition hover:text-light"
+          >
+            <Search size={20} />
+          </button>
+
+          {/* Hamburguesa animada — aparece exactamente igual que en el original: ≤720px */}
+          <button
+            className="hidden h-[30px] w-[30px] flex-col justify-center gap-1.5 max-[720px]:flex"
+            aria-label="Abrir menú"
+            onClick={() => setMenuAbierto((v) => !v)}
+          >
+            <span
+              className={`block h-0.5 w-full origin-bottom-left bg-primary transition-all duration-300 ${
+                menuAbierto ? "translate-y-px rotate-45" : ""
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-full bg-primary transition-all duration-300 ${
+                menuAbierto ? "-ml-8 opacity-0" : ""
+              }`}
+            />
+            <span
+              className={`block h-0.5 w-full origin-bottom-left bg-primary transition-all duration-300 ${
+                menuAbierto ? "translate-y-0.5 -rotate-45" : ""
+              }`}
+            />
+          </button>
+        </div>
       </nav>
 
       {/* Buscador desplegable — fondo celeste */}
       {buscadorAbierto && (
         <div className="bg-light/80 py-4">
-          <div className="mx-auto w-3/5">
+          <div className="mx-auto w-3/5 max-[550px]:w-[80%]">
             <form onSubmit={irAResultados} className="flex gap-2">
               <input
                 type="text"
@@ -216,7 +221,7 @@ export default function Header() {
 
       {/* Menú móvil */}
       {menuAbierto && (
-        <ul className="flex flex-col gap-1 border-t border-line bg-white px-6 py-4 md:hidden">
+        <ul className="hidden flex-col gap-1 border-t border-line bg-white px-6 py-4 max-[720px]:flex">
           {menu.map((item) => (
             <li key={item.href}>
               <Link

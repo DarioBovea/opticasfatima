@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function AdminIndexPage() {
   return (
-    <div className="mt-36 px-6 pb-24">
+    <div className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 pb-24">
       <div className="mx-auto max-w-xl">
         <h1 className="mb-6 text-2xl font-bold text-primary">Administración</h1>
         <Link

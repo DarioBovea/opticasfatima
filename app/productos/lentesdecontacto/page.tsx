@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function LentesDeContactoPage() {
   return (
-    <section className="mt-36 px-6 pb-24">
+    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 pb-24">
       <div className="mx-auto max-w-6xl">
         <h1 className="py-8 text-3xl font-bold text-primary">Lentes de Contacto</h1>
         <CatalogoLentesContacto productos={productos} />

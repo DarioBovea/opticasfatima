@@ -1,6 +1,8 @@
 export type Producto = {
   id: string;
   laboratorio: string;
+  // esferico = solo esfera (miopía/hipermetropía) | torico = esfera+cilindro+eje (astigmatismo) | multifocal = esfera+adición (presbicia)
+  tipoFormula: "esferico" | "torico" | "multifocal";
   slug: string;
   alt: string;
   titulo: string;
@@ -35,6 +37,7 @@ export const productos: Producto[] = [
   {
     id: "Acuvue001",
     laboratorio: "Johnson & Johnson",
+    tipoFormula: "esferico",
     slug: "acuvue-oasys-hydraclear-plus",
     alt: "Acuvue Oasys con HydraClear Plus",
     titulo: "ACUVUE® Oasys con HydraClear Plus",
@@ -57,6 +60,7 @@ export const productos: Producto[] = [
   {
     id: "Acuvue002",
     laboratorio: "Johnson & Johnson",
+    tipoFormula: "torico",
     slug: "acuvue-oasys-astigmatismo",
     alt: "Acuvue Oasys para Astigmatismo con HydraClear Plus",
     titulo: "ACUVUE® Oasys para Astigmatismo con HydraClear Plus",
@@ -79,6 +83,7 @@ export const productos: Producto[] = [
   {
     id: "Acuvue003",
     laboratorio: "Johnson & Johnson",
+    tipoFormula: "multifocal",
     slug: "acuvue-oasys-multifocal",
     alt: "Acuvue Oasys Multifocal",
     titulo: "ACUVUE® Oasys Multifocal",
@@ -101,6 +106,7 @@ export const productos: Producto[] = [
   {
     id: "Acuvue004",
     laboratorio: "Johnson & Johnson",
+    tipoFormula: "esferico",
     slug: "1-day-acuvue-moist-lacreon",
     alt: "1-Day ACUVUE Moist con LACREON",
     titulo: "1-Day ACUVUE® Moist con LACREON™",
@@ -123,6 +129,7 @@ export const productos: Producto[] = [
   {
     id: "Acuvue005",
     laboratorio: "Johnson & Johnson",
+    tipoFormula: "torico",
     slug: "1-day-acuvue-moist-astigmatismo",
     alt: "1-Day ACUVUE Moist para Astigmatismo con LACREON",
     titulo: "1-Day ACUVUE® Moist para Astigmatismo con LACREON™",
@@ -145,6 +152,7 @@ export const productos: Producto[] = [
   {
     id: "Acuvue006",
     laboratorio: "Johnson & Johnson",
+    tipoFormula: "esferico",
     slug: "acuvue-vita",
     alt: "Acuvue Vita",
     titulo: "ACUVUE® Vita™",
@@ -167,6 +175,7 @@ export const productos: Producto[] = [
   {
     id: "Acuvue007",
     laboratorio: "Johnson & Johnson",
+    tipoFormula: "torico",
     slug: "acuvue-vita-astigmatismo",
     alt: "Acuvue Vita para Astigmatismo",
     titulo: "ACUVUE® Vita™ para Astigmatismo",
@@ -189,6 +198,7 @@ export const productos: Producto[] = [
   {
     id: "Acuvue008",
     laboratorio: "Johnson & Johnson",
+    tipoFormula: "esferico",
     slug: "acuvue-2",
     alt: "Acuvue 2",
     titulo: "ACUVUE® 2",
