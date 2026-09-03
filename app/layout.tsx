@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AosProvider from "@/components/AosProvider";
 import { CartProvider } from "@/context/CartContext";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -48,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="es-CO">
       <body>
+        <AosProvider />
         <CartProvider>
           <Header />
           {children}

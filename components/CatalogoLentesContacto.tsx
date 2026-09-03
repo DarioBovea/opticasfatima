@@ -114,11 +114,13 @@ export default function CatalogoLentesContacto({ productos }: Props) {
           <p className="text-primary">No hay productos con esos filtros.</p>
         ) : (
           <div className="flex flex-wrap gap-6">
-            {filtrados.map((p) => (
+            {filtrados.map((p, i) => (
               <Link
                 key={p.id}
                 href={`/productos/lentesdecontacto/${p.slug}`}
                 className="group relative flex w-full flex-col overflow-hidden border border-light/20 sm:w-[calc(50%-12px)] lg:w-[calc(33.3%-16px)]"
+                data-aos="fade-up"
+                data-aos-delay={(i % 3) * 100}
               >
                 <div className="-mt-5 flex items-center justify-center">
                   {/* eslint-disable-next-line @next/next/no-img-element */}

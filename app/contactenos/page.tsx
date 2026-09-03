@@ -1,4 +1,4 @@
-import PaginaConSidebar from "@/components/PaginaConSidebar";
+import PaginaSimple from "@/components/PaginaSimple";
 
 export const metadata = {
   title: "Contáctenos",
@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function ContactenosPage() {
   return (
-    <PaginaConSidebar>
+    <PaginaSimple>
       <h1 className="text-3xl font-bold text-light md:text-4xl">Contáctenos</h1>
         <h2 className="text-2xl font-bold">Descripción Breve</h2>
 
@@ -45,6 +45,6 @@ export default function ContactenosPage() {
             <p>Website: opticasfatima.com</p>
           </div>
         </div>
-    </PaginaConSidebar>
+    </PaginaSimple>
   );
 }

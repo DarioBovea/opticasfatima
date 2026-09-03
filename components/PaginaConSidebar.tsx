@@ -1,17 +1,14 @@
 import type { ReactNode } from "react";
-import BlogSidebar from "@/components/BlogSidebar";
 
-// Replica .pagina-contenido: en el original NO hay una versión "móvil"
-// duplicada del sidebar — es un solo bloque que aparece PRIMERO (arriba
-// del contenido) en pantallas angostas, porque el contenedor solo se
-// vuelve flex (lado a lado) a partir de 1024px. Antes de esto, esta
-// página tenía 2 <aside> (uno oculto en escritorio, otro en móvil).
+// Ya solo la usan los artículos del blog (/blog/[slug]) — Nosotros,
+// Servicios, Contáctenos y Bono Regalo pasaron a PaginaSimple.tsx
+// (a todo el ancho, sin sidebar).
 export default function PaginaConSidebar({
   children,
-  sidebar = <BlogSidebar />,
+  sidebar,
 }: {
   children: ReactNode;
-  sidebar?: ReactNode;
+  sidebar: ReactNode;
 }) {
   return (
     <section
@@ -30,6 +27,7 @@ export default function PaginaConSidebar({
           "lg:relative lg:-left-12 lg:w-[15%] lg:p-[128px_64px_64px_0px]",
           "min-[1920px]:p-[60px_140px_0px_0px]",
         ].join(" ")}
+        data-aos="fade-down"
       >
         {sidebar}
       </aside>
@@ -38,7 +36,7 @@ export default function PaginaConSidebar({
           fijo (60px 20px 60px 60px) sin importar el tamaño de pantalla,
           pero eso se siente grande en celulares — en ≤1023px usamos
           24px, y a partir de 1024px sí queda igual al original. */}
-      <div className="flex-1 space-y-4 p-6 text-primary lg:p-[60px_20px_60px_60px]">
+      <div className="flex-1 space-y-4 p-6 text-primary lg:p-[60px_20px_60px_60px]" data-aos="fade-up">
         {children}
       </div>
     </section>

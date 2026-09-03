@@ -1,4 +1,4 @@
-import PaginaConSidebar from "@/components/PaginaConSidebar";
+import PaginaSimple from "@/components/PaginaSimple";
 import FormularioBono from "@/components/FormularioBono";
 
 export const metadata = {
@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function BonoRegaloPage() {
   return (
-    <PaginaConSidebar>
+    <PaginaSimple>
       <h1 className="text-3xl font-bold text-light md:text-4xl">
           Te regalamos un bono de $50.000
         </h1>
@@ -36,6 +36,6 @@ export default function BonoRegaloPage() {
         </div>
 
         <FormularioBono />
-    </PaginaConSidebar>
+    </PaginaSimple>
   );
 }

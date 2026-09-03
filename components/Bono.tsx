@@ -9,6 +9,7 @@ export default function Bono() {
           backgroundImage:
             "linear-gradient(to left, transparent, #b3b3b3), url('/img/promocion.webp')",
         }}
+        data-aos="zoom-in"
       >
         {/* .slide en el original: 45% base → 50% en ≤820px */}
         <div className="relative w-full text-primary md:w-[45%] max-[820px]:!w-1/2">

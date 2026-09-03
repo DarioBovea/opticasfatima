@@ -1,4 +1,4 @@
-import PaginaConSidebar from "@/components/PaginaConSidebar";
+import PaginaSimple from "@/components/PaginaSimple";
 
 export const metadata = {
   title: "Nuestros Servicios",
@@ -48,7 +48,7 @@ const servicios = [
 
 export default function ServiciosPage() {
   return (
-    <PaginaConSidebar>
+    <PaginaSimple>
       <h1 className="text-3xl font-bold text-light md:text-4xl">Nuestros Servicios</h1>
 
         {servicios.map((s) => (
@@ -62,6 +62,6 @@ export default function ServiciosPage() {
           alguno de nuestros servicios, no dudes en contactarnos. ¡Estamos
           aquí para ayudarte a ver mejor!
         </p>
-    </PaginaConSidebar>
+    </PaginaSimple>
   );
 }

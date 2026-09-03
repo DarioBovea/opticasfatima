@@ -1,4 +1,4 @@
-import PaginaConSidebar from "@/components/PaginaConSidebar";
+import PaginaSimple from "@/components/PaginaSimple";
 
 export const metadata = {
   title: "Sobre Nosotros",
@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function NosotrosPage() {
   return (
-    <PaginaConSidebar>
+    <PaginaSimple>
       <h1 className="text-3xl font-bold text-light md:text-4xl">Sobre Nosotros</h1>
 
         <h2 className="pt-2 text-2xl font-bold">Innovación y Cuidado en Nuestra Óptica</h2>
@@ -73,6 +73,6 @@ export default function NosotrosPage() {
           posible. Le invitamos a visitarnos y descubrir por qué somos la
           opción preferida para el cuidado de su visión.
         </p>
-    </PaginaConSidebar>
+    </PaginaSimple>
   );
 }

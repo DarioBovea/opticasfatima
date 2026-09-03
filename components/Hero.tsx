@@ -6,7 +6,11 @@ export default function Hero() {
       style={{ backgroundImage: "url('/img/banner.webp')" }}
     >
       <div className="mx-auto w-4/5 max-[820px]:w-[90%]">
-        <div className="w-full md:w-[35%] max-[820px]:!w-[46%] max-[720px]:!w-1/2">
+        <div
+          className="w-full md:w-[35%] max-[820px]:!w-[46%] max-[720px]:!w-1/2"
+          data-aos="fade-right"
+          data-aos-duration="800"
+        >
           <span className="text-2xl font-bold max-[720px]:text-2xl">CORDIAL BIENVENIDA A</span>
           <h1 className="mt-2 font-sans text-4xl font-extrabold max-[720px]:text-2xl">
             ÓPTICAS FÁTIMA
@@ -20,6 +24,8 @@ export default function Hero() {
               rel="noopener noreferrer"
               title="Agenda tu cita"
               className="rounded-lg bg-primary px-6 py-2.5 font-bold uppercase text-white shadow-btn transition hover:bg-light max-[720px]:text-sm"
+              data-aos="zoom-in"
+              data-aos-delay="300"
             >
               ¡Agenda tu cita!
             </a>

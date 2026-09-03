@@ -21,10 +21,12 @@ const servicios: Servicio[] = [
 export default function Servicios() {
   return (
     <section className="mb-24 flex flex-wrap">
-      {servicios.map((s) => (
+      {servicios.map((s, i) => (
         <div
           key={s.titulo}
           className="group relative w-1/3 max-[820px]:w-1/2 max-[720px]:mx-auto max-[720px]:w-[95%]"
+          data-aos="fade-up"
+          data-aos-delay={(i % 3) * 100}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={s.imagen} alt={s.titulo} className="h-full w-full object-cover" />

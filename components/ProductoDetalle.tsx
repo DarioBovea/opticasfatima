@@ -191,13 +191,13 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
 
       <form onSubmit={agregarAlCarrito} className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-2">
         {/* Imagen */}
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center" data-aos="fade-right">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={producto.imagen} alt={producto.alt} className="max-h-[28rem] w-full object-contain" />
         </div>
 
         {/* Formulario de fórmula */}
-        <div>
+        <div data-aos="fade-left">
           <div className="rounded-lg border border-primary p-8 shadow-header max-[1024px]:p-4 max-[768px]:p-8">
             <div className="text-center">
               <p className="text-lg font-medium text-primary">
