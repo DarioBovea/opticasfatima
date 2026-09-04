@@ -66,12 +66,15 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed left-0 top-0 z-50 w-full bg-white/95 shadow-header transition-all duration-300 ${
+      className={`fixed left-0 top-0 z-50 w-full border-b border-white/30 bg-white/70 shadow-[0_8px_32px_rgba(13,56,87,0.10)] backdrop-blur-lg backdrop-saturate-150 transition-all duration-300 ${
         oculto ? "-translate-y-full" : "translate-y-0"
       }`}
     >
-      {/* Barra superior */}
-      <div className="h-[34px] bg-primary min-[1920px]:h-[46px]">
+      {/* Barra superior — se mantiene con el color sólido de marca para
+          que los datos de contacto se lean con total nitidez; el efecto
+          de vidrio vive en el header como conjunto (el borde y la
+          sombra suave) y sobre todo en la navegación de abajo. */}
+      <div className="h-[34px] bg-primary/95 backdrop-blur-sm min-[1920px]:h-[46px]">
         <div className="mx-auto flex h-full w-4/5 items-center justify-end gap-6 text-white max-[820px]:w-[90%] min-[1920px]:w-[70%]">
           <div className="flex items-center gap-3">
             {redes.map(({ href, label, Icon }) => (
@@ -167,9 +170,9 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Buscador desplegable — fondo celeste */}
+      {/* Buscador desplegable — mismo vidrio esmerilado que el resto del header */}
       {buscadorAbierto && (
-        <div className="bg-light/80 py-4">
+        <div className="border-t border-white/30 bg-light/60 py-4 backdrop-blur-lg backdrop-saturate-150">
           <div className="mx-auto w-3/5 max-[550px]:w-[80%]">
             <form onSubmit={irAResultados} className="flex gap-2">
               <input
@@ -187,7 +190,7 @@ export default function Header() {
 
             {/* Resultados en vivo mientras escribe */}
             {textoBusqueda.trim() && (
-              <div className="mt-2 max-h-80 overflow-y-auto rounded-lg bg-white shadow-header">
+              <div className="mt-2 max-h-80 overflow-y-auto rounded-lg bg-white/95 shadow-header backdrop-blur-sm">
                 {sugerencias.length === 0 ? (
                   <p className="p-4 text-sm text-primary/60">Sin resultados.</p>
                 ) : (
@@ -219,9 +222,9 @@ export default function Header() {
         </div>
       )}
 
-      {/* Menú móvil */}
+      {/* Menú móvil — mismo vidrio esmerilado */}
       {menuAbierto && (
-        <ul className="hidden flex-col gap-1 border-t border-line bg-white px-6 py-4 max-[720px]:flex">
+        <ul className="hidden flex-col gap-1 border-t border-white/30 bg-white/80 px-6 py-4 backdrop-blur-lg backdrop-saturate-150 max-[720px]:flex">
           {menu.map((item) => (
             <li key={item.href}>
               <Link

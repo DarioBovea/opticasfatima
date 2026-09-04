@@ -114,33 +114,63 @@ export default function CatalogoLentesContacto({ productos }: Props) {
           <p className="text-primary">No hay productos con esos filtros.</p>
         ) : (
           <div className="flex flex-wrap gap-6">
-            {filtrados.map((p, i) => (
-              <Link
-                key={p.id}
-                href={`/productos/lentesdecontacto/${p.slug}`}
-                className="group relative flex w-full flex-col overflow-hidden border border-light/20 sm:w-[calc(50%-12px)] lg:w-[calc(33.3%-16px)]"
-                data-aos="fade-up"
-                data-aos-delay={(i % 3) * 100}
-              >
-                <div className="-mt-5 flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={p.imagen}
-                    alt={p.alt}
-                    className="my-8 max-w-[220px] transition duration-300 group-hover:-translate-y-[10%]"
-                  />
-                </div>
-                <div className="-mt-6 px-8 pb-6 text-center">
-                  <p className="text-xs uppercase tracking-wide text-primary/50">{p.laboratorio}</p>
-                  <p className="my-1 font-bold leading-snug text-primary">{p.titulo}</p>
-                  <p className="text-lg font-extrabold text-light">
-                    ${p.precio.toLocaleString("es-CO")}
-                  </p>
-                  <p className="text-sm text-primary">{p.afeccion}</p>
-                  <p className="text-sm text-primary">{p.uso} · {p.reemplazo}</p>
-                </div>
-              </Link>
-            ))}
+            {filtrados.map((p, i) => {
+              const etiquetaTipo =
+                p.tipoFormula === "esferico"
+                  ? "Esférico"
+                  : p.tipoFormula === "torico"
+                  ? "Tórico"
+                  : "Multifocal";
+
+              return (
+                <Link
+                  key={p.id}
+                  href={`/productos/lentesdecontacto/${p.slug}`}
+                  className="group relative flex w-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[calc(50%-12px)] lg:w-[calc(33.3%-16px)]"
+                  data-aos="fade-up"
+                  data-aos-delay={(i % 3) * 100}
+                >
+                  {/* Imagen con fondo propio y etiqueta de tipo de lente */}
+                  <div className="relative flex items-center justify-center bg-canvas py-8">
+                    <span className="absolute left-3 top-3 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+                      {etiquetaTipo}
+                    </span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={p.imagen}
+                      alt={p.alt}
+                      className="max-w-[200px] transition duration-300 group-hover:-translate-y-1 group-hover:scale-105"
+                    />
+                  </div>
+
+                  {/* Contenido con jerarquía clara: marca → título → precio → detalles */}
+                  <div className="flex flex-1 flex-col px-6 py-5 text-center">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-primary/50">
+                      {p.laboratorio}
+                    </p>
+                    <p className="mt-1 text-base font-bold leading-snug text-primary">{p.titulo}</p>
+
+                    <p className="mt-3 text-2xl font-extrabold text-light">
+                      ${p.precio.toLocaleString("es-CO")}
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap items-center justify-center gap-2 border-t border-line pt-4">
+                      <span className="rounded-full bg-light/15 px-3 py-1 text-xs font-semibold text-primary">
+                        {p.afeccion}
+                      </span>
+                      <span className="rounded-full bg-primary/5 px-3 py-1 text-xs font-medium text-primary/70">
+                        {p.uso} · {p.reemplazo}
+                      </span>
+                    </div>
+
+                    <span className="mt-4 inline-flex items-center justify-center gap-1 text-sm font-bold text-primary transition group-hover:gap-2 group-hover:text-light">
+                      Ver detalle
+                      <span aria-hidden>→</span>
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         )}
       </div>
