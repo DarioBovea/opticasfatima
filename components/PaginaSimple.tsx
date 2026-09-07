@@ -11,7 +11,7 @@ export default function PaginaSimple({ children }: { children: ReactNode }) {
         "px-6 py-12 lg:px-[calc((100%-1180px)/2)] min-[1920px]:px-[calc((100%-1640px)/2)]",
       ].join(" ")}
     >
-      <div className="space-y-4 text-primary" data-aos="fade-up">{children}</div>
+      <div className="space-y-4 text-primary dark:text-darktext" data-aos="fade-up">{children}</div>
     </section>
   );
 }

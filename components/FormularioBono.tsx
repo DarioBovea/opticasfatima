@@ -113,14 +113,14 @@ export default function FormularioBono() {
       )}
 
       <fieldset className="border-0">
-        <legend className="leading-relaxed text-primary">
+        <legend className="leading-relaxed text-primary dark:text-darktext">
           Regístrate y te enviaremos <strong>GRATIS un BONO de $50.000</strong>{" "}
           que podrás utilizar en la compra de cualquiera de nuestros
           productos.
         </legend>
 
         {codigo ? (
-          <div className="mt-4 space-y-2 rounded-lg border border-light bg-light/10 p-4 text-primary">
+          <div className="mt-4 space-y-2 rounded-lg border border-light bg-light/10 p-4 text-primary dark:text-darktext">
             <p>
               ¡Listo! Tu código es <strong className="text-lg">{codigo}</strong>.
             </p>
@@ -139,7 +139,7 @@ export default function FormularioBono() {
                 required
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
-                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary dark:border-darkline dark:bg-darkcard dark:text-darktext max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
             <label className="m-3">
@@ -149,7 +149,7 @@ export default function FormularioBono() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary dark:border-darkline dark:bg-darkcard dark:text-darktext max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
             <label className="m-3">
@@ -159,7 +159,7 @@ export default function FormularioBono() {
                 required
                 value={telefono}
                 onChange={(e) => setTelefono(e.target.value)}
-                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary dark:border-darkline dark:bg-darkcard dark:text-darktext max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
             <label className="m-3">
@@ -169,17 +169,17 @@ export default function FormularioBono() {
                 required
                 value={direccion}
                 onChange={(e) => setDireccion(e.target.value)}
-                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary dark:border-darkline dark:bg-darkcard dark:text-darktext max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
-            <label className="m-3 flex flex-col gap-1 text-sm text-primary">
+            <label className="m-3 flex flex-col gap-1 text-sm text-primary dark:text-darktext">
               Fecha de nacimiento*
               <input
                 type="date"
                 required
                 value={fechaNacimiento}
                 onChange={(e) => setFechaNacimiento(e.target.value)}
-                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary max-[768px]:w-4/5 max-[320px]:w-full"
+                className="w-1/2 border border-line px-2 py-2 text-primary outline-none focus:border-primary dark:border-darkline dark:bg-darkcard dark:text-darktext max-[768px]:w-4/5 max-[320px]:w-full"
               />
             </label>
 
@@ -214,7 +214,7 @@ export default function FormularioBono() {
             </button>
             <div className="m-3 flex items-start gap-2">
               <input type="checkbox" required id="terminos" className="mt-1" />
-              <label htmlFor="terminos" className="text-sm text-primary">
+              <label htmlFor="terminos" className="text-sm text-primary dark:text-darktext">
                 He leído y acepto los{" "}
                 <a href="/terminos-y-condiciones" target="_blank" className="underline">
                   Términos y condiciones

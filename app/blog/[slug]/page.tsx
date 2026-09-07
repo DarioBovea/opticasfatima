@@ -37,10 +37,10 @@ export default function ArticuloPage({ params }: { params: { slug: string } }) {
         <li key={a.slug}>
           <Link
             href={`/blog/${a.slug}`}
-            className="group flex items-center gap-3 rounded-lg border border-line bg-white px-4 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-light hover:shadow-md"
+            className="group flex items-center gap-3 rounded-lg border border-line bg-white px-4 py-3 shadow-sm transition hover:-translate-y-0.5 hover:border-light hover:shadow-md dark:border-darkline dark:bg-darkcard"
           >
             <span className="h-2 w-2 shrink-0 rounded-full bg-light transition group-hover:bg-primary" />
-            <span className="font-medium text-primary transition group-hover:text-light">
+            <span className="font-medium text-primary transition group-hover:text-light dark:text-darktext">
               {a.categoria}
             </span>
           </Link>
@@ -55,7 +55,7 @@ export default function ArticuloPage({ params }: { params: { slug: string } }) {
           {articulo.titulo}
         </h1>
 
-        <div className="space-y-4 text-primary">
+        <div className="space-y-4 text-primary dark:text-darktext">
           {articulo.contenido.map((bloque, i) => {
             if (bloque.tipo === "h2") {
               return (

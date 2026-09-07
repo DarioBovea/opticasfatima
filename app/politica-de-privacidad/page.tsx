@@ -9,11 +9,11 @@ export const metadata = {
 export default function PoliticaPrivacidadPage() {
   return (
     <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 pb-24">
-      <div className="mx-auto max-w-3xl text-primary">
+      <div className="mx-auto max-w-3xl text-primary dark:text-darktext">
         <h1 className="mb-2 text-3xl font-bold text-light md:text-4xl">
           Política de Privacidad
         </h1>
-        <p className="mb-8 text-sm text-primary/60">
+        <p className="mb-8 text-sm text-primary/60 dark:text-darktext/60">
           Última actualización: agosto de 2026
         </p>
 
@@ -135,7 +135,7 @@ export default function PoliticaPrivacidadPage() {
             su fecha de actualización correspondiente.
           </p>
 
-          <p className="pt-4 text-sm text-primary/60">
+          <p className="pt-4 text-sm text-primary/60 dark:text-darktext/60">
             Este documento es una guía general y no reemplaza asesoría legal
             profesional. Si tiene inquietudes específicas sobre el tratamiento
             de sus datos, le recomendamos consultarlas con un abogado

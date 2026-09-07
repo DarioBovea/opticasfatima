@@ -41,13 +41,30 @@ export const metadata: Metadata = {
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
+// Se ejecuta ANTES de que React pinte nada, directo en el <head> —
+// si no hiciéramos esto, la página siempre cargaría en claro por una
+// fracción de segundo y luego "saltaría" a oscuro, algo muy notorio.
+const scriptTema = `
+  (function () {
+    try {
+      var guardado = localStorage.getItem("opticas-tema");
+      var prefiereOscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var oscuro = guardado ? guardado === "dark" : prefiereOscuro;
+      document.documentElement.classList.toggle("dark", oscuro);
+    } catch (e) {}
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es-CO">
+    <html lang="es-CO" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: scriptTema }} />
+      </head>
       <body>
         <AosProvider />
         <CartProvider>

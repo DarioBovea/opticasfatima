@@ -7,6 +7,16 @@
 body {
   font-family: "Rubik", sans-serif;
   color: #0d3857;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Fondo base del modo oscuro. Los componentes que ya recibieron su
+   propio ajuste de modo oscuro (Fase 1: Header, Footer, Home) usan
+   sus propias clases dark:; esto es solo la base general para que
+   ninguna sección sin tocar todavía se quede en blanco puro. */
+.dark body {
+  background-color: #0a1a2b;
+  color: #dbe8f0;
 }
 
 ::selection {

@@ -24,7 +24,7 @@ function Select({
       required
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full border-0 border-b border-light bg-transparent pb-0.5 text-center text-sm text-primary outline-none"
+      className="w-full border-0 border-b border-light bg-transparent pb-0.5 text-center text-sm text-primary outline-none dark:text-darktext [color-scheme:light] dark:[color-scheme:dark]"
     >
       <option value="" disabled>
         Elegir
@@ -41,7 +41,7 @@ function Select({
 function Cantidad({ valor, onChange }: { valor: number; onChange: (v: number) => void }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="mb-1 select-none text-sm font-semibold text-primary">Cantidad</span>
+      <span className="mb-1 select-none text-sm font-semibold text-primary dark:text-darktext">Cantidad</span>
       <div className="flex w-24 items-center justify-between">
         <button
           type="button"
@@ -50,7 +50,7 @@ function Cantidad({ valor, onChange }: { valor: number; onChange: (v: number) =>
         >
           −
         </button>
-        <span className="text-xl font-semibold text-primary">{valor}</span>
+        <span className="text-xl font-semibold text-primary dark:text-darktext">{valor}</span>
         <button
           type="button"
           onClick={() => onChange(valor + 1)}
@@ -93,7 +93,7 @@ function CamposOjo({
   return (
     <div className={`mt-2 grid gap-4 rounded border border-light/40 p-4 max-[430px]:!grid-cols-1 ${columnas}`}>
       <div>
-        <label className="mb-1 block text-center text-xs font-semibold text-primary">Esfera (sph)</label>
+        <label className="mb-1 block text-center text-xs font-semibold text-primary dark:text-darktext">Esfera (sph)</label>
         <Select
           label={`Esfera ${prefijo}`}
           value={campos.power}
@@ -105,7 +105,7 @@ function CamposOjo({
       {tipoFormula === "torico" && (
         <>
           <div>
-            <label className="mb-1 block text-center text-xs font-semibold text-primary">Cilindro (cyl)</label>
+            <label className="mb-1 block text-center text-xs font-semibold text-primary dark:text-darktext">Cilindro (cyl)</label>
             <Select
               label={`Cilindro ${prefijo}`}
               value={campos.cyl}
@@ -114,7 +114,7 @@ function CamposOjo({
             />
           </div>
           <div>
-            <label className="mb-1 block text-center text-xs font-semibold text-primary">Eje</label>
+            <label className="mb-1 block text-center text-xs font-semibold text-primary dark:text-darktext">Eje</label>
             <Select label={`Eje ${prefijo}`} value={campos.axis} onChange={campos.setAxis} opciones={opcionesEje} />
           </div>
         </>
@@ -122,7 +122,7 @@ function CamposOjo({
 
       {tipoFormula === "multifocal" && (
         <div>
-          <label className="mb-1 block text-center text-xs font-semibold text-primary">Adición (ADD)</label>
+          <label className="mb-1 block text-center text-xs font-semibold text-primary dark:text-darktext">Adición (ADD)</label>
           <Select
             label={`Adición ${prefijo}`}
             value={campos.add}
@@ -175,15 +175,15 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-6">
+    <div className="mx-auto max-w-5xl px-6 dark:text-darktext">
       <div className="pt-12">
         <Link href={`/productos/lentesdecontacto`} className="text-sm uppercase text-light">
           {producto.laboratorio}
         </Link>
-        <h1 className="mt-1 text-2xl font-extrabold text-primary md:text-3xl">
+        <h1 className="mt-1 text-2xl font-extrabold text-primary dark:text-darktext md:text-3xl">
           {producto.titulo}
         </h1>
-        <div className="mt-2 flex flex-wrap gap-x-8 gap-y-1 text-sm text-primary/60">
+        <div className="mt-2 flex flex-wrap gap-x-8 gap-y-1 text-sm text-primary/60 dark:text-darktext/60">
           <span>Uso por lente: {producto.uso}</span>
           <span>{producto.contenido}</span>
         </div>
@@ -198,9 +198,9 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
 
         {/* Formulario de fórmula */}
         <div data-aos="fade-left">
-          <div className="rounded-lg border border-primary p-8 shadow-header max-[1024px]:p-4 max-[768px]:p-8">
+          <div className="rounded-lg border border-primary p-8 shadow-header max-[1024px]:p-4 max-[768px]:p-8 dark:border-light/40 dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
             <div className="text-center">
-              <p className="text-lg font-medium text-primary">
+              <p className="text-lg font-medium text-primary dark:text-darktext">
                 Ingresa tu fórmula de lentes de contacto
               </p>
               {/* Aviso claro de qué tipo de lente es, ya que el
@@ -233,7 +233,7 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
               </button>
             </div>
 
-            <p className="mt-4 text-center text-sm font-bold text-primary">
+            <p className="mt-4 text-center text-sm font-bold text-primary dark:text-darktext">
               {mismaFormula ? "Misma Fórmula" : "Ojo Derecho"}
             </p>
 
@@ -259,7 +259,7 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
             {!mismaFormula && (
               <>
                 <div className="my-5 h-px bg-light/40" />
-                <p className="text-center text-sm font-bold text-primary">Ojo Izquierdo</p>
+                <p className="text-center text-sm font-bold text-primary dark:text-darktext">Ojo Izquierdo</p>
 
                 <CamposOjo
                   tipoFormula={producto.tipoFormula}
@@ -285,7 +285,7 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
 
           <div className="mt-8 flex items-center justify-between">
             <span className="text-2xl font-extrabold text-light">
-              ${producto.precio.toLocaleString("es-CO")} <span className="text-sm font-normal text-primary">c/u</span>
+              ${producto.precio.toLocaleString("es-CO")} <span className="text-sm font-normal text-primary dark:text-darktext">c/u</span>
             </span>
             <button
               type="submit"
@@ -298,35 +298,35 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
       </form>
 
       {/* Ficha técnica */}
-      <div className="my-10 flex flex-wrap justify-center gap-6 rounded-xl border border-line p-6 max-[550px]:gap-4 max-[550px]:p-4">
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
+      <div className="my-10 flex flex-wrap justify-center gap-6 rounded-xl border border-line p-6 max-[550px]:gap-4 max-[550px]:p-4 dark:border-darkline">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Tiempo de uso</h4>
           <span>{producto.reemplazo}</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Contenido</h4>
           <span>{producto.contenido}</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Afección Visual</h4>
           <span>{producto.afeccion}</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Marca</h4>
           <span>Acuvue</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Contenido en agua</h4>
           <span>{producto.contenidoAgua}</span>
         </div>
-        <div className="flex w-32 flex-col items-center text-center text-sm text-primary max-[320px]:w-[calc(50%-1rem)]">
+        <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
           <h4 className="font-bold">Material</h4>
           <span>{producto.material}</span>
         </div>
       </div>
 
       {/* Descripción */}
-      <div className="mb-16 space-y-1 text-primary">
+      <div className="mb-16 space-y-1 text-primary dark:text-darktext">
         {producto.descripcion.map((linea, i) => (
           <p key={i}>- {linea}</p>
         ))}
