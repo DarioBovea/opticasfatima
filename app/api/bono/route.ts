@@ -8,9 +8,6 @@ export async function POST(request: Request) {
     const { nombre, email, telefono, direccion, fechaNacimiento, tokenCaptcha, sitio_web } =
       await request.json();
 
-    // Defensa en profundidad: si alguien llama a esta API directamente
-    // (sin pasar por el formulario) y manda el campo trampa lleno,
-    // lo rechazamos igual que en el cliente.
     if (sitio_web) {
       return NextResponse.json({ codigo: generarCodigo() });
     }
@@ -65,8 +62,6 @@ export async function POST(request: Request) {
 
     if (errorPersona) throw errorPersona;
 
-    // 2. Creamos su bono, con reintento si el código genera choca con
-    //    la restricción UNIQUE (muy poco probable, pero posible).
     let codigo = "";
     let insertado = false;
     let intentos = 0;

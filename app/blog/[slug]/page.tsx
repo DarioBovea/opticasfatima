@@ -3,7 +3,6 @@ import Link from "next/link";
 import { articulos, obtenerArticulo } from "@/lib/articulos";
 import PaginaConSidebar from "@/components/PaginaConSidebar";
 
-// Genera las 8 rutas estáticas en build time: /blog/lentes-progresivos, etc.
 export function generateStaticParams() {
   return articulos.map((a) => ({ slug: a.slug }));
 }
@@ -28,11 +27,10 @@ export default function ArticuloPage({ params }: { params: { slug: string } }) {
   const articulo = obtenerArticulo(params.slug);
   if (!articulo) notFound();
 
-  // El menú lateral muestra los otros artículos (igual al sidebar original)
   const otros = articulos.filter((a) => a.slug !== articulo.slug);
 
   const sidebar = (
-    <ul className="m-0 flex list-none flex-col gap-3 p-0">
+    <ul className="m-0 lg:pt-12 flex list-none flex-col gap-3 p-0">
       {otros.map((a) => (
         <li key={a.slug}>
           <Link

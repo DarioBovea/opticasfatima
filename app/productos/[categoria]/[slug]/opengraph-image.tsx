@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { obtenerProducto } from "@/lib/productos";
+import { obtenerCategoria } from "@/lib/categorias";
 import { SITE_URL } from "@/lib/seo";
 
 export const runtime = "edge";
@@ -7,10 +8,18 @@ export const alt = "Ópticas Fátima — Producto";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function Image({ params }: { params: { slug: string } }) {
+export default async function Image({ params }: { params: { categoria: string; slug: string } }) {
   const producto = obtenerProducto(params.slug);
+  const categoria = obtenerCategoria(params.categoria);
   const titulo = producto?.titulo ?? "Ópticas Fátima";
   const precio = producto ? `$${producto.precio.toLocaleString("es-CO")}` : "";
+  const etiqueta = categoria ? `${categoria.nombre.toUpperCase()}${producto ? " " + producto.laboratorio.toUpperCase() : ""}` : "ÓPTICAS FÁTIMA";
+  // Los productos reales usan una ruta local ("/img/..."), pero los de
+  // prueba usan una URL externa completa (placehold.co) — si ya
+  // empieza con "http", no le anteponemos el dominio del sitio.
+  const urlImagen = producto?.imagen.startsWith("http")
+    ? producto.imagen
+    : `${SITE_URL}${producto?.imagen ?? ""}`;
 
   return new ImageResponse(
     (
@@ -34,7 +43,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
           {producto && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={`${SITE_URL}${producto.imagen}`}
+              src={urlImagen}
               alt={producto.alt}
               style={{ width: "80%", objectFit: "contain" }}
             />
@@ -50,7 +59,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
           }}
         >
           <span style={{ color: "#45deff", fontSize: 24, fontWeight: 700, letterSpacing: 2 }}>
-            LENTES DE CONTACTO ACUVUE
+            {etiqueta}
           </span>
           <span
             style={{

@@ -19,6 +19,7 @@ const menu = [
   { href: "/", label: "Inicio" },
   { href: "/nosotros", label: "Nosotros" },
   { href: "/servicios", label: "Servicios" },
+  { href: "/productos", label: "Productos" },
   { href: "/contactenos", label: "Contáctenos" },
 ];
 
@@ -53,8 +54,6 @@ export default function Header() {
     router.push(`/buscar?q=${encodeURIComponent(textoBusqueda.trim())}`);
   }
 
-  // Replica el comportamiento original: el header se oculta al bajar
-  // y reaparece al subir (js/main.js).
   useEffect(() => {
     function onScroll() {
       const actual = window.scrollY;
@@ -66,8 +65,7 @@ export default function Header() {
   }, []);
 
   // Con el menú móvil a pantalla completa, bloqueamos el scroll de
-  // fondo mientras está abierto — si no, se puede desplazar la página
-  // detrás del menú, que es confuso.
+  // fondo
   useEffect(() => {
     document.body.style.overflow = menuAbierto ? "hidden" : "";
     return () => {
@@ -76,15 +74,13 @@ export default function Header() {
   }, [menuAbierto]);
 
   return (
-    <header
-      className={`fixed left-0 top-0 z-50 w-full border-b border-white/30 bg-white/70 shadow-[0_8px_32px_rgba(13,56,87,0.10)] backdrop-blur-lg backdrop-saturate-150 transition-all duration-300 dark:border-darkline/60 dark:bg-darksurface/80 dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] ${
-        oculto ? "-translate-y-full" : "translate-y-0"
-      }`}
-    >
-      {/* Barra superior — se mantiene con el color sólido de marca para
-          que los datos de contacto se lean con total nitidez; el efecto
-          de vidrio vive en el header como conjunto (el borde y la
-          sombra suave) y sobre todo en la navegación de abajo. */}
+    <>
+      <header
+        className={`fixed left-0 top-0 z-50 w-full border-b border-white/30 bg-white/70 shadow-[0_8px_32px_rgba(13,56,87,0.10)] backdrop-blur-lg backdrop-saturate-150 transition-all duration-300 dark:border-darkline/60 dark:bg-darksurface/80 dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] ${
+          oculto ? "-translate-y-full" : "translate-y-0"
+        }`}
+      >
+
       <div className="h-[34px] bg-primary/95 backdrop-blur-sm min-[1920px]:h-[46px]">
         <div className="mx-auto flex h-full w-4/5 items-center justify-end gap-6 text-white max-[820px]:w-[90%] min-[1920px]:w-[70%]">
           <div className="flex items-center gap-3">
@@ -158,7 +154,7 @@ export default function Header() {
             <Search size={20} />
           </button>
 
-          {/* Hamburguesa animada — aparece exactamente igual que en el original: ≤720px */}
+          {/* Hamburguesa animada ≤720px */}
           <button
             className="relative hidden h-[18px] w-[26px] max-[720px]:block"
             aria-label="Abrir menú"
@@ -235,10 +231,16 @@ export default function Header() {
         </div>
       )}
 
-      {/* Menú móvil — revelado circular desde la esquina inferior
-          izquierda, igual al efecto del sitio original. Siempre está
-          montado (no solo cuando está abierto) para que la animación
-          de cierre también se vea, no solo la de apertura. */}
+      </header>
+
+      {/* Menú móvil — vive FUERA del <header> a propósito: el header
+          tiene backdrop-blur (efecto de vidrio), y en CSS cualquier
+          elemento con backdrop-filter/filter crea un nuevo "contenedor"
+          para sus descendientes con position:fixed. Si este menú
+          quedara dentro del header, su "fixed inset-0" se posicionaría
+          relativo al header (~144px de alto) en vez de a toda la
+          pantalla — que era exactamente el bug reportado (el menú solo
+          se veía "de la mitad hacia abajo"). */}
       <div
         className="fixed inset-0 z-40 hidden bg-white/95 backdrop-blur-lg transition-[clip-path] duration-500 ease-in-out max-[720px]:block dark:bg-darksurface/95"
         style={{
@@ -260,6 +262,6 @@ export default function Header() {
           ))}
         </ul>
       </div>
-    </header>
+    </>
   );
 }

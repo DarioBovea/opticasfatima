@@ -7,8 +7,6 @@ type Servicio = {
   interno: boolean;
 };
 
-// Coloca estas imágenes en /public/img/ con estos mismos nombres
-// (son los mismos nombres de archivo del sitio original).
 const servicios: Servicio[] = [
   { titulo: "Lentes Formulados", imagen: "/img/lentes-formulados.jpg", href: "/blog/lentes-formulados", interno: true },
   { titulo: "Gafas De Sol", imagen: "/img/gafas-de-sol.jpg", href: "/blog/gafas-de-sol", interno: true },

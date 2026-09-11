@@ -52,7 +52,7 @@ export default function ServiciosPage() {
       <h1 className="text-3xl font-bold text-light md:text-4xl">Nuestros Servicios</h1>
 
         {servicios.map((s) => (
-          <p key={s.titulo} className="text-justify leading-relaxed">
+          <p key={s.titulo} className="m-6 text-justify leading-relaxed">
             <strong>{s.titulo}</strong> {s.texto}
           </p>
         ))}

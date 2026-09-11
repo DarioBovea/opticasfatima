@@ -9,13 +9,9 @@ const redes = [
 
 export default function Footer() {
   return (
-    // El original usa img/background-footer.svg como fondo decorativo.
-    // Cópialo a public/img/background-footer.svg y descomenta el estilo
-    // de abajo si quieres el patrón exacto; por ahora uso el azul sólido.
-    <footer className="w-full bg-primary pt-[70px] text-white min-[1920px]:pt-[120px]">
+    <footer className="w-full bg-primary pt-12 text-white min-[1920px]:pt-[120px]">
       <div className="mx-auto flex w-4/5 flex-col items-center gap-10 py-6 md:flex-row">
         <div className="w-full text-center md:w-1/3 max-[768px]:mt-6" data-aos="fade-up">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/img/logotipos/logoblanco.png"
             alt="Logo Ópticas Fátima"
@@ -23,12 +19,13 @@ export default function Footer() {
           />
         </div>
 
-        <div className="w-full text-center md:w-1/3" data-aos="fade-up" data-aos-delay="100">
+        <div className="w-full text-center md:w-1/3" text-lg data-aos="fade-up" data-aos-delay="100">
           <span className="text-2xl font-bold">Comuníquese con nosotros:</span>
-          <div className="my-4 text-lg font-bold">
-            <p>De lunes a viernes,</p>
-            <p>7:00 am a 6:00 pm</p>
-            <p>Sábados,</p>
+          <div className="my-4">
+            <p className="font-bold">De lunes a viernes,</p>
+            <p>7:30AM a 12:00AM</p>
+            <p>2:00PM a 5:30PM</p>
+            <p className="font-bold">Sábados,</p>
             <p>8:00 am a 12:00 pm</p>
           </div>
           <p className="mb-1">Carrera 18 # 19B - 06 </p>
@@ -58,6 +55,9 @@ export default function Footer() {
       <div className="mx-auto mt-6 max-w-[97%] border-t border-white/40" />
       <div className="flex flex-col items-center gap-2 py-3 text-center text-sm">
         <div className="flex gap-4 text-xs">
+          <a href="/productos" className="underline hover:text-light">
+            Productos
+          </a>
           <a href="/terminos-y-condiciones" className="underline hover:text-light">
             Términos y Condiciones
           </a>

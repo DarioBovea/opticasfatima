@@ -8,9 +8,6 @@ import "aos/dist/aos.css";
 export default function AosProvider() {
   const pathname = usePathname();
 
-  // Se inicializa una sola vez, con una duración/curva pareja en todo
-  // el sitio para que se sienta como un solo diseño, no animaciones
-  // sueltas por sección.
   useEffect(() => {
     AOS.init({
       duration: 600,
@@ -20,8 +17,6 @@ export default function AosProvider() {
     });
   }, []);
 
-  // Next.js navega entre páginas sin recargar — sin esto, AOS no se
-  // entera de los elementos nuevos que aparecen en la página siguiente.
   useEffect(() => {
     AOS.refreshHard();
   }, [pathname]);

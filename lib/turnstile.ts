@@ -1,7 +1,3 @@
-// Verifica un token de Cloudflare Turnstile contra la API de Cloudflare.
-// Si no configuraste TURNSTILE_SECRET_KEY, se salta la verificación (para
-// que el sitio siga funcionando en desarrollo local sin captcha). En
-// producción, configura la variable para que sí se exija.
 export async function verificarTurnstile(token: string, ip?: string | null) {
   const secretKey = process.env.TURNSTILE_SECRET_KEY;
 

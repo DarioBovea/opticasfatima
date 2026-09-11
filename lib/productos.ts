@@ -1,41 +1,47 @@
+import type { CategoriaSlug } from "@/lib/categorias";
+
 export type Producto = {
   id: string;
+  categoria: CategoriaSlug;
   laboratorio: string;
-  // esferico = solo esfera (miopía/hipermetropía) | torico = esfera+cilindro+eje (astigmatismo) | multifocal = esfera+adición (presbicia)
-  tipoFormula: "esferico" | "torico" | "multifocal";
   slug: string;
   alt: string;
   titulo: string;
   imagen: string;
+  // Fotos adicionales (opcional, 1 o 2 más) — solo se muestran en la
+  // página de detalle del producto, como una galería junto a la
+  // imagen principal. El catálogo, el carrito y las redes sociales
+  // siguen usando solo "imagen".
+  galeria?: string[];
   precio: number;
-  uso: string;
-  reemplazo: string;
-  contenido: string;
-  afeccion: string;
-  material: string;
-  contenidoAgua: string;
   descripcion: string[];
+
+  // Todo lo de abajo es EXCLUSIVO de lentes de contacto (categoria
+  // "lentesdecontacto") — queda opcional para que otras categorías
+  // (gafas de sol, monturas, gotas, soluciones) no tengan que rellenar
+  // campos que no les aplican.
+  //
+  // esferico = solo esfera (miopía/hipermetropía)
+  // torico = esfera+cilindro+eje (astigmatismo)
+  // multifocal = esfera+adición (presbicia)
+  tipoFormula?: "esferico" | "torico" | "multifocal";
+  uso?: string;
+  reemplazo?: string;
+  contenido?: string;
+  afeccion?: string;
+  material?: string;
+  contenidoAgua?: string;
+
+  // Para categorías SIN fórmula (gafas de sol, monturas, gotas,
+  // soluciones): pares clave/valor genéricos para la ficha técnica.
+  // Ej: [{ etiqueta: "Material", valor: "Acetato" }]
+  atributos?: { etiqueta: string; valor: string }[];
 };
 
-// ✅ Ficha técnica (material y % de agua) verificada con fuentes públicas
-// del fabricante y distribuidores oficiales de Acuvue (agosto 2026):
-// - id, laboratorio, titulo, imagen, precio, uso, reemplazo, contenido →
-//   tomados de tu js/productos.json / tus páginas de producto reales.
-// - material y contenidoAgua → verificados: Oasys = Senofilcon A / 38%,
-//   Vita = Senofilcon C / 41%, 1-Day Moist y Acuvue 2 = Etafilcon A / 58%.
-// - afeccion y descripcion[] → siguen siendo redactadas por mí a partir
-//   de lo que vende cada línea de producto (no son texto copiado de
-//   ninguna página), pero no están verificadas palabra por palabra con
-//   una ficha técnica oficial en español — revísalas si te importa la
-//   redacción exacta.
-// Nota aparte: noté que tus 8 páginas de producto reales (Productos_acuvue.zip)
-// tienen el precio y la ficha técnica idénticos entre sí (copiados del
-// molde de Oasys) — probablemente quedaron sin personalizar. Aquí quedaron
-// corregidos con los precios de tu productos.json (que sí varían) y los
-// datos técnicos reales de cada línea.
 export const productos: Producto[] = [
   {
     id: "Acuvue001",
+    categoria: "lentesdecontacto",
     laboratorio: "Johnson & Johnson",
     tipoFormula: "esferico",
     slug: "acuvue-oasys-hydraclear-plus",
@@ -59,6 +65,7 @@ export const productos: Producto[] = [
   },
   {
     id: "Acuvue002",
+    categoria: "lentesdecontacto",
     laboratorio: "Johnson & Johnson",
     tipoFormula: "torico",
     slug: "acuvue-oasys-astigmatismo",
@@ -82,6 +89,7 @@ export const productos: Producto[] = [
   },
   {
     id: "Acuvue003",
+    categoria: "lentesdecontacto",
     laboratorio: "Johnson & Johnson",
     tipoFormula: "multifocal",
     slug: "acuvue-oasys-multifocal",
@@ -105,6 +113,7 @@ export const productos: Producto[] = [
   },
   {
     id: "Acuvue004",
+    categoria: "lentesdecontacto",
     laboratorio: "Johnson & Johnson",
     tipoFormula: "esferico",
     slug: "1-day-acuvue-moist-lacreon",
@@ -128,6 +137,7 @@ export const productos: Producto[] = [
   },
   {
     id: "Acuvue005",
+    categoria: "lentesdecontacto",
     laboratorio: "Johnson & Johnson",
     tipoFormula: "torico",
     slug: "1-day-acuvue-moist-astigmatismo",
@@ -151,6 +161,7 @@ export const productos: Producto[] = [
   },
   {
     id: "Acuvue006",
+    categoria: "lentesdecontacto",
     laboratorio: "Johnson & Johnson",
     tipoFormula: "esferico",
     slug: "acuvue-vita",
@@ -174,6 +185,7 @@ export const productos: Producto[] = [
   },
   {
     id: "Acuvue007",
+    categoria: "lentesdecontacto",
     laboratorio: "Johnson & Johnson",
     tipoFormula: "torico",
     slug: "acuvue-vita-astigmatismo",
@@ -197,6 +209,7 @@ export const productos: Producto[] = [
   },
   {
     id: "Acuvue008",
+    categoria: "lentesdecontacto",
     laboratorio: "Johnson & Johnson",
     tipoFormula: "esferico",
     slug: "acuvue-2",
@@ -218,10 +231,183 @@ export const productos: Producto[] = [
       "Fáciles de manipular, ideales para primerizos",
     ],
   },
+
+  // --- Gafas de sol (sin fórmula) ---
+  {
+    id: "MF1042",
+    categoria: "gafasdesol",
+    laboratorio: "Miraflex",
+    slug: "MF1042_M572",
+    alt: "Gafas de sol Miraflex Kids",
+    titulo: "Gafas de sol Miraflex Kids",
+    imagen: "/img/catalogo/Miraflex/MF1042_M572_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF1042_M572_Side_1.avif",
+      "/img/catalogo/Miraflex/MF1042_M572_Side_2.avif",
+    ],
+    precio: 330000,
+    atributos: [
+      { etiqueta: "Protección UV", valor: "UV400" },
+      { etiqueta: "Material", valor: "Acetato" },
+      { etiqueta: "Color", valor: "Negro / Dorado" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Acetato inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "DEMO-GS-002",
+    categoria: "gafasdesol",
+    laboratorio: "Oakley",
+    slug: "demo-oakley-holbrook",
+    alt: "Gafas de sol Oakley Holbrook",
+    titulo: "Oakley Holbrook (producto de prueba)",
+    imagen: "https://placehold.co/400x400/0d3857/FFFFFF?text=Holbrook",
+    precio: 380000,
+    atributos: [
+      { etiqueta: "Protección UV", valor: "UV400" },
+      { etiqueta: "Material", valor: "O Matter (plástico liviano)" },
+      { etiqueta: "Color", valor: "Negro mate" },
+    ],
+    descripcion: [
+      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
+      "Diseño deportivo inspirado en los clásicos años 40",
+      "Lentes con protección UV400",
+    ],
+  },
+
+  // --- Monturas (sin fórmula) ---
+  {
+    id: "DEMO-MT-001",
+    categoria: "monturas",
+    laboratorio: "Ray-Ban",
+    slug: "demo-rayban-wayfarer-optica",
+    alt: "Montura óptica Ray-Ban Wayfarer",
+    titulo: "Ray-Ban Wayfarer Óptica (producto de prueba)",
+    imagen: "https://placehold.co/400x400/0d3857/FFFFFF?text=Wayfarer",
+    galeria: ["https://placehold.co/400x400/45deff/0d3857?text=Wayfarer+2"],
+    precio: 320000,
+    atributos: [
+      { etiqueta: "Material", valor: "Acetato" },
+      { etiqueta: "Forma", valor: "Cuadrada" },
+      { etiqueta: "Color", valor: "Negro" },
+    ],
+    descripcion: [
+      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
+      "Montura óptica lista para tus lentes formulados",
+      "El diseño Wayfarer clásico, en versión oftálmica",
+    ],
+  },
+  {
+    id: "DEMO-MT-002",
+    categoria: "monturas",
+    laboratorio: "Vogue Eyewear",
+    slug: "demo-vogue-redonda",
+    alt: "Montura óptica Vogue redonda",
+    titulo: "Vogue Eyewear Redonda (producto de prueba)",
+    imagen: "https://placehold.co/400x400/0d3857/FFFFFF?text=Vogue",
+    precio: 280000,
+    atributos: [
+      { etiqueta: "Material", valor: "Metal" },
+      { etiqueta: "Forma", valor: "Redonda" },
+      { etiqueta: "Color", valor: "Rosado dorado" },
+    ],
+    descripcion: [
+      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
+      "Diseño liviano y minimalista",
+      "Ideal para un look retro-moderno",
+    ],
+  },
+
+  // --- Gotas (sin fórmula) ---
+  {
+    id: "DEMO-GT-001",
+    categoria: "gotas",
+    laboratorio: "Alcon",
+    slug: "demo-systane-ultra",
+    alt: "Gotas humectantes Systane Ultra",
+    titulo: "Systane Ultra (producto de prueba)",
+    imagen: "https://placehold.co/400x400/45deff/0d3857?text=Systane",
+    precio: 45000,
+    atributos: [
+      { etiqueta: "Contenido", valor: "10 ml" },
+      { etiqueta: "Tipo", valor: "Lubricante ocular" },
+    ],
+    descripcion: [
+      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
+      "Alivio prolongado para el ojo seco",
+      "Uso recomendado: consulta a tu optómetra",
+    ],
+  },
+  {
+    id: "DEMO-GT-002",
+    categoria: "gotas",
+    laboratorio: "Allergan",
+    slug: "demo-refresh-tears",
+    alt: "Gotas humectantes Refresh Tears",
+    titulo: "Refresh Tears (producto de prueba)",
+    imagen: "https://placehold.co/400x400/45deff/0d3857?text=Refresh",
+    precio: 38000,
+    atributos: [
+      { etiqueta: "Contenido", valor: "15 ml" },
+      { etiqueta: "Tipo", valor: "Lubricante ocular" },
+    ],
+    descripcion: [
+      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
+      "Fórmula suave para uso frecuente",
+      "Uso recomendado: consulta a tu optómetra",
+    ],
+  },
+
+  // --- Soluciones para lentes de contacto (sin fórmula) ---
+  {
+    id: "DEMO-SL-001",
+    categoria: "soluciones",
+    laboratorio: "Bausch + Lomb",
+    slug: "demo-renu-multiplus",
+    alt: "Solución multipropósito ReNu MultiPlus",
+    titulo: "ReNu MultiPlus (producto de prueba)",
+    imagen: "https://placehold.co/400x400/45deff/0d3857?text=ReNu",
+    precio: 42000,
+    atributos: [
+      { etiqueta: "Contenido", valor: "355 ml" },
+      { etiqueta: "Tipo", valor: "Multipropósito" },
+    ],
+    descripcion: [
+      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
+      "Limpia, enjuaga, desinfecta y guarda tus lentes de contacto",
+      "Para lentes blandos",
+    ],
+  },
+  {
+    id: "DEMO-SL-002",
+    categoria: "soluciones",
+    laboratorio: "Alcon",
+    slug: "demo-optifree-puremoist",
+    alt: "Solución multipropósito Opti-Free PureMoist",
+    titulo: "Opti-Free PureMoist (producto de prueba)",
+    imagen: "https://placehold.co/400x400/45deff/0d3857?text=Opti-Free",
+    precio: 48000,
+    atributos: [
+      { etiqueta: "Contenido", valor: "300 ml" },
+      { etiqueta: "Tipo", valor: "Multipropósito" },
+    ],
+    descripcion: [
+      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
+      "Hidratación durante todo el día de uso",
+      "Para lentes blandos",
+    ],
+  },
 ];
 
 export function obtenerProducto(slug: string) {
   return productos.find((p) => p.slug === slug);
+}
+
+export function obtenerProductosPorCategoria(categoria: string) {
+  return productos.filter((p) => p.categoria === categoria);
 }
 
 export function obtenerProductoPorId(id: string) {

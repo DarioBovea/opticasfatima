@@ -6,10 +6,6 @@ import { obtenerProductoPorId } from "@/lib/productos";
 
 const NUMERO_WHATSAPP = "573206740505";
 
-// Arma el texto de la fórmula (RX) de un ojo según el tipo de lente:
-// esférico solo muestra la esfera, tórico agrega cilindro/eje, y
-// multifocal agrega la adición — nunca mezclamos campos que no
-// aplican al tipo de lente comprado.
 function formatearRx(
   tipoFormula: "esferico" | "torico" | "multifocal",
   power: string,
@@ -41,7 +37,10 @@ export default function CartPage() {
     .map((item) => {
       const producto = obtenerProductoPorId(item.id);
       if (!producto) return null;
-      const unidades = (parseInt(item.cantidadOd) || 0) + (parseInt(item.cantidadOi) || 0);
+      const unidades =
+        item.tipo === "formula"
+          ? (parseInt(item.od.cantidad) || 0) + (parseInt(item.oi.cantidad) || 0)
+          : parseInt(item.cantidad) || 0;
       const subtotal = producto.precio * unidades;
       return { item, producto, unidades, subtotal };
     })
@@ -88,9 +87,6 @@ export default function CartPage() {
     setComprando(true);
     setErrorBono("");
 
-    // Si hay un bono aplicado, lo marcamos como usado justo antes de
-    // pasar a WhatsApp — así queda registrado el canje aunque la
-    // conversación de WhatsApp no la veamos nosotros directamente.
     if (bonoAplicado) {
       try {
         const res = await fetch("/api/bono/canjear", {
@@ -100,8 +96,6 @@ export default function CartPage() {
         });
         const data = await res.json();
         if (!res.ok) {
-          // Alguien más lo usó primero, o pasó algo raro: no dejamos
-          // continuar la compra con un descuento que ya no es válido.
           setErrorBono(data.error || "El bono ya no está disponible.");
           setBonoAplicado(null);
           setComprando(false);
@@ -115,13 +109,16 @@ export default function CartPage() {
     }
 
     const lineas = filas.map(({ item, producto }) => {
-      const rxOd = formatearRx(producto.tipoFormula, item.selectPowerOd, item.selectCylOd, item.selectAxisOd, item.selectAddOd);
-      const rxOi = formatearRx(producto.tipoFormula, item.selectPowerOi, item.selectCylOi, item.selectAxisOi, item.selectAddOi);
-      return (
-        `• ${producto.titulo}\n` +
-        `  OD: ${rxOd} (x${item.cantidadOd})\n` +
-        `  OI: ${rxOi} (x${item.cantidadOi})`
-      );
+      if (item.tipo === "formula" && producto.tipoFormula) {
+        const rxOd = formatearRx(producto.tipoFormula, item.od.power, item.od.cyl, item.od.axis, item.od.add);
+        const rxOi = formatearRx(producto.tipoFormula, item.oi.power, item.oi.cyl, item.oi.axis, item.oi.add);
+        return (
+          `• ${producto.titulo}\n` +
+          `  OD: ${rxOd} (x${item.od.cantidad})\n` +
+          `  OI: ${rxOi} (x${item.oi.cantidad})`
+        );
+      }
+      return `• ${producto.titulo} (x${item.tipo === "simple" ? item.cantidad : "1"})`;
     });
 
     const mensaje = [
@@ -166,19 +163,23 @@ export default function CartPage() {
                   <small className="text-light">{producto.laboratorio}</small>
                   <h3 className="m-0 font-bold">{producto.titulo}</h3>
 
-                  <div className="mt-2 text-sm">
-                    <h5 className="mb-0 mt-2 font-semibold">Ojo Derecho</h5>
-                    <p className="m-0">
-                      RX: {formatearRx(producto.tipoFormula, item.selectPowerOd, item.selectCylOd, item.selectAxisOd, item.selectAddOd)}
-                    </p>
-                    <p className="m-0">Cantidad: {item.cantidadOd}</p>
+                  {item.tipo === "formula" && producto.tipoFormula ? (
+                    <div className="mt-2 text-sm">
+                      <h5 className="mb-0 mt-2 font-semibold">Ojo Derecho</h5>
+                      <p className="m-0">
+                        RX: {formatearRx(producto.tipoFormula, item.od.power, item.od.cyl, item.od.axis, item.od.add)}
+                      </p>
+                      <p className="m-0">Cantidad: {item.od.cantidad}</p>
 
-                    <h5 className="mb-0 mt-2 font-semibold">Ojo Izquierdo</h5>
-                    <p className="m-0">
-                      RX: {formatearRx(producto.tipoFormula, item.selectPowerOi, item.selectCylOi, item.selectAxisOi, item.selectAddOi)}
-                    </p>
-                    <p className="m-0">Cantidad: {item.cantidadOi}</p>
-                  </div>
+                      <h5 className="mb-0 mt-2 font-semibold">Ojo Izquierdo</h5>
+                      <p className="m-0">
+                        RX: {formatearRx(producto.tipoFormula, item.oi.power, item.oi.cyl, item.oi.axis, item.oi.add)}
+                      </p>
+                      <p className="m-0">Cantidad: {item.oi.cantidad}</p>
+                    </div>
+                  ) : (
+                    <p className="mt-2 text-sm">Cantidad: {item.tipo === "simple" ? item.cantidad : "1"}</p>
+                  )}
 
                   <p className="mt-2">
                     <small className="text-lg font-semibold">Precio: </small>

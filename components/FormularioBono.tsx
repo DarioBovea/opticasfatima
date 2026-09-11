@@ -45,10 +45,7 @@ export default function FormularioBono() {
     e.preventDefault();
     setError("");
 
-    // Campo trampa: un visitante real nunca ve ni llena este campo (está
-    // oculto con CSS), así que si viene lleno, es casi seguro un bot.
-    // Respondemos como si todo saliera bien, sin gastar un código real
-    // ni tocar la base de datos, para no delatarle al bot que lo detectamos.
+    // Campo trampa
     if (sitioWeb) {
       setCodigo("XXXXXXXX");
       return;
@@ -183,8 +180,7 @@ export default function FormularioBono() {
               />
             </label>
 
-            {/* Campo trampa: invisible para personas, visible para bots que
-                llenan todos los inputs de un formulario sin mirar el CSS. */}
+            {/* Campo trampa */}
             <label
               className="absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
               aria-hidden="true"
@@ -208,7 +204,7 @@ export default function FormularioBono() {
             <button
               type="submit"
               disabled={cargando}
-              className="m-3 w-1/2 rounded-lg bg-primary px-6 py-3 font-bold uppercase text-white shadow-btn transition hover:bg-light disabled:opacity-60 max-[768px]:w-4/5 max-[320px]:w-full"
+              className="my-3 mx-auto w-1/2 rounded-lg bg-primary px-6 py-3 font-bold uppercase text-white shadow-btn transition hover:bg-light disabled:opacity-60 max-[768px]:w-4/5 max-[320px]:w-full"
             >
               {cargando ? "Generando código..." : "Registrarme y canjear 50Mil"}
             </button>

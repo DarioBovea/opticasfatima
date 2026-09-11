@@ -8,8 +8,6 @@ export const opcionesEsfera = [
   "-5.25","-5.50","-5.75","-6.00",
 ];
 
-// Nota: el original repetía "-2.25" dos veces en esta lista (probable
-// error de tipeo en tu js/producto.js). Lo corregí aquí.
 export const opcionesCilindro = ["-0.75", "-1.25", "-1.75", "-2.25"];
 
 export const opcionesEje = [
@@ -17,8 +15,4 @@ export const opcionesEje = [
   "110°","120°","130°","140°","150°","160°","170°","180°",
 ];
 
-// Acuvue Oasys Multifocal (y la mayoría de multifocales Acuvue) no usan
-// un valor numérico de adición como otras marcas — usan estas 3
-// categorías fijas. Verificado con la ficha técnica pública del
-// fabricante (agosto 2026).
 export const opcionesAdicion = ["LOW", "MID", "HIGH"];

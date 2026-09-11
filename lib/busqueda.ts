@@ -1,5 +1,6 @@
 import { articulos } from "@/lib/articulos";
 import { productos } from "@/lib/productos";
+import { categorias } from "@/lib/categorias";
 
 export type ResultadoBusqueda = {
   tipo: "Página" | "Blog" | "Producto";
@@ -37,16 +38,25 @@ const paginasFijas: ResultadoBusqueda[] = [
   },
   {
     tipo: "Página",
-    titulo: "Lentes de Contacto",
-    descripcion: "Catálogo completo con filtros por marca y defecto visual.",
-    href: "/productos/lentesdecontacto",
+    titulo: "Productos",
+    descripcion: "Lentes de contacto, gafas de sol, monturas, gotas y soluciones.",
+    href: "/productos",
   },
 ];
 
-// Todo el índice se arma una sola vez a partir de tus datos reales —
-// si agregas un artículo o producto nuevo, aparece solo en la búsqueda.
+// Todo el índice se arma una sola vez a partir de tus datos reales.
+// Las categorías con productos cargados aparecen automáticamente —
+// una categoría nueva sin productos todavía no ensucia el buscador.
 const indice: ResultadoBusqueda[] = [
   ...paginasFijas,
+  ...categorias
+    .filter((c) => productos.some((p) => p.categoria === c.slug))
+    .map((c) => ({
+      tipo: "Página" as const,
+      titulo: c.nombre,
+      descripcion: c.descripcion,
+      href: `/productos/${c.slug}`,
+    })),
   ...articulos.map((a) => ({
     tipo: "Blog" as const,
     titulo: a.titulo,
@@ -56,8 +66,10 @@ const indice: ResultadoBusqueda[] = [
   ...productos.map((p) => ({
     tipo: "Producto" as const,
     titulo: p.titulo,
-    descripcion: `${p.laboratorio} · ${p.afeccion} · ${p.uso}, ${p.reemplazo}`,
-    href: `/productos/lentesdecontacto/${p.slug}`,
+    descripcion: [p.laboratorio, p.afeccion, [p.uso, p.reemplazo].filter(Boolean).join(", ")]
+      .filter(Boolean)
+      .join(" · "),
+    href: `/productos/${p.categoria}/${p.slug}`,
   })),
 ];
 

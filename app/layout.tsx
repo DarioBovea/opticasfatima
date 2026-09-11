@@ -40,10 +40,7 @@ export const metadata: Metadata = {
 };
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-
-// Se ejecuta ANTES de que React pinte nada, directo en el <head> —
-// si no hiciéramos esto, la página siempre cargaría en claro por una
-// fracción de segundo y luego "saltaría" a oscuro, algo muy notorio.
+//RECARGUE MODO OSCURO
 const scriptTema = `
   (function () {
     try {
