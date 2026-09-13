@@ -8,15 +8,6 @@ export type Producto = {
   alt: string;
   titulo: string;
   imagen: string;
-<<<<<<< HEAD
-  galeria?: string[];
-  precio: number;
-  descripcion: string[];
-=======
-  // Fotos adicionales (opcional, 1 o 2 más) — solo se muestran en la
-  // página de detalle del producto, como una galería junto a la
-  // imagen principal. El catálogo, el carrito y las redes sociales
-  // siguen usando solo "imagen".
   galeria?: string[];
   precio: number;
   descripcion: string[];
@@ -263,14 +254,10 @@ export const productos: Producto[] = [
       { etiqueta: "Protección UV", valor: "UV400" },
 <<<<<<< HEAD
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-=======
-      { etiqueta: "Material", valor: "Acetato" },
->>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
       { etiqueta: "Color", valor: "Negro / Dorado" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",
-<<<<<<< HEAD
       "Plastico inyectado",
       "Es liviano y resistente",
     ],
