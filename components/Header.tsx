@@ -24,7 +24,7 @@ const menu = [
 ];
 
 const redes = [
-  { href: "https://wa.me/573206740505", label: "WhatsApp", Icon: MessageCircle },
+  { href: "https://wa.me/573043446574", label: "WhatsApp", Icon: MessageCircle },
   { href: "https://www.facebook.com/opticasfatima", label: "Facebook", Icon: Facebook },
   { href: "https://www.instagram.com/opticasfatima/", label: "Instagram", Icon: Instagram },
   { href: "https://www.linkedin.com/in/opticasfatima/", label: "LinkedIn", Icon: Linkedin },

@@ -12,7 +12,7 @@ const NEGOCIO = {
   ciudad: "Pasto",
   region: "Nariño",
   pais: "CO",
-  whatsapp: "https://wa.me/573206740505",
+  whatsapp: "https://wa.me/573043446574",
   facebook: "https://www.facebook.com/opticasfatima",
   instagram: "https://www.instagram.com/opticasfatima/",
   linkedin: "https://www.linkedin.com/in/opticasfatima/",

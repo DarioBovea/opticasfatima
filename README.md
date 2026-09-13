@@ -668,15 +668,6 @@ conectados donde corresponde:
   ayuda a Google a mostrar la ruta (Inicio > Productos > Gafas de Sol
   > ...) en los resultados
 
-**⚠️ Encontré una inconsistencia real en tus datos** que vale la pena
-que corrijas: el número de WhatsApp del **Header**
-(`573206740505`) no coincide con el de la lista de redes del
-**Footer** (`573043446574`). Usé el del Header para los datos
-estructurados porque es donde vive tu enlace principal de "escríbenos
-por WhatsApp", pero confirma cuál es el correcto y avísame para
-dejarlo consistente en todo el sitio (y corregirlo también en
-`lib/schema.ts`).
-
 **Cómo verificar que funciona:** después de desplegar, pega la URL de
 tu sitio (o de una página de producto específica) en la [herramienta
 de prueba de resultados enriquecidos de
