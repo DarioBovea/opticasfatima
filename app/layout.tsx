@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AosProvider from "@/components/AosProvider";
 import { CartProvider } from "@/context/CartContext";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { generarSchemaNegocio } from "@/lib/schema";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -39,6 +41,17 @@ export const metadata: Metadata = {
 };
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+//RECARGUE MODO OSCURO
+const scriptTema = `
+  (function () {
+    try {
+      var guardado = localStorage.getItem("opticas-tema");
+      var prefiereOscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      var oscuro = guardado ? guardado === "dark" : prefiereOscuro;
+      document.documentElement.classList.toggle("dark", oscuro);
+    } catch (e) {}
+  })();
+`;
 
 export default function RootLayout({
   children,
@@ -46,8 +59,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es-CO">
+    <html lang="es-CO" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: scriptTema }} />
+        {/* Datos estructurados del negocio (Schema.org) — le dicen a
+            Google explícitamente que esto es una óptica, con su
+            dirección, teléfono y horario. Aparece en todas las páginas. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(generarSchemaNegocio()) }}
+        />
+      </head>
       <body>
+        <AosProvider />
         <CartProvider>
           <Header />
           {children}

@@ -25,8 +25,8 @@ type Bono = {
 };
 
 const ESTILOS_ESTADO: Record<EstadoBono, string> = {
-  pendiente: "bg-[#f0e0b0] text-[#7a5b00]",
-  confirmado: "bg-light/20 text-primary",
+  pendiente: "bg-[#f0e0b0] text-[#7a5b00] dark:bg-[#7a5b00] dark:text-[#f0e0b0]",
+  confirmado: "bg-light/20 text-primary dark:bg-light/25 dark:text-darktext",
   utilizado: "bg-primary text-white",
 };
 
@@ -123,10 +123,10 @@ export default function PanelBonosPage() {
       <div className="mx-auto max-w-5xl">
         <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-primary">Panel de Bonos Regalo</h1>
-            {correo && <p className="text-xs text-primary/50">Sesión: {correo}</p>}
+            <h1 className="text-2xl font-bold text-primary dark:text-darktext">Panel de Bonos Regalo</h1>
+            {correo && <p className="text-xs text-primary/50 dark:text-darktext/50">Sesión: {correo}</p>}
           </div>
-          <button onClick={handleSalir} className="text-sm text-primary underline">
+          <button onClick={handleSalir} className="text-sm text-primary underline dark:text-darktext">
             Cerrar sesión
           </button>
         </div>
@@ -137,9 +137,9 @@ export default function PanelBonosPage() {
             placeholder="Buscar por nombre, correo o código..."
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
-            className="w-full max-w-xs border border-line px-3 py-2 text-primary outline-none focus:border-primary sm:w-auto"
+            className="w-full max-w-xs border border-line px-3 py-2 text-primary outline-none focus:border-primary dark:border-darkline dark:bg-darkcard dark:text-darktext sm:w-auto"
           />
-          <span className="text-sm text-primary">
+          <span className="text-sm text-primary dark:text-darktext">
             {pendientes} pendiente{pendientes !== 1 && "s"} · {usados} utilizado
             {usados !== 1 && "s"} · {bonos.length} total
           </span>
@@ -148,14 +148,14 @@ export default function PanelBonosPage() {
         {error && <p className="mb-3 text-sm text-[#961818]">{error}</p>}
 
         {cargando ? (
-          <p className="text-primary">Cargando...</p>
+          <p className="text-primary dark:text-darktext">Cargando...</p>
         ) : filtrados.length === 0 ? (
-          <p className="text-primary">No hay registros todavía.</p>
+          <p className="text-primary dark:text-darktext">No hay registros todavía.</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-left text-sm text-primary">
+            <table className="w-full border-collapse text-left text-sm text-primary dark:text-darktext">
               <thead>
-                <tr className="border-b border-primary">
+                <tr className="border-b border-primary dark:border-light/40">
                   <th className="py-2 pr-4">Fecha</th>
                   <th className="py-2 pr-4">Nombre</th>
                   <th className="py-2 pr-4">Contacto</th>
@@ -166,19 +166,19 @@ export default function PanelBonosPage() {
               </thead>
               <tbody>
                 {filtrados.map((b) => (
-                  <tr key={b.id} className="border-b border-line align-top">
+                  <tr key={b.id} className="border-b border-line align-top dark:border-darkline">
                     <td className="py-2 pr-4 whitespace-nowrap">
                       {new Date(b.creado_en).toLocaleDateString("es-CO")}
                     </td>
                     <td className="py-2 pr-4">
                       {b.personas?.nombre ?? (
-                        <span className="italic text-primary/40">(sin datos)</span>
+                        <span className="italic text-primary/40 dark:text-darktext/40">(sin datos)</span>
                       )}
                       {b.personas?.direccion && (
-                        <p className="text-xs text-primary/50">{b.personas.direccion}</p>
+                        <p className="text-xs text-primary/50 dark:text-darktext/50">{b.personas.direccion}</p>
                       )}
                       {b.personas?.fecha_nacimiento && (
-                        <p className="text-xs text-primary/50">
+                        <p className="text-xs text-primary/50 dark:text-darktext/50">
                           Nace: {new Date(b.personas.fecha_nacimiento).toLocaleDateString("es-CO")}
                         </p>
                       )}
@@ -186,7 +186,7 @@ export default function PanelBonosPage() {
                     <td className="py-2 pr-4">
                       {b.personas?.email}
                       {b.personas?.telefono && (
-                        <p className="text-xs text-primary/50">{b.personas.telefono}</p>
+                        <p className="text-xs text-primary/50 dark:text-darktext/50">{b.personas.telefono}</p>
                       )}
                     </td>
                     <td className="py-2 pr-4 font-mono font-bold">{b.codigo}</td>
@@ -195,7 +195,7 @@ export default function PanelBonosPage() {
                         {ETIQUETA_ESTADO[b.estado]}
                       </span>
                       {b.estado === "utilizado" && b.usado_en && (
-                        <p className="mt-1 text-xs text-primary/50">
+                        <p className="mt-1 text-xs text-primary/50 dark:text-darktext/50">
                           {new Date(b.usado_en).toLocaleDateString("es-CO")}
                         </p>
                       )}
@@ -204,7 +204,7 @@ export default function PanelBonosPage() {
                       {b.estado === "pendiente" && (
                         <button
                           onClick={() => cambiarEstado(b, "confirmado")}
-                          className="block text-sm text-primary underline"
+                          className="block text-sm text-primary underline dark:text-darktext"
                         >
                           Marcar confirmado
                         </button>
@@ -213,13 +213,13 @@ export default function PanelBonosPage() {
                         <>
                           <button
                             onClick={() => cambiarEstado(b, "utilizado")}
-                            className="block text-sm text-primary underline"
+                            className="block text-sm text-primary underline dark:text-darktext"
                           >
                             Marcar como usado
                           </button>
                           <button
                             onClick={() => cambiarEstado(b, "pendiente")}
-                            className="block text-sm text-primary underline"
+                            className="block text-sm text-primary underline dark:text-darktext"
                           >
                             Revertir a pendiente
                           </button>
@@ -228,7 +228,7 @@ export default function PanelBonosPage() {
                       {b.estado === "utilizado" && (
                         <button
                           onClick={() => cambiarEstado(b, "confirmado")}
-                          className="block text-sm text-primary underline"
+                          className="block text-sm text-primary underline dark:text-darktext"
                         >
                           Revertir a confirmado
                         </button>

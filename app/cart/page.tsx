@@ -6,10 +6,6 @@ import { obtenerProductoPorId } from "@/lib/productos";
 
 const NUMERO_WHATSAPP = "573206740505";
 
-// Arma el texto de la fórmula (RX) de un ojo según el tipo de lente:
-// esférico solo muestra la esfera, tórico agrega cilindro/eje, y
-// multifocal agrega la adición — nunca mezclamos campos que no
-// aplican al tipo de lente comprado.
 function formatearRx(
   tipoFormula: "esferico" | "torico" | "multifocal",
   power: string,
@@ -41,7 +37,10 @@ export default function CartPage() {
     .map((item) => {
       const producto = obtenerProductoPorId(item.id);
       if (!producto) return null;
-      const unidades = (parseInt(item.cantidadOd) || 0) + (parseInt(item.cantidadOi) || 0);
+      const unidades =
+        item.tipo === "formula"
+          ? (parseInt(item.od.cantidad) || 0) + (parseInt(item.oi.cantidad) || 0)
+          : parseInt(item.cantidad) || 0;
       const subtotal = producto.precio * unidades;
       return { item, producto, unidades, subtotal };
     })
@@ -88,9 +87,6 @@ export default function CartPage() {
     setComprando(true);
     setErrorBono("");
 
-    // Si hay un bono aplicado, lo marcamos como usado justo antes de
-    // pasar a WhatsApp — así queda registrado el canje aunque la
-    // conversación de WhatsApp no la veamos nosotros directamente.
     if (bonoAplicado) {
       try {
         const res = await fetch("/api/bono/canjear", {
@@ -100,8 +96,6 @@ export default function CartPage() {
         });
         const data = await res.json();
         if (!res.ok) {
-          // Alguien más lo usó primero, o pasó algo raro: no dejamos
-          // continuar la compra con un descuento que ya no es válido.
           setErrorBono(data.error || "El bono ya no está disponible.");
           setBonoAplicado(null);
           setComprando(false);
@@ -115,13 +109,16 @@ export default function CartPage() {
     }
 
     const lineas = filas.map(({ item, producto }) => {
-      const rxOd = formatearRx(producto.tipoFormula, item.selectPowerOd, item.selectCylOd, item.selectAxisOd, item.selectAddOd);
-      const rxOi = formatearRx(producto.tipoFormula, item.selectPowerOi, item.selectCylOi, item.selectAxisOi, item.selectAddOi);
-      return (
-        `• ${producto.titulo}\n` +
-        `  OD: ${rxOd} (x${item.cantidadOd})\n` +
-        `  OI: ${rxOi} (x${item.cantidadOi})`
-      );
+      if (item.tipo === "formula" && producto.tipoFormula) {
+        const rxOd = formatearRx(producto.tipoFormula, item.od.power, item.od.cyl, item.od.axis, item.od.add);
+        const rxOi = formatearRx(producto.tipoFormula, item.oi.power, item.oi.cyl, item.oi.axis, item.oi.add);
+        return (
+          `• ${producto.titulo}\n` +
+          `  OD: ${rxOd} (x${item.od.cantidad})\n` +
+          `  OI: ${rxOi} (x${item.oi.cantidad})`
+        );
+      }
+      return `• ${producto.titulo} (x${item.tipo === "simple" ? item.cantidad : "1"})`;
     });
 
     const mensaje = [
@@ -143,10 +140,10 @@ export default function CartPage() {
 
   return (
     <div className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] min-h-[calc(100vh-344px)] px-6 pb-24 md:px-[calc((100%-1180px)/2)]">
-      <h2 className="mb-8 text-2xl font-bold text-primary">Carrito De Compras</h2>
+      <h2 className="mb-8 text-2xl font-bold text-primary dark:text-darktext">Carrito De Compras</h2>
 
       {filas.length === 0 ? (
-        <p className="text-primary">
+        <p className="text-primary dark:text-darktext">
           Tu carrito está vacío <span aria-hidden>🙁</span>
         </p>
       ) : (
@@ -155,30 +152,34 @@ export default function CartPage() {
             {filas.map(({ item, producto, subtotal }) => (
               <div
                 key={item.id}
-                className="flex w-full flex-row items-center gap-4 rounded-xl border border-primary p-4 pl-8 text-primary max-[430px]:flex-col max-[430px]:items-stretch max-[430px]:p-2"
+                className="flex w-full flex-row items-center gap-4 rounded-xl border border-primary p-4 pl-8 text-primary dark:border-light/40 dark:text-darktext max-[430px]:flex-col max-[430px]:items-stretch max-[430px]:p-2"
               >
                 <div className="w-1/5 max-[430px]:w-[90%] max-[430px]:mx-auto">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={producto.imagen} alt={producto.alt} className="rounded-lg" />
                 </div>
 
-                <div className="w-3/5 border-l border-primary pl-6 text-justify max-[430px]:w-[90%] max-[430px]:mx-auto max-[430px]:border-l-0 max-[430px]:border-y max-[430px]:py-4 max-[430px]:pl-0 max-[430px]:text-center">
+                <div className="w-3/5 border-l border-primary pl-6 text-justify dark:border-light/40 max-[430px]:w-[90%] max-[430px]:mx-auto max-[430px]:border-l-0 max-[430px]:border-y max-[430px]:py-4 max-[430px]:pl-0 max-[430px]:text-center">
                   <small className="text-light">{producto.laboratorio}</small>
                   <h3 className="m-0 font-bold">{producto.titulo}</h3>
 
-                  <div className="mt-2 text-sm">
-                    <h5 className="mb-0 mt-2 font-semibold">Ojo Derecho</h5>
-                    <p className="m-0">
-                      RX: {formatearRx(producto.tipoFormula, item.selectPowerOd, item.selectCylOd, item.selectAxisOd, item.selectAddOd)}
-                    </p>
-                    <p className="m-0">Cantidad: {item.cantidadOd}</p>
+                  {item.tipo === "formula" && producto.tipoFormula ? (
+                    <div className="mt-2 text-sm">
+                      <h5 className="mb-0 mt-2 font-semibold">Ojo Derecho</h5>
+                      <p className="m-0">
+                        RX: {formatearRx(producto.tipoFormula, item.od.power, item.od.cyl, item.od.axis, item.od.add)}
+                      </p>
+                      <p className="m-0">Cantidad: {item.od.cantidad}</p>
 
-                    <h5 className="mb-0 mt-2 font-semibold">Ojo Izquierdo</h5>
-                    <p className="m-0">
-                      RX: {formatearRx(producto.tipoFormula, item.selectPowerOi, item.selectCylOi, item.selectAxisOi, item.selectAddOi)}
-                    </p>
-                    <p className="m-0">Cantidad: {item.cantidadOi}</p>
-                  </div>
+                      <h5 className="mb-0 mt-2 font-semibold">Ojo Izquierdo</h5>
+                      <p className="m-0">
+                        RX: {formatearRx(producto.tipoFormula, item.oi.power, item.oi.cyl, item.oi.axis, item.oi.add)}
+                      </p>
+                      <p className="m-0">Cantidad: {item.oi.cantidad}</p>
+                    </div>
+                  ) : (
+                    <p className="mt-2 text-sm">Cantidad: {item.tipo === "simple" ? item.cantidad : "1"}</p>
+                  )}
 
                   <p className="mt-2">
                     <small className="text-lg font-semibold">Precio: </small>
@@ -204,27 +205,27 @@ export default function CartPage() {
           </div>
 
           {/* Bono Regalo */}
-          <div className="rounded-xl border border-line p-4">
+          <div className="rounded-xl border border-line p-4 dark:border-darkline">
             {bonoAplicado ? (
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-primary">
+                <p className="text-primary dark:text-darktext">
                   ✅ Bono <strong>{bonoAplicado.codigo}</strong> aplicado — descuento de $
                   {descuento.toLocaleString("es-CO")}
                 </p>
-                <button onClick={quitarBono} className="text-sm text-primary underline">
+                <button onClick={quitarBono} className="text-sm text-primary underline dark:text-darktext">
                   Quitar
                 </button>
               </div>
             ) : (
               <form onSubmit={handleAplicarBono} className="flex flex-wrap items-end gap-3">
-                <label className="flex flex-col gap-1 text-sm text-primary">
+                <label className="flex flex-col gap-1 text-sm text-primary dark:text-darktext">
                   ¿Tienes un código de Bono Regalo?
                   <input
                     type="text"
                     value={codigoIngresado}
                     onChange={(e) => setCodigoIngresado(e.target.value)}
                     placeholder="Ej: A3F7K9Q2"
-                    className="border border-line px-3 py-2 uppercase text-primary outline-none focus:border-primary"
+                    className="border border-line px-3 py-2 uppercase text-primary outline-none focus:border-primary dark:border-darkline dark:bg-darkcard dark:text-darktext"
                   />
                 </label>
                 <button
@@ -242,20 +243,20 @@ export default function CartPage() {
           <div className="flex flex-row items-center justify-between gap-4 max-[430px]:flex-col max-[430px]:items-end max-[430px]:gap-6">
             <button
               onClick={handleVaciar}
-              className="rounded-2xl bg-[#e2e2e2] px-6 py-4 font-semibold uppercase text-primary transition hover:bg-[#d5d5d5]"
+              className="rounded-2xl bg-[#e2e2e2] px-6 py-4 font-semibold uppercase text-primary transition hover:bg-[#d5d5d5] dark:bg-darkcard dark:text-darktext dark:hover:bg-darkline"
             >
               Vaciar carrito
             </button>
 
             <div className="flex flex-col items-end gap-2">
               {bonoAplicado && (
-                <p className="text-sm text-primary/70">
+                <p className="text-sm text-primary/70 dark:text-darktext/70">
                   Subtotal: ${subtotalGeneral.toLocaleString("es-CO")} — Bono: -$
                   {descuento.toLocaleString("es-CO")}
                 </p>
               )}
               <div className="flex overflow-hidden rounded-2xl">
-                <div className="flex items-center gap-3 bg-[#e2e2e2] px-6 font-semibold uppercase text-primary">
+                <div className="flex items-center gap-3 bg-[#e2e2e2] px-6 font-semibold uppercase text-primary dark:bg-darkcard dark:text-darktext">
                   <span>Total:</span>
                   <span>${total.toLocaleString("es-CO")}</span>
                 </div>

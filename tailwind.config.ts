@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -13,6 +14,13 @@ const config: Config = {
         light: "#45deff",     // azul claro / hover
         canvas: "#FFFFFF",
         line: "#E5E9EC",
+        // Superficies para modo oscuro — NO reemplazan a "primary" (que
+        // sigue siendo el azul de marca para botones/header/footer),
+        // son fondos y bordes nuevos, propios del tema oscuro.
+        darksurface: "#0a1a2b",   // fondo de página en modo oscuro
+        darkcard: "#102a40",      // tarjetas/cajas en modo oscuro
+        darkline: "#1e3a52",      // bordes en modo oscuro
+        darktext: "#dbe8f0",      // texto por defecto en modo oscuro
       },
       fontFamily: {
         // Fuente real del sitio original

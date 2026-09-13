@@ -25,9 +25,6 @@ export async function PATCH(
       return NextResponse.json({ error: "Estado no válido." }, { status: 400 });
     }
 
-    // Cada estado trae consigo su propia marca de tiempo. Al retroceder
-    // (ej. de "utilizado" a "confirmado"), limpiamos la marca de tiempo
-    // del estado que se está abandonando.
     const ahora = new Date().toISOString();
     const actualizacion: Record<string, unknown> = { estado };
 
@@ -70,11 +67,6 @@ export async function DELETE(
   }
 
   try {
-    // Solo borramos el bono, no la persona — así, si más adelante esa
-    // persona tiene otras compras o historial, esos datos no se pierden
-    // por eliminar un bono suyo. Un bono "huérfano" (persona borrada
-    // aparte) no puede pasar al revés porque personas nunca se borra
-    // desde aquí.
     const supabase = crearClienteSupabase();
     const { error } = await supabase.from("bonos").delete().eq("id", params.id);
 

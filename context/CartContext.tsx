@@ -2,21 +2,23 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-// Un ítem del carrito = un producto + su fórmula (RX) por ojo.
-// Misma estructura que guardaba el js/carrito.js original en localStorage.
-export type ItemCarrito = {
-  id: string;
-  selectPowerOd: string;
-  selectCylOd: string;
-  selectAxisOd: string;
-  selectAddOd: string;
-  cantidadOd: string;
-  selectPowerOi: string;
-  selectCylOi: string;
-  selectAxisOi: string;
-  selectAddOi: string;
-  cantidadOi: string;
+// Fórmula (RX) de un ojo — solo la llevan los productos con fórmula
+// (categoria "lentesdecontacto" por ahora).
+export type FormulaOjo = {
+  power: string;
+  cyl: string;
+  axis: string;
+  add: string;
+  cantidad: string;
 };
+
+// Un ítem del carrito es UNA de estas dos formas, nunca las dos:
+// - "formula": producto con fórmula (lentes de contacto) — lleva RX por ojo
+// - "simple": producto sin fórmula (gafas de sol, monturas, gotas,
+//   soluciones) — solo cantidad
+export type ItemCarrito =
+  | { id: string; tipo: "formula"; od: FormulaOjo; oi: FormulaOjo }
+  | { id: string; tipo: "simple"; cantidad: string };
 
 type CartContextType = {
   items: ItemCarrito[];
@@ -68,10 +70,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setItems([]);
   }
 
-  const cantidadTotal = items.reduce(
-    (acc, i) => acc + (parseInt(i.cantidadOd) || 0) + (parseInt(i.cantidadOi) || 0),
-    0
-  );
+  const cantidadTotal = items.reduce((acc, i) => {
+    if (i.tipo === "formula") {
+      return acc + (parseInt(i.od.cantidad) || 0) + (parseInt(i.oi.cantidad) || 0);
+    }
+    return acc + (parseInt(i.cantidad) || 0);
+  }, 0);
 
   return (
     <CartContext.Provider

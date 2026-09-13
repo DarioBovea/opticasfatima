@@ -3,9 +3,7 @@ import { crearClienteSupabase } from "@/lib/supabase";
 import { crearClienteSupabaseServidor } from "@/lib/supabase-server";
 
 export async function GET() {
-  // El middleware ya bloquea esta ruta si no hay sesión, pero
-  // verificamos de nuevo aquí por si algún día se llama sin pasar
-  // por el middleware (defensa en profundidad).
+
   const supabaseAuth = crearClienteSupabaseServidor();
   const {
     data: { user },
@@ -16,10 +14,7 @@ export async function GET() {
   }
 
   try {
-    // Para leer la tabla usamos la Service Role Key (permisos completos),
-    // ya que confirmamos arriba que quien pide esto es un admin logueado.
-    // El "personas(...)" trae los datos de la persona relacionada en el
-    // mismo viaje, gracias a la relación (foreign key) entre las tablas.
+
     const supabase = crearClienteSupabase();
     const { data, error } = await supabase
       .from("bonos")

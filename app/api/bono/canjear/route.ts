@@ -11,11 +11,6 @@ export async function POST(request: Request) {
 
     const supabase = crearClienteSupabase();
 
-    // El .eq("estado", "confirmado") es lo que hace esto seguro ante dos
-    // compras casi simultáneas: si alguien ya lo marcó como utilizado un
-    // instante antes, esta actualización no encuentra ninguna fila que
-    // cumpla la condición y devuelve 0 filas afectadas, en vez de
-    // "usarlo" dos veces.
     const { data, error } = await supabase
       .from("bonos")
       .update({ estado: "utilizado", usado_en: new Date().toISOString() })

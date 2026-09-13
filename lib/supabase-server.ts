@@ -2,10 +2,6 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "@/lib/supabase-env";
 
-// Cliente de Supabase para Server Components y API routes, que lee la
-// sesión desde las cookies de la petición (así sabe si el admin ya
-// inició sesión). Usa la clave pública — la sesión del usuario logueado
-// es la que determina los permisos, no una clave especial.
 export function crearClienteSupabaseServidor() {
   const cookieStore = cookies();
 
