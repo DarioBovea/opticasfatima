@@ -1,8 +1,12 @@
 import { notFound } from "next/navigation";
 import { productos, obtenerProducto } from "@/lib/productos";
+<<<<<<< HEAD
 import { obtenerCategoria } from "@/lib/categorias";
 import ProductoDetalle from "@/components/ProductoDetalle";
 import { generarSchemaProducto, generarSchemaMigas } from "@/lib/schema";
+=======
+import ProductoDetalle from "@/components/ProductoDetalle";
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
 
 export function generateStaticParams() {
   return productos.map((p) => ({ categoria: p.categoria, slug: p.slug }));
@@ -42,6 +46,7 @@ export default function ProductoPage({
   const producto = obtenerProducto(params.slug);
   if (!producto || producto.categoria !== params.categoria) notFound();
 
+<<<<<<< HEAD
   const categoria = obtenerCategoria(producto.categoria);
 
   const migas = generarSchemaMigas([
@@ -63,6 +68,10 @@ export default function ProductoPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(migas) }}
       />
+=======
+  return (
+    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] pb-12">
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
       <ProductoDetalle producto={producto} />
     </section>
   );

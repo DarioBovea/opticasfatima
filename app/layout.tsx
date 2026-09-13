@@ -62,6 +62,7 @@ export default function RootLayout({
     <html lang="es-CO" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: scriptTema }} />
+<<<<<<< HEAD
         {/* Datos estructurados del negocio (Schema.org) — le dicen a
             Google explícitamente que esto es una óptica, con su
             dirección, teléfono y horario. Aparece en todas las páginas. */}
@@ -69,6 +70,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(generarSchemaNegocio()) }}
         />
+=======
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
       </head>
       <body>
         <AosProvider />

@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+<<<<<<< HEAD
 import ImagenConLupa from "@/components/ImagenConLupa";
+=======
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
 
 export default function GaleriaImagenes({
   imagenes,
@@ -14,7 +17,16 @@ export default function GaleriaImagenes({
 
   return (
     <div className="flex flex-col items-center gap-4" data-aos="fade-right">
+<<<<<<< HEAD
       <ImagenConLupa src={imagenes[seleccionada]} alt={alt} className="w-full" />
+=======
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={imagenes[seleccionada]}
+        alt={alt}
+        className="max-h-[28rem] w-full object-contain"
+      />
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
 
       {/* Las miniaturas solo aparecen si hay más de 1 imagen */}
       {imagenes.length > 1 && (

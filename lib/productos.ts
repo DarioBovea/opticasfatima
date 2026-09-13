@@ -8,9 +8,28 @@ export type Producto = {
   alt: string;
   titulo: string;
   imagen: string;
+<<<<<<< HEAD
   galeria?: string[];
   precio: number;
   descripcion: string[];
+=======
+  // Fotos adicionales (opcional, 1 o 2 más) — solo se muestran en la
+  // página de detalle del producto, como una galería junto a la
+  // imagen principal. El catálogo, el carrito y las redes sociales
+  // siguen usando solo "imagen".
+  galeria?: string[];
+  precio: number;
+  descripcion: string[];
+
+  // Todo lo de abajo es EXCLUSIVO de lentes de contacto (categoria
+  // "lentesdecontacto") — queda opcional para que otras categorías
+  // (gafas de sol, monturas, gotas, soluciones) no tengan que rellenar
+  // campos que no les aplican.
+  //
+  // esferico = solo esfera (miopía/hipermetropía)
+  // torico = esfera+cilindro+eje (astigmatismo)
+  // multifocal = esfera+adición (presbicia)
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
   tipoFormula?: "esferico" | "torico" | "multifocal";
   uso?: string;
   reemplazo?: string;
@@ -18,6 +37,13 @@ export type Producto = {
   afeccion?: string;
   material?: string;
   contenidoAgua?: string;
+<<<<<<< HEAD
+=======
+
+  // Para categorías SIN fórmula (gafas de sol, monturas, gotas,
+  // soluciones): pares clave/valor genéricos para la ficha técnica.
+  // Ej: [{ etiqueta: "Material", valor: "Acetato" }]
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
   atributos?: { etiqueta: string; valor: string }[];
 };
 
@@ -217,7 +243,11 @@ export const productos: Producto[] = [
 
   // --- Gafas de sol (sin fórmula) ---
   {
+<<<<<<< HEAD
     id: "MF1042_M572",
+=======
+    id: "MF1042",
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
     categoria: "gafasdesol",
     laboratorio: "Miraflex",
     slug: "MF1042_M572",
@@ -231,16 +261,27 @@ export const productos: Producto[] = [
     precio: 330000,
     atributos: [
       { etiqueta: "Protección UV", valor: "UV400" },
+<<<<<<< HEAD
       { etiqueta: "Material", valor: "Plastico Inyectado" },
+=======
+      { etiqueta: "Material", valor: "Acetato" },
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
       { etiqueta: "Color", valor: "Negro / Dorado" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",
+<<<<<<< HEAD
       "Plastico inyectado",
       "Es liviano y resistente",
     ],
   },
 
+=======
+      "Acetato inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
   {
     id: "DEMO-GS-002",
     categoria: "gafasdesol",
@@ -263,6 +304,7 @@ export const productos: Producto[] = [
   },
 
   // --- Monturas (sin fórmula) ---
+<<<<<<< HEAD
 
   {
     id: "MF4001_k593",
@@ -646,6 +688,47 @@ export const productos: Producto[] = [
       "Gafas de sol para niños(as)",
       "Plastico inyectado",
       "Es liviano y resistente",
+=======
+  {
+    id: "DEMO-MT-001",
+    categoria: "monturas",
+    laboratorio: "Ray-Ban",
+    slug: "demo-rayban-wayfarer-optica",
+    alt: "Montura óptica Ray-Ban Wayfarer",
+    titulo: "Ray-Ban Wayfarer Óptica (producto de prueba)",
+    imagen: "https://placehold.co/400x400/0d3857/FFFFFF?text=Wayfarer",
+    galeria: ["https://placehold.co/400x400/45deff/0d3857?text=Wayfarer+2"],
+    precio: 320000,
+    atributos: [
+      { etiqueta: "Material", valor: "Acetato" },
+      { etiqueta: "Forma", valor: "Cuadrada" },
+      { etiqueta: "Color", valor: "Negro" },
+    ],
+    descripcion: [
+      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
+      "Montura óptica lista para tus lentes formulados",
+      "El diseño Wayfarer clásico, en versión oftálmica",
+    ],
+  },
+  {
+    id: "DEMO-MT-002",
+    categoria: "monturas",
+    laboratorio: "Vogue Eyewear",
+    slug: "demo-vogue-redonda",
+    alt: "Montura óptica Vogue redonda",
+    titulo: "Vogue Eyewear Redonda (producto de prueba)",
+    imagen: "https://placehold.co/400x400/0d3857/FFFFFF?text=Vogue",
+    precio: 280000,
+    atributos: [
+      { etiqueta: "Material", valor: "Metal" },
+      { etiqueta: "Forma", valor: "Redonda" },
+      { etiqueta: "Color", valor: "Rosado dorado" },
+    ],
+    descripcion: [
+      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
+      "Diseño liviano y minimalista",
+      "Ideal para un look retro-moderno",
+>>>>>>> 2887f7bafe79bf70e343d7bb40dfa48c8fbb82f3
     ],
   },
 
