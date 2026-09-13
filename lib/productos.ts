@@ -8,22 +8,9 @@ export type Producto = {
   alt: string;
   titulo: string;
   imagen: string;
-  // Fotos adicionales (opcional, 1 o 2 más) — solo se muestran en la
-  // página de detalle del producto, como una galería junto a la
-  // imagen principal. El catálogo, el carrito y las redes sociales
-  // siguen usando solo "imagen".
   galeria?: string[];
   precio: number;
   descripcion: string[];
-
-  // Todo lo de abajo es EXCLUSIVO de lentes de contacto (categoria
-  // "lentesdecontacto") — queda opcional para que otras categorías
-  // (gafas de sol, monturas, gotas, soluciones) no tengan que rellenar
-  // campos que no les aplican.
-  //
-  // esferico = solo esfera (miopía/hipermetropía)
-  // torico = esfera+cilindro+eje (astigmatismo)
-  // multifocal = esfera+adición (presbicia)
   tipoFormula?: "esferico" | "torico" | "multifocal";
   uso?: string;
   reemplazo?: string;
@@ -286,9 +273,9 @@ export const productos: Producto[] = [
     categoria: "monturas",
     laboratorio: "Miraflex",
     slug: "MF4001_k593",
-    alt: "Gafas Miraflex Kids",
-    titulo: "Gafas Miraflex Kids",
-    imagen: "/img/catalogo/Miraflex/MF4001_k593_Front.avif",
+    alt: "Miraflex MF4001 k593",
+    titulo: "Miraflex MF4001 k593",
+    imagen: "/img/catalogo/Miraflex/MF4001_K593_Front.avif",
     galeria: [
       "/img/catalogo/Miraflex/MF4001_k593_Side_1.avif",
       "/img/catalogo/Miraflex/MF4001_k593_Side_2.avif",
@@ -310,8 +297,8 @@ export const productos: Producto[] = [
     categoria: "monturas",
     laboratorio: "Miraflex",
     slug: "MF4001_k598",
-    alt: "Gafas Miraflex Kids",
-    titulo: "Gafas Miraflex Kids",
+    alt: "Miraflex MF4001 k598",
+    titulo: "Miraflex MF4001 k598",
     imagen: "/img/catalogo/Miraflex/MF4001_k598_Front.avif",
     galeria: [
       "/img/catalogo/Miraflex/MF4001_k598_Side_1.avif",
@@ -334,8 +321,8 @@ export const productos: Producto[] = [
     categoria: "monturas",
     laboratorio: "Miraflex",
     slug: "MF4001_k602",
-    alt: "Gafas Miraflex Kids",
-    titulo: "Gafas Miraflex Kids",
+    alt: "Miraflex MF4001 k602",
+    titulo: "Miraflex MF4001 k602",
     imagen: "/img/catalogo/Miraflex/MF4001_k602_Front.avif",
     galeria: [
       "/img/catalogo/Miraflex/MF4001_k602_Side_1.avif",
