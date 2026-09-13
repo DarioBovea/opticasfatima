@@ -8,9 +8,22 @@ export type Producto = {
   alt: string;
   titulo: string;
   imagen: string;
+  // Fotos adicionales (opcional, 1 o 2 más) — solo se muestran en la
+  // página de detalle del producto, como una galería junto a la
+  // imagen principal. El catálogo, el carrito y las redes sociales
+  // siguen usando solo "imagen".
   galeria?: string[];
   precio: number;
   descripcion: string[];
+
+  // Todo lo de abajo es EXCLUSIVO de lentes de contacto (categoria
+  // "lentesdecontacto") — queda opcional para que otras categorías
+  // (gafas de sol, monturas, gotas, soluciones) no tengan que rellenar
+  // campos que no les aplican.
+  //
+  // esferico = solo esfera (miopía/hipermetropía)
+  // torico = esfera+cilindro+eje (astigmatismo)
+  // multifocal = esfera+adición (presbicia)
   tipoFormula?: "esferico" | "torico" | "multifocal";
   uso?: string;
   reemplazo?: string;
@@ -18,6 +31,10 @@ export type Producto = {
   afeccion?: string;
   material?: string;
   contenidoAgua?: string;
+
+  // Para categorías SIN fórmula (gafas de sol, monturas, gotas,
+  // soluciones): pares clave/valor genéricos para la ficha técnica.
+  // Ej: [{ etiqueta: "Material", valor: "Acetato" }]
   atributos?: { etiqueta: string; valor: string }[];
 };
 
