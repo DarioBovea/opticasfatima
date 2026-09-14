@@ -18,10 +18,6 @@ export type Producto = {
   afeccion?: string;
   material?: string;
   contenidoAgua?: string;
-
-  // Para categorías SIN fórmula (gafas de sol, monturas, gotas,
-  // soluciones): pares clave/valor genéricos para la ficha técnica.
-  // Ej: [{ etiqueta: "Material", valor: "Acetato" }]
   atributos?: { etiqueta: string; valor: string }[];
 };
 
@@ -225,8 +221,8 @@ export const productos: Producto[] = [
     categoria: "gafasdesol",
     laboratorio: "Miraflex",
     slug: "MF1042_M572",
-    alt: "Miraflex MF1042 M572",
-    titulo: "Miraflex MF1042 M572",
+    alt: "Gafas de sol Miraflex Kids",
+    titulo: "Gafas de sol Miraflex Kids",
     imagen: "/img/catalogo/Miraflex/MF1042_M572_Front.avif",
     galeria: [
       "/img/catalogo/Miraflex/MF1042_M572_Side_1.avif",
@@ -269,16 +265,16 @@ export const productos: Producto[] = [
   // --- Monturas (sin fórmula) ---
 
   {
-    id: "MF4001_k593",
+    id: "MF4001_K593",
     categoria: "monturas",
     laboratorio: "Miraflex",
-    slug: "MF4001_k593",
-    alt: "Miraflex MF4001 k593",
-    titulo: "Miraflex MF4001 k593",
+    slug: "MF4001_K593",
+    alt: "Miraflex MF4001 K593",
+    titulo: "Miraflex MF4001 K593",
     imagen: "/img/catalogo/Miraflex/MF4001_K593_Front.avif",
     galeria: [
-      "/img/catalogo/Miraflex/MF4001_k593_Side_1.avif",
-      "/img/catalogo/Miraflex/MF4001_k593_Side_2.avif",
+      "/img/catalogo/Miraflex/MF4001_K593_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4001_K593_Side_2.avif",
     ],
     precio: 240000,
     atributos: [
@@ -293,16 +289,16 @@ export const productos: Producto[] = [
     ],
   },
   {
-    id: "MF4001_k598",
+    id: "MF4001_K598",
     categoria: "monturas",
     laboratorio: "Miraflex",
-    slug: "MF4001_k598",
-    alt: "Miraflex MF4001 k598",
-    titulo: "Miraflex MF4001 k598",
-    imagen: "/img/catalogo/Miraflex/MF4001_k598_Front.avif",
+    slug: "MF4001_K598",
+    alt: "Miraflex MF4001 K598",
+    titulo: "Miraflex MF4001 K598",
+    imagen: "/img/catalogo/Miraflex/MF4001_K598_Front.avif",
     galeria: [
-      "/img/catalogo/Miraflex/MF4001_k598_Side_1.avif",
-      "/img/catalogo/Miraflex/MF4001_k598_Side_2.avif",
+      "/img/catalogo/Miraflex/MF4001_K598_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4001_K598_Side_2.avif",
     ],
     precio: 240000,
     atributos: [
@@ -317,16 +313,16 @@ export const productos: Producto[] = [
     ],
   },
   {
-    id: "MF4001_k602",
+    id: "MF4001_K602",
     categoria: "monturas",
     laboratorio: "Miraflex",
-    slug: "MF4001_k602",
-    alt: "Miraflex MF4001 k602",
-    titulo: "Miraflex MF4001 k602",
-    imagen: "/img/catalogo/Miraflex/MF4001_k602_Front.avif",
+    slug: "MF4001_K602",
+    alt: "Miraflex MF4001 K602",
+    titulo: "Miraflex MF4001 K602",
+    imagen: "/img/catalogo/Miraflex/MF4001_K602_Front.avif",
     galeria: [
-      "/img/catalogo/Miraflex/MF4001_k602_Side_1.avif",
-      "/img/catalogo/Miraflex/MF4001_k602_Side_2.avif",
+      "/img/catalogo/Miraflex/MF4001_K602_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4001_K602_Side_2.avif",
     ],
     precio: 240000,
     atributos: [
@@ -344,13 +340,13 @@ export const productos: Producto[] = [
     id: "MF4002_k613",
     categoria: "monturas",
     laboratorio: "Miraflex",
-    slug: "MF4002_k613",
-    alt: "Miraflex MF4002 k613",
-    titulo: "Miraflex MF4002 k613",
-    imagen: "/img/catalogo/Miraflex/MF4002_k613_Front.avif",
+    slug: "MF4002_K613",
+    alt: "Miraflex MF4002 K613",
+    titulo: "Miraflex MF4002 K613",
+    imagen: "/img/catalogo/Miraflex/MF4002_K613_Front.avif",
     galeria: [
-      "/img/catalogo/Miraflex/MF4002_k613_Side_1.avif",
-      "/img/catalogo/Miraflex/MF4002_k613_Side_2.avif",
+      "/img/catalogo/Miraflex/MF4002_K613_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4002_K613_Side_2.avif",
     ],
     precio: 240000,
     atributos: [

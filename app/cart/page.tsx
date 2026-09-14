@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { obtenerProductoPorId } from "@/lib/productos";
 
-const NUMERO_WHATSAPP = "573043446574";
+const NUMERO_WHATSAPP = "573206740505";
 
 function formatearRx(
   tipoFormula: "esferico" | "torico" | "multifocal",
