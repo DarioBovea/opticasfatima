@@ -3,7 +3,6 @@ import { obtenerProducto } from "@/lib/productos";
 import { obtenerCategoria } from "@/lib/categorias";
 import { SITE_URL } from "@/lib/seo";
 
-export const runtime = "edge";
 export const alt = "Ópticas Fátima — Producto";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

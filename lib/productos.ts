@@ -219,7 +219,10 @@ export const productos: Producto[] = [
     ],
   },
 
-  // --- Gafas de sol (sin fórmula) ---
+  //-------------------------------------------------------
+  // --- Gafas de sol (sin fórmula) -----------------------
+  //--------------------------------------------------------
+
   {
     id: "MF1042_M572",
     categoria: "gafasdesol",
@@ -265,20 +268,20 @@ export const productos: Producto[] = [
       "Lentes con protección UV400",
     ],
   },
-
+  //-------------------------------------------------------------------------
   // --- Monturas (sin fórmula) ---
-
+  //-------------------------------------------------------------------------
   {
-    id: "MF4001_k593",
+    id: "MF4001_K593",
     categoria: "monturas",
     laboratorio: "Miraflex",
-    slug: "MF4001_k593",
-    alt: "Miraflex MF4001 k593",
-    titulo: "Miraflex MF4001 k593",
+    slug: "MF4001_K593",
+    alt: "Miraflex MF4001 K593",
+    titulo: "Miraflex MF4001 K593",
     imagen: "/img/catalogo/Miraflex/MF4001_K593_Front.avif",
     galeria: [
-      "/img/catalogo/Miraflex/MF4001_k593_Side_1.avif",
-      "/img/catalogo/Miraflex/MF4001_k593_Side_2.avif",
+      "/img/catalogo/Miraflex/MF4001_K593_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4001_K593_Side_2.avif",
     ],
     precio: 240000,
     atributos: [
@@ -293,16 +296,16 @@ export const productos: Producto[] = [
     ],
   },
   {
-    id: "MF4001_k598",
+    id: "MF4001_K598",
     categoria: "monturas",
     laboratorio: "Miraflex",
-    slug: "MF4001_k598",
-    alt: "Miraflex MF4001 k598",
-    titulo: "Miraflex MF4001 k598",
-    imagen: "/img/catalogo/Miraflex/MF4001_k598_Front.avif",
+    slug: "MF4001_K598",
+    alt: "Miraflex MF4001 K598",
+    titulo: "Miraflex MF4001 K598",
+    imagen: "/img/catalogo/Miraflex/MF4001_K598_Front.avif",
     galeria: [
-      "/img/catalogo/Miraflex/MF4001_k598_Side_1.avif",
-      "/img/catalogo/Miraflex/MF4001_k598_Side_2.avif",
+      "/img/catalogo/Miraflex/MF4001_K598_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4001_K598_Side_2.avif",
     ],
     precio: 240000,
     atributos: [
@@ -317,16 +320,16 @@ export const productos: Producto[] = [
     ],
   },
   {
-    id: "MF4001_k602",
+    id: "MF4001_K602",
     categoria: "monturas",
     laboratorio: "Miraflex",
-    slug: "MF4001_k602",
-    alt: "Miraflex MF4001 k602",
-    titulo: "Miraflex MF4001 k602",
-    imagen: "/img/catalogo/Miraflex/MF4001_k602_Front.avif",
+    slug: "MF4001_K602",
+    alt: "Miraflex MF4001 K602",
+    titulo: "Miraflex MF4001 K602",
+    imagen: "/img/catalogo/Miraflex/MF4001_K02_Front.avif",
     galeria: [
-      "/img/catalogo/Miraflex/MF4001_k602_Side_1.avif",
-      "/img/catalogo/Miraflex/MF4001_k602_Side_2.avif",
+      "/img/catalogo/Miraflex/MF4001_K602_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4001_K602_Side_2.avif",
     ],
     precio: 240000,
     atributos: [
@@ -548,7 +551,7 @@ export const productos: Producto[] = [
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
       { etiqueta: "Froma", valor: "Ovalada" },
-      { etiqueta: "Color", valor: "Marado / Lila" },
+      { etiqueta: "Color", valor: "Morado / Lila" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",
@@ -572,7 +575,7 @@ export const productos: Producto[] = [
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
       { etiqueta: "Froma", valor: "Ovalada" },
-      { etiqueta: "Color", valor: "Marado / Lila" },
+      { etiqueta: "Color", valor: "Rosada translucida" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",
@@ -644,7 +647,7 @@ export const productos: Producto[] = [
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
       { etiqueta: "Froma", valor: "Rectangular" },
-      { etiqueta: "Color", valor: "Azul / Gris" },
+      { etiqueta: "Color", valor: "Azul translucido" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",
