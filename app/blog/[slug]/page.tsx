@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { articulos, obtenerArticulo } from "@/lib/articulos";
 import PaginaConSidebar from "@/components/PaginaConSidebar";
+import { generarSchemaArticulo, generarSchemaMigas } from "@/lib/schema";
 
 export function generateStaticParams() {
   return articulos.map((a) => ({ slug: a.slug }));
@@ -49,6 +50,22 @@ export default function ArticuloPage({ params }: { params: { slug: string } }) {
 
   return (
     <PaginaConSidebar sidebar={sidebar}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(generarSchemaArticulo(articulo)) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            generarSchemaMigas([
+              { nombre: "Inicio", url: "/" },
+              { nombre: "Blog", url: "/blog" },
+              { nombre: articulo.titulo, url: `/blog/${articulo.slug}` },
+            ])
+          ),
+        }}
+      />
       <h1 className="mb-6 text-3xl font-bold text-light md:text-4xl">
           {articulo.titulo}
         </h1>

@@ -8,22 +8,9 @@ export type Producto = {
   alt: string;
   titulo: string;
   imagen: string;
-  // Fotos adicionales (opcional, 1 o 2 más) — solo se muestran en la
-  // página de detalle del producto, como una galería junto a la
-  // imagen principal. El catálogo, el carrito y las redes sociales
-  // siguen usando solo "imagen".
   galeria?: string[];
   precio: number;
   descripcion: string[];
-
-  // Todo lo de abajo es EXCLUSIVO de lentes de contacto (categoria
-  // "lentesdecontacto") — queda opcional para que otras categorías
-  // (gafas de sol, monturas, gotas, soluciones) no tengan que rellenar
-  // campos que no les aplican.
-  //
-  // esferico = solo esfera (miopía/hipermetropía)
-  // torico = esfera+cilindro+eje (astigmatismo)
-  // multifocal = esfera+adición (presbicia)
   tipoFormula?: "esferico" | "torico" | "multifocal";
   uso?: string;
   reemplazo?: string;
@@ -231,10 +218,11 @@ export const productos: Producto[] = [
       "Fáciles de manipular, ideales para primerizos",
     ],
   },
-
-  // --- Gafas de sol (sin fórmula) ---
+  //----------------------------------------------------------------
+  // --- Gafas de sol (sin fórmula) --------------------------------
+  //----------------------------------------------------------------
   {
-    id: "MF1042",
+    id: "MF1042_M572",
     categoria: "gafasdesol",
     laboratorio: "Miraflex",
     slug: "MF1042_M572",
@@ -248,15 +236,16 @@ export const productos: Producto[] = [
     precio: 330000,
     atributos: [
       { etiqueta: "Protección UV", valor: "UV400" },
-      { etiqueta: "Material", valor: "Acetato" },
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
       { etiqueta: "Color", valor: "Negro / Dorado" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",
-      "Acetato inyectado",
+      "Plastico inyectado",
       "Es liviano y resistente",
     ],
   },
+
   {
     id: "DEMO-GS-002",
     categoria: "gafasdesol",
@@ -278,46 +267,392 @@ export const productos: Producto[] = [
     ],
   },
 
-  // --- Monturas (sin fórmula) ---
+  //----------------------------------------------------------------
+  // --- Monturas (sin fórmula) ------------------------------------
+  //----------------------------------------------------------------
+
   {
-    id: "DEMO-MT-001",
+    id: "MF4001_K593",
     categoria: "monturas",
-    laboratorio: "Ray-Ban",
-    slug: "demo-rayban-wayfarer-optica",
-    alt: "Montura óptica Ray-Ban Wayfarer",
-    titulo: "Ray-Ban Wayfarer Óptica (producto de prueba)",
-    imagen: "https://placehold.co/400x400/0d3857/FFFFFF?text=Wayfarer",
-    galeria: ["https://placehold.co/400x400/45deff/0d3857?text=Wayfarer+2"],
-    precio: 320000,
+    laboratorio: "Miraflex",
+    slug: "MF4001_K593",
+    alt: "Miraflex MF4001 K593",
+    titulo: "Miraflex MF4001 K593",
+    imagen: "/img/catalogo/Miraflex/MF4001_K593_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4001_K593_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4001_K593_Side_2.avif",
+    ],
+    precio: 240000,
     atributos: [
-      { etiqueta: "Material", valor: "Acetato" },
-      { etiqueta: "Forma", valor: "Cuadrada" },
-      { etiqueta: "Color", valor: "Negro" },
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Verde / Negro" },
     ],
     descripcion: [
-      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
-      "Montura óptica lista para tus lentes formulados",
-      "El diseño Wayfarer clásico, en versión oftálmica",
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
     ],
   },
   {
-    id: "DEMO-MT-002",
+    id: "MF4001_K598",
     categoria: "monturas",
-    laboratorio: "Vogue Eyewear",
-    slug: "demo-vogue-redonda",
-    alt: "Montura óptica Vogue redonda",
-    titulo: "Vogue Eyewear Redonda (producto de prueba)",
-    imagen: "https://placehold.co/400x400/0d3857/FFFFFF?text=Vogue",
-    precio: 280000,
+    laboratorio: "Miraflex",
+    slug: "MF4001_K598",
+    alt: "Miraflex MF4001 K598",
+    titulo: "Miraflex MF4001 K598",
+    imagen: "/img/catalogo/Miraflex/MF4001_K598_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4001_K598_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4001_K598_Side_2.avif",
+    ],
+    precio: 240000,
     atributos: [
-      { etiqueta: "Material", valor: "Metal" },
-      { etiqueta: "Forma", valor: "Redonda" },
-      { etiqueta: "Color", valor: "Rosado dorado" },
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Transparente / Azul" },
     ],
     descripcion: [
-      "Producto de ejemplo — reemplazar con datos reales antes de publicar",
-      "Diseño liviano y minimalista",
-      "Ideal para un look retro-moderno",
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4001_K602",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4001_K602",
+    alt: "Miraflex MF4001 K602",
+    titulo: "Miraflex MF4001 K602",
+    imagen: "/img/catalogo/Miraflex/MF4001_K602_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4001_K602_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4001_K602_Side_2.avif",
+    ],
+    precio: 240000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Verde / Negro" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4002_k613",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4002_K613",
+    alt: "Miraflex MF4002 K613",
+    titulo: "Miraflex MF4002 K613",
+    imagen: "/img/catalogo/Miraflex/MF4002_K613_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4002_K613_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4002_K613_Side_2.avif",
+    ],
+    precio: 240000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Transparente / Rosada" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4002_L122",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4002_L122",
+    alt: "Miraflex MF4002 L122",
+    titulo: "Miraflex MF4002 L122",
+    imagen: "/img/catalogo/Miraflex/MF4002_L122_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4002_L122_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4002_L122_Side_2.avif",
+    ],
+    precio: 240000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Transparente / Azul" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4002_K606",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4002_K606",
+    alt: "Miraflex MF4002 K606",
+    titulo: "Miraflex MF4002 K606",
+    imagen: "/img/catalogo/Miraflex/MF4002_K606_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4002_K606_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4002_K606_Side_2.avif",
+    ],
+    precio: 240000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Rosada translucida" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4002_K608",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4002_K608",
+    alt: "Miraflex MF4002 K608",
+    titulo: "Miraflex MF4002 K608",
+    imagen: "/img/catalogo/Miraflex/MF4002_K608_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4002_K608_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4002_K608_Side_2.avif",
+    ],
+    precio: 240000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Gris translucido / Azul" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4002_K610",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4002_K610",
+    alt: "Miraflex MF4002 K610",
+    titulo: "Miraflex MF4002 K610",
+    imagen: "/img/catalogo/Miraflex/MF4002_K610_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4002_K610_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4002_K610_Side_2.avif",
+    ],
+    precio: 240000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Azul translucido" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4007_L134",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4007_L134",
+    alt: "Miraflex MF4007 L134",
+    titulo: "Miraflex MF4007 L134",
+    imagen: "/img/catalogo/Miraflex/MF4007_L134_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4007_L134_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4007_L134_Side_2.avif",
+    ],
+    precio: 240000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Azul translucido / Azul" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4007_L137",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4007_L137",
+    alt: "Miraflex MF4007 L137",
+    titulo: "Miraflex MF4007 L137",
+    imagen: "/img/catalogo/Miraflex/MF4007_L137_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4007_L137_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4007_L137_Side_2.avif",
+    ],
+    precio: 240000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Transparente / Azul" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4007_L141",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4007_L141",
+    alt: "Miraflex MF4007 L141",
+    titulo: "Miraflex MF4007 L141",
+    imagen: "/img/catalogo/Miraflex/MF4007_L141_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4007_L141_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4007_L141_Side_2.avif",
+    ],
+    precio: 240000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Transparente / Azul" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4010_L892",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4010_L892",
+    alt: "Miraflex MF4010 L892",
+    titulo: "Miraflex MF4010 L892",
+    imagen: "/img/catalogo/Miraflex/MF4010_L892_Front.webp",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4010_L892_Side_1.webp",
+      "/img/catalogo/Miraflex/MF4010_L892_Side_2.webp",
+    ],
+    precio: 300000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Ovalada" },
+      { etiqueta: "Color", valor: "Morado / Lila" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4010_L358",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4010_L358",
+    alt: "Miraflex MF4010 L358",
+    titulo: "Miraflex MF4010 L358",
+    imagen: "/img/catalogo/Miraflex/MF4010_L358_Front.webp",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4010_L358_Side_1.webp",
+      "/img/catalogo/Miraflex/MF4010_L358_Side_2.webp",
+    ],
+    precio: 300000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Ovalada" },
+      { etiqueta: "Color", valor: "Rosada translucida" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4012_L365",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4012_L365",
+    alt: "Miraflex MF4012 L365",
+    titulo: "Miraflex MF4012 L365",
+    imagen: "/img/catalogo/Miraflex/MF4012_L365_Front.webp",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4012_L365_Side_1.webp",
+      "/img/catalogo/Miraflex/MF4012_L365_Side_2.webp",
+    ],
+    precio: 300000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Verde / Gris" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4012_L366",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4012_L366",
+    alt: "Miraflex MF4012 L366",
+    titulo: "Miraflex MF4012 L366",
+    imagen: "/img/catalogo/Miraflex/MF4012_L366_Front.avif",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4012_L366_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4012_L366_Side_2.avif",
+    ],
+    precio: 300000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Azul / Gris" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
+    ],
+  },
+  {
+    id: "MF4012_L368",
+    categoria: "monturas",
+    laboratorio: "Miraflex",
+    slug: "MF4012_L368",
+    alt: "Miraflex MF4012 L368",
+    titulo: "Miraflex MF4012 L368",
+    imagen: "/img/catalogo/Miraflex/MF4012_L368_Front.webp",
+    galeria: [
+      "/img/catalogo/Miraflex/MF4012_L368_Side_1.webp",
+      "/img/catalogo/Miraflex/MF4012_L368_Side_2.webp",
+    ],
+    precio: 300000,
+    atributos: [
+      { etiqueta: "Material", valor: "Plastico Inyectado" },
+      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Color", valor: "Azul / Gris" },
+    ],
+    descripcion: [
+      "Gafas de sol para niños(as)",
+      "Plastico inyectado",
+      "Es liviano y resistente",
     ],
   },
 

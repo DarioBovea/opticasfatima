@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ImagenConLupa from "@/components/ImagenConLupa";
 
 export default function GaleriaImagenes({
   imagenes,
@@ -13,12 +14,7 @@ export default function GaleriaImagenes({
 
   return (
     <div className="flex flex-col items-center gap-4" data-aos="fade-right">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={imagenes[seleccionada]}
-        alt={alt}
-        className="max-h-[28rem] w-full object-contain"
-      />
+      <ImagenConLupa src={imagenes[seleccionada]} alt={alt} className="w-full" />
 
       {/* Las miniaturas solo aparecen si hay más de 1 imagen */}
       {imagenes.length > 1 && (

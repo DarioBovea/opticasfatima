@@ -6,6 +6,7 @@ import AosProvider from "@/components/AosProvider";
 import { CartProvider } from "@/context/CartContext";
 import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from "@/lib/seo";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { generarSchemaNegocio } from "@/lib/schema";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -61,6 +62,13 @@ export default function RootLayout({
     <html lang="es-CO" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: scriptTema }} />
+        {/* Datos estructurados del negocio (Schema.org) — le dicen a
+            Google explícitamente que esto es una óptica, con su
+            dirección, teléfono y horario. Aparece en todas las páginas. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(generarSchemaNegocio()) }}
+        />
       </head>
       <body>
         <AosProvider />
