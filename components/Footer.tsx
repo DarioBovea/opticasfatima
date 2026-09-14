@@ -19,7 +19,7 @@ export default function Footer() {
           />
         </div>
 
-        <div className="w-full text-center md:w-1/3" text-lg data-aos="fade-up" data-aos-delay="100">
+        <div className="w-full text-center md:w-1/3 text-lg" data-aos="fade-up" data-aos-delay="100">
           <span className="text-2xl font-bold">Comuníquese con nosotros:</span>
           <div className="my-4">
             <p className="font-bold">De lunes a viernes,</p>

@@ -215,7 +215,10 @@ export const productos: Producto[] = [
     ],
   },
 
-  // --- Gafas de sol (sin fórmula) ---
+  //-------------------------------------------------------
+  // --- Gafas de sol (sin fórmula) -----------------------
+  //--------------------------------------------------------
+
   {
     id: "MF1042_M572",
     categoria: "gafasdesol",
@@ -261,9 +264,9 @@ export const productos: Producto[] = [
       "Lentes con protección UV400",
     ],
   },
-
+  //-------------------------------------------------------------------------
   // --- Monturas (sin fórmula) ---
-
+  //-------------------------------------------------------------------------
   {
     id: "MF4001_K593",
     categoria: "monturas",
@@ -319,7 +322,11 @@ export const productos: Producto[] = [
     slug: "MF4001_K602",
     alt: "Miraflex MF4001 K602",
     titulo: "Miraflex MF4001 K602",
+<<<<<<< HEAD
     imagen: "/img/catalogo/Miraflex/MF4001_K602_Front.avif",
+=======
+    imagen: "/img/catalogo/Miraflex/MF4001_K02_Front.avif",
+>>>>>>> 4c6eb7b78159b36d1d811948040dbbb5dabdcf2d
     galeria: [
       "/img/catalogo/Miraflex/MF4001_K602_Side_1.avif",
       "/img/catalogo/Miraflex/MF4001_K602_Side_2.avif",
@@ -544,7 +551,7 @@ export const productos: Producto[] = [
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
       { etiqueta: "Froma", valor: "Ovalada" },
-      { etiqueta: "Color", valor: "Marado / Lila" },
+      { etiqueta: "Color", valor: "Morado / Lila" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",
@@ -568,7 +575,7 @@ export const productos: Producto[] = [
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
       { etiqueta: "Froma", valor: "Ovalada" },
-      { etiqueta: "Color", valor: "Marado / Lila" },
+      { etiqueta: "Color", valor: "Rosada translucida" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",
@@ -640,7 +647,7 @@ export const productos: Producto[] = [
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
       { etiqueta: "Froma", valor: "Rectangular" },
-      { etiqueta: "Color", valor: "Azul / Gris" },
+      { etiqueta: "Color", valor: "Azul translucido" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",

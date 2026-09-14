@@ -8,9 +8,30 @@ export function generateStaticParams() {
   return articulos.map((a) => ({ slug: a.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const articulo = obtenerArticulo(params.slug);
+// Codigo anterior
+// export function generateMetadata({ params }: { params: { slug: string } }) {
+//   const articulo = obtenerArticulo(params.slug);
+//   if (!articulo) return {};
+//   return {
+//     title: articulo.titulo,
+//     description: articulo.descripcion,
+//     alternates: { canonical: `/blog/${articulo.slug}` },
+//     openGraph: {
+//       type: "article",
+//       url: `/blog/${articulo.slug}`,
+//       title: articulo.titulo,
+//       description: articulo.descripcion,
+//     },
+//   };
+// }
+
+//  Código nuevo corregido:
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const articulo = obtenerArticulo(slug);
+  
   if (!articulo) return {};
+  
   return {
     title: articulo.titulo,
     description: articulo.descripcion,
