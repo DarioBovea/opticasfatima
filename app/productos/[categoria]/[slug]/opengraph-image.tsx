@@ -14,9 +14,6 @@ export default async function Image({ params }: { params: Promise<{ categoria: s
   const titulo = producto?.titulo ?? "Ópticas Fátima";
   const precio = producto ? `$${producto.precio.toLocaleString("es-CO")}` : "";
   const etiqueta = categoria ? `${categoria.nombre.toUpperCase()}${producto ? " " + producto.laboratorio.toUpperCase() : ""}` : "ÓPTICAS FÁTIMA";
-  // Los productos reales usan una ruta local ("/img/..."), pero los de
-  // prueba usan una URL externa completa (placehold.co) — si ya
-  // empieza con "http", no le anteponemos el dominio del sitio.
   const urlImagen = producto?.imagen.startsWith("http")
     ? producto.imagen
     : `${SITE_URL}${producto?.imagen ?? ""}`;

@@ -12,15 +12,13 @@ const NEGOCIO = {
   ciudad: "Pasto",
   region: "Nariño",
   pais: "CO",
-  whatsapp: "https://wa.me/573206740505",
+  whatsapp: "https://wa.me/573043446574",
   facebook: "https://www.facebook.com/opticasfatima",
   instagram: "https://www.instagram.com/opticasfatima/",
   linkedin: "https://www.linkedin.com/in/opticasfatima/",
 };
 
-// Negocio local (aparece en TODAS las páginas, vía app/layout.tsx).
-// "Optician" es un subtipo de Schema.org pensado específicamente para
-// ópticas — más preciso que un genérico "LocalBusiness".
+
 export function generarSchemaNegocio() {
   return {
     "@context": "https://schema.org",
@@ -61,13 +59,9 @@ export function generarSchemaNegocio() {
   };
 }
 
-// Un producto individual — le dice a Google el precio, la marca y si
-// hay existencias, lo que habilita resultados enriquecidos (precio,
-// disponibilidad) en la búsqueda.
+
 export function generarSchemaProducto(producto: Producto, categoria: Categoria) {
-  // Los productos reales usan una ruta local ("/img/..."); los de
-  // prueba usan una URL externa completa (placehold.co) — si ya
-  // empieza con "http", no le anteponemos el dominio del sitio.
+
   const urlImagen = producto.imagen.startsWith("http")
     ? producto.imagen
     : `${SITE_URL}${producto.imagen}`;

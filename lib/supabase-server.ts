@@ -15,7 +15,7 @@ export function crearClienteSupabaseServidor() {
             cookieStore.set({ name, value, ...options });
           } catch {
             // set() puede fallar si se llama desde un Server Component
-            // puro; el middleware se encarga de refrescar la sesión.
+            // puro; el middleware (Proxy) se encarga de refrescar la sesión.
           }
         },
         remove(name: string, options: CookieOptions) {

@@ -19,7 +19,7 @@ export default function Hero() {
           <p className="text-2xl font-semibold max-[720px]:text-base">la calidad que se nota.</p>
           <div className="mt-8 pl-4 flex text-center">
             <a
-              href="https://api.whatsapp.com/send/?phone=573205787143&text=Hola, quiero agendar una cita!"
+              href="https://api.whatsapp.com/send/?phone=573043446574&text=Hola, quiero agendar una cita!"
               target="_blank"
               rel="noopener noreferrer"
               title="Agenda tu cita"
