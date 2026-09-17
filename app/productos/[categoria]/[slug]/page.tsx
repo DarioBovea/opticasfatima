@@ -54,7 +54,7 @@ export default async function ProductoPage({
   ]);
 
   return (
-    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] pb-12">
+    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] py-12">
       {categoria && (
         <script
           type="application/ld+json"

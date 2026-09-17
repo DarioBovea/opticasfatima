@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function PoliticaPrivacidadPage() {
   return (
-    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 pb-24">
+    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 py-12">
       <div className="mx-auto max-w-3xl text-primary dark:text-darktext">
         <h1 className="mb-2 text-3xl font-bold text-light md:text-4xl">
           Política de Privacidad

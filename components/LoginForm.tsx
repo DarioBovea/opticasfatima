@@ -32,7 +32,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] flex justify-center px-6 pb-24">
+    <div className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] flex justify-center px-6 py-12">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-sm rounded-lg border border-primary bg-white p-6 text-primary dark:border-light/40 dark:bg-darkcard dark:text-darktext"

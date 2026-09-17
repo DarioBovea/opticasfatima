@@ -64,7 +64,7 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Con el menú móvil a pantalla completa, bloqueamos el scroll de
+  // Con el menú móvil a pantalla completa, bloquea el scroll de
   // fondo
   useEffect(() => {
     document.body.style.overflow = menuAbierto ? "hidden" : "";
@@ -125,7 +125,7 @@ export default function Header() {
           />
         </Link>
 
-        <ul className="flex items-center gap-0 max-[720px]:hidden">
+        <ul className="flex items-center gap-0 max-[768px]:hidden">
           {menu.map((item) => {
             const activo = pathname === item.href;
             return (
@@ -156,7 +156,7 @@ export default function Header() {
 
           {/* Hamburguesa animada ≤720px */}
           <button
-            className="relative hidden h-[18px] w-[26px] max-[720px]:block"
+            className="relative hidden h-[18px] w-[26px] max-[768px]:block"
             aria-label="Abrir menú"
             onClick={() => setMenuAbierto((v) => !v)}
           >
@@ -233,18 +233,10 @@ export default function Header() {
 
       </header>
 
-      {/* Menú móvil — vive FUERA del <header> a propósito: el header
-          tiene backdrop-blur (efecto de vidrio), y en CSS cualquier
-          elemento con backdrop-filter/filter crea un nuevo "contenedor"
-          para sus descendientes con position:fixed. Si este menú
-          quedara dentro del header, su "fixed inset-0" se posicionaría
-          relativo al header (~144px de alto) en vez de a toda la
-          pantalla — que era exactamente el bug reportado (el menú solo
-          se veía "de la mitad hacia abajo"). */}
       <div
-        className="fixed inset-0 z-40 hidden bg-white/95 backdrop-blur-lg transition-[clip-path] duration-500 ease-in-out max-[720px]:block dark:bg-darksurface/95"
+        className="fixed inset-0 z-40 hidden bg-white/95 backdrop-blur-lg transition-[clip-path] duration-600 ease-in-out max-[768px]:block dark:bg-darksurface/95"
         style={{
-          clipPath: menuAbierto ? "circle(150% at 0% 100%)" : "circle(0% at 0% 100%)",
+          clipPath: menuAbierto ? "circle(150% at 100% 0%)" : "circle(0% at 100% 0%) ",
           pointerEvents: menuAbierto ? "auto" : "none",
         }}
       >
