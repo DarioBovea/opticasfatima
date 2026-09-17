@@ -9,8 +9,9 @@ export function generateStaticParams() {
   return categorias.map((c) => ({ categoria: c.slug }));
 }
 
-export function generateMetadata({ params }: { params: { categoria: string } }) {
-  const categoria = obtenerCategoria(params.categoria);
+export async function generateMetadata({ params }: { params: Promise<{ categoria: string }> }) {
+  const { categoria: categoriaSlug } = await params;
+  const categoria = obtenerCategoria(categoriaSlug);
   if (!categoria) return {};
   return {
     title: categoria.nombre,
@@ -20,8 +21,9 @@ export function generateMetadata({ params }: { params: { categoria: string } }) 
   };
 }
 
-export default function CategoriaPage({ params }: { params: { categoria: string } }) {
-  const categoria = obtenerCategoria(params.categoria);
+export default async function CategoriaPage({ params }: { params: Promise<{ categoria: string }> }) {
+  const { categoria: categoriaSlug } = await params;
+  const categoria = obtenerCategoria(categoriaSlug);
   if (!categoria) notFound();
 
   const productosCategoria = obtenerProductosPorCategoria(categoria.slug);

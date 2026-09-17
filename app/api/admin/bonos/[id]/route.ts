@@ -7,8 +7,9 @@ const ESTADOS_VALIDOS: EstadoBono[] = ["pendiente", "confirmado", "utilizado"];
 
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const supabaseAuth = crearClienteSupabaseServidor();
   const {
     data: { user },
@@ -39,7 +40,7 @@ export async function PATCH(
     }
 
     const supabase = crearClienteSupabase();
-    const { error } = await supabase.from("bonos").update(actualizacion).eq("id", params.id);
+    const { error } = await supabase.from("bonos").update(actualizacion).eq("id", id);
 
     if (error) throw error;
 
@@ -55,8 +56,9 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await params;
   const supabaseAuth = crearClienteSupabaseServidor();
   const {
     data: { user },
@@ -68,7 +70,7 @@ export async function DELETE(
 
   try {
     const supabase = crearClienteSupabase();
-    const { error } = await supabase.from("bonos").delete().eq("id", params.id);
+    const { error } = await supabase.from("bonos").delete().eq("id", id);
 
     if (error) throw error;
 

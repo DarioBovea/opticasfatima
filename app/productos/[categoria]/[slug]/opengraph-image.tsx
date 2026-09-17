@@ -3,14 +3,14 @@ import { obtenerProducto } from "@/lib/productos";
 import { obtenerCategoria } from "@/lib/categorias";
 import { SITE_URL } from "@/lib/seo";
 
-export const runtime = "edge";
 export const alt = "Ópticas Fátima — Producto";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function Image({ params }: { params: { categoria: string; slug: string } }) {
-  const producto = obtenerProducto(params.slug);
-  const categoria = obtenerCategoria(params.categoria);
+export default async function Image({ params }: { params: Promise<{ categoria: string; slug: string }> }) {
+  const { categoria: categoriaSlug, slug } = await params;
+  const producto = obtenerProducto(slug);
+  const categoria = obtenerCategoria(categoriaSlug);
   const titulo = producto?.titulo ?? "Ópticas Fátima";
   const precio = producto ? `$${producto.precio.toLocaleString("es-CO")}` : "";
   const etiqueta = categoria ? `${categoria.nombre.toUpperCase()}${producto ? " " + producto.laboratorio.toUpperCase() : ""}` : "ÓPTICAS FÁTIMA";

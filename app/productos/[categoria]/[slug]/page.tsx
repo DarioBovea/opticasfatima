@@ -8,13 +8,14 @@ export function generateStaticParams() {
   return productos.map((p) => ({ categoria: p.categoria, slug: p.slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { categoria: string; slug: string };
+  params: Promise<{ categoria: string; slug: string }>;
 }) {
-  const producto = obtenerProducto(params.slug);
-  if (!producto || producto.categoria !== params.categoria) return {};
+  const { categoria: categoriaSlug, slug } = await params;
+  const producto = obtenerProducto(slug);
+  if (!producto || producto.categoria !== categoriaSlug) return {};
 
   const descripcion = producto.tipoFormula
     ? `${producto.titulo} — ${producto.uso}, ${producto.reemplazo}. Desde $${producto.precio.toLocaleString("es-CO")}.`
@@ -34,13 +35,14 @@ export function generateMetadata({
   };
 }
 
-export default function ProductoPage({
+export default async function ProductoPage({
   params,
 }: {
-  params: { categoria: string; slug: string };
+  params: Promise<{ categoria: string; slug: string }>;
 }) {
-  const producto = obtenerProducto(params.slug);
-  if (!producto || producto.categoria !== params.categoria) notFound();
+  const { categoria: categoriaSlug, slug } = await params;
+  const producto = obtenerProducto(slug);
+  if (!producto || producto.categoria !== categoriaSlug) notFound();
 
   const categoria = obtenerCategoria(producto.categoria);
 

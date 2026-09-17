@@ -496,7 +496,7 @@ export const productos: Producto[] = [
     titulo: "Miraflex MF4007 L137",
     imagen: "/img/catalogo/Miraflex/MF4007_L137_Front.avif",
     galeria: [
-      "/img/catalogo/Miraflex/MF4007_L137_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4007_L137_Side_1.avif",//imagen repetida
       "/img/catalogo/Miraflex/MF4007_L137_Side_2.avif",
     ],
     precio: 240000,

@@ -12,12 +12,13 @@ const colorTipo: Record<string, string> = {
   Producto: "bg-primary text-white",
 };
 
-export default function BuscarPage({
+export default async function BuscarPage({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: Promise<{ q?: string }>;
 }) {
-  const consulta = searchParams.q ?? "";
+  const { q } = await searchParams;
+  const consulta = q ?? "";
   const resultados = buscar(consulta);
 
   return (

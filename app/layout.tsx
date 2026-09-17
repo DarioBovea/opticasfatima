@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -61,10 +62,21 @@ export default function RootLayout({
   return (
     <html lang="es-CO" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: scriptTema }} />
+        {/* next/script con strategy="beforeInteractive": React 19 ya no
+            permite <script> normales dentro del árbol que se hidrata en
+            el cliente. Esta estrategia es la pensada justo para esto —
+            corre antes de la hidratación, así que sigue evitando el
+            parpadeo blanco/oscuro al cargar. */}
+        <Script id="script-tema" strategy="beforeInteractive">
+          {scriptTema}
+        </Script>
         {/* Datos estructurados del negocio (Schema.org) — le dicen a
             Google explícitamente que esto es una óptica, con su
-            dirección, teléfono y horario. Aparece en todas las páginas. */}
+            dirección, teléfono y horario. Aparece en todas las páginas.
+            Este sí puede seguir como <script> normal: layout.tsx es un
+            Server Component y esto no ejecuta nada, solo es JSON para
+            los rastreadores — es el patrón que la propia documentación
+            de Next.js recomienda para JSON-LD. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(generarSchemaNegocio()) }}

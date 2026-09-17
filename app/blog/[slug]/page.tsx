@@ -8,8 +8,9 @@ export function generateStaticParams() {
   return articulos.map((a) => ({ slug: a.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const articulo = obtenerArticulo(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const articulo = obtenerArticulo(slug);
   if (!articulo) return {};
   return {
     title: articulo.titulo,
@@ -24,8 +25,9 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function ArticuloPage({ params }: { params: { slug: string } }) {
-  const articulo = obtenerArticulo(params.slug);
+export default async function ArticuloPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const articulo = obtenerArticulo(slug);
   if (!articulo) notFound();
 
   const otros = articulos.filter((a) => a.slug !== articulo.slug);
