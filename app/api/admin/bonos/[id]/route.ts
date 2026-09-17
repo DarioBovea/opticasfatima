@@ -10,7 +10,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const supabaseAuth = crearClienteSupabaseServidor();
+  const supabaseAuth = await crearClienteSupabaseServidor();
   const {
     data: { user },
   } = await supabaseAuth.auth.getUser();
@@ -59,7 +59,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const { id } = await params;
-  const supabaseAuth = crearClienteSupabaseServidor();
+  const supabaseAuth = await crearClienteSupabaseServidor();
   const {
     data: { user },
   } = await supabaseAuth.auth.getUser();
