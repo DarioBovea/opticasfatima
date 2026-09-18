@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FeaturedServicesSeparator } from "@/components/Separador";
 
 type Servicio = {
   titulo: string;
@@ -18,7 +19,13 @@ const servicios: Servicio[] = [
 
 export default function Servicios() {
   return (
-    <section className="mb-24 flex flex-wrap">
+    <section className="w-full mx-auto md:w-4/5 2xl:w-[70%] mb-24 flex flex-wrap">
+
+        <div className="w-full mb-12" data-aos="slide-right">
+          <FeaturedServicesSeparator />
+        </div>
+
+
       {servicios.map((s, i) => (
         <div
           key={s.titulo}

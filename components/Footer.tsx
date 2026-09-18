@@ -9,7 +9,7 @@ const redes = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-primary pt-12 text-white min-[1920px]:pt-[120px]">
+    <footer className="w-full bg-primary pt-12 text-white">
       <div className="mx-auto flex w-4/5 flex-col items-center gap-10 py-6 md:flex-row">
         <div className="w-full text-center md:w-1/3 max-[768px]:mt-6" data-aos="fade-up">
           <img

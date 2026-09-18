@@ -146,12 +146,12 @@ export const articulos: Articulo[] = [
   },
   {
     slug: "vision-del-futuro",
-    titulo: `La Visión del Futuro: Innovación y Cuidado en la Óptica Moderna`,
+    titulo: `Innovación y Cuidado en la Óptica Moderna`,
     categoria: `La Visión del Futuro`,
     descripcion: `En el mundo acelerado de hoy, la tecnología avanza a pasos agigantados, y la industria óptica no se queda atrás.`,
     imagen: "/img/retinografo.webp",
     contenido: [
-      { tipo: "p", texto: `En el mundo acelerado de hoy, la tecnología avanza a pasos agigantados, y la industria óptica no se queda atrás. Con innovaciones que transforman la manera en que vemos el mundo, las ópticas modernas ofrecen mucho más que corrección visual; ofrecen una ventana a un futuro más claro y saludable para nuestros ojos.` },
+      { tipo: "p", texto: `En el mundo acelerado de hoy, la tecnología avanza a pasos agigantados, y la industria óptica no se queda atrás. Con innovaciónes que transforman la manera en que vemos el mundo, las ópticas modernas ofrecen mucho más que corrección visual; ofrecen una ventana a un futuro más claro y saludable para nuestros ojos.` },
       { tipo: "h2", texto: `Innovación Tecnológica` },
       { tipo: "p", texto: `Las ópticas de hoy en día están equipadas con tecnología de punta para realizar exámenes visuales más precisos y personalizados. Desde topógrafos corneales que mapean la superficie del ojo con exactitud milimétrica, hasta retinógrafos que capturan imágenes detalladas del fondo de ojo, la tecnología está al servicio de la salud visual.` },
       { tipo: "h2", texto: `Lentes Personalizados` },

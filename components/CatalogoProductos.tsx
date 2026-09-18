@@ -145,15 +145,16 @@ export default function CatalogoProductos({ productos }: Props) {
                     si el producto tiene fórmula */}
                 <div className="relative flex items-center justify-center bg-canvas py-8 dark:bg-darksurface">
                   {p.tipoFormula && (
-                    <span className="absolute left-3 top-3 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
+                    <span className="absolute left-3 top-3 z-10 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white">
                       {ETIQUETA_TIPO_FORMULA[p.tipoFormula]}
                     </span>
+                    
                   )}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={p.imagen}
                     alt={p.alt}
-                    className="max-w-[200px] transition duration-300 group-hover:-translate-y-1 group-hover:scale-105"
+                    className="max-w-[200px] transition duration-300 group-hover:scale-105 group-hover:-translate-y-2"
                   />
                 </div>
 
