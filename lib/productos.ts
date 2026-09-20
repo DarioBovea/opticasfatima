@@ -18,6 +18,10 @@ export type Producto = {
   afeccion?: string;
   material?: string;
   contenidoAgua?: string;
+
+  // Para categorías SIN fórmula (gafas de sol, monturas, gotas,
+  // soluciones): pares clave/valor genéricos para la ficha técnica.
+  // Ej: [{ etiqueta: "Material", valor: "Acetato" }]
   atributos?: { etiqueta: string; valor: string }[];
 };
 
@@ -31,7 +35,7 @@ export const productos: Producto[] = [
     alt: "Acuvue Oasys con HydraClear Plus",
     titulo: "ACUVUE® Oasys con HydraClear Plus",
     imagen: "/img/catalogo/acuvue/acuvue_oasys_1.webp",
-    precio: 238900,
+    precio: 343400,
     uso: "Uso diario",
     reemplazo: "Reemplazo quincenal",
     contenido: "Caja con 6 unidades",
@@ -55,7 +59,7 @@ export const productos: Producto[] = [
     alt: "Acuvue Oasys para Astigmatismo con HydraClear Plus",
     titulo: "ACUVUE® Oasys para Astigmatismo con HydraClear Plus",
     imagen: "/img/catalogo/acuvue/acuvue_oasys_astig.webp",
-    precio: 296900,
+    precio: 420300,
     uso: "Uso diario",
     reemplazo: "Reemplazo quincenal",
     contenido: "Caja con 6 unidades",
@@ -79,7 +83,7 @@ export const productos: Producto[] = [
     alt: "Acuvue Oasys Multifocal",
     titulo: "ACUVUE® Oasys Multifocal",
     imagen: "/img/catalogo/acuvue/acuvue_oasys_multi.webp",
-    precio: 284900,
+    precio: 350200,
     uso: "Uso diario",
     reemplazo: "Reemplazo quincenal",
     contenido: "Caja con 6 unidades",
@@ -103,7 +107,7 @@ export const productos: Producto[] = [
     alt: "1-Day ACUVUE Moist con LACREON",
     titulo: "1-Day ACUVUE® Moist con LACREON™",
     imagen: "/img/catalogo/acuvue/acuvue_1day_moist.webp",
-    precio: 202900,
+    precio: 256800,
     uso: "Uso único",
     reemplazo: "Reemplazo diario",
     contenido: "Caja con 30 unidades",
@@ -127,7 +131,7 @@ export const productos: Producto[] = [
     alt: "1-Day ACUVUE Moist para Astigmatismo con LACREON",
     titulo: "1-Day ACUVUE® Moist para Astigmatismo con LACREON™",
     imagen: "/img/catalogo/acuvue/acuvue_1day_moist_astig.webp",
-    precio: 245900,
+    precio: 304600,
     uso: "Uso único",
     reemplazo: "Reemplazo diario",
     contenido: "Caja con 30 unidades",
@@ -151,7 +155,7 @@ export const productos: Producto[] = [
     alt: "Acuvue Vita",
     titulo: "ACUVUE® Vita™",
     imagen: "/img/catalogo/acuvue/acuvue_vita.webp",
-    precio: 291900,
+    precio: 355600,
     uso: "Uso diario",
     reemplazo: "Reemplazo mensual",
     contenido: "Caja con 6 unidades",
@@ -175,7 +179,7 @@ export const productos: Producto[] = [
     alt: "Acuvue Vita para Astigmatismo",
     titulo: "ACUVUE® Vita™ para Astigmatismo",
     imagen: "/img/catalogo/acuvue/acuvue_vita_astig.webp",
-    precio: 308900,
+    precio: 323200,
     uso: "Uso diario",
     reemplazo: "Reemplazo mensual",
     contenido: "Caja con 6 unidades",
@@ -199,7 +203,7 @@ export const productos: Producto[] = [
     alt: "Acuvue 2",
     titulo: "ACUVUE® 2",
     imagen: "/img/catalogo/acuvue/acuvue_2.webp",
-    precio: 221900,
+    precio: 266000,
     uso: "Uso diario",
     reemplazo: "Reemplazo quincenal",
     contenido: "Caja con 6 unidades",
@@ -214,11 +218,9 @@ export const productos: Producto[] = [
       "Fáciles de manipular, ideales para primerizos",
     ],
   },
-
-  //-------------------------------------------------------
-  // --- Gafas de sol (sin fórmula) -----------------------
-  //--------------------------------------------------------
-
+  //----------------------------------------------------------------
+  // --- Gafas de sol (sin fórmula) --------------------------------
+  //----------------------------------------------------------------
   {
     id: "MF1042_M572",
     categoria: "gafasdesol",
@@ -264,9 +266,11 @@ export const productos: Producto[] = [
       "Lentes con protección UV400",
     ],
   },
-  //-------------------------------------------------------------------------
-  // --- Monturas (sin fórmula) ---
-  //-------------------------------------------------------------------------
+
+  //----------------------------------------------------------------
+  // --- Monturas (sin fórmula) ------------------------------------
+  //----------------------------------------------------------------
+
   {
     id: "MF4001_K593",
     categoria: "monturas",
@@ -322,11 +326,7 @@ export const productos: Producto[] = [
     slug: "MF4001_K602",
     alt: "Miraflex MF4001 K602",
     titulo: "Miraflex MF4001 K602",
-<<<<<<< HEAD
     imagen: "/img/catalogo/Miraflex/MF4001_K602_Front.avif",
-=======
-    imagen: "/img/catalogo/Miraflex/MF4001_K02_Front.avif",
->>>>>>> 4c6eb7b78159b36d1d811948040dbbb5dabdcf2d
     galeria: [
       "/img/catalogo/Miraflex/MF4001_K602_Side_1.avif",
       "/img/catalogo/Miraflex/MF4001_K602_Side_2.avif",
@@ -496,7 +496,7 @@ export const productos: Producto[] = [
     titulo: "Miraflex MF4007 L137",
     imagen: "/img/catalogo/Miraflex/MF4007_L137_Front.avif",
     galeria: [
-      "/img/catalogo/Miraflex/MF4007_L137_Side_1.avif",
+      "/img/catalogo/Miraflex/MF4007_L137_Side_1.avif",//imagen repetida
       "/img/catalogo/Miraflex/MF4007_L137_Side_2.avif",
     ],
     precio: 240000,
@@ -647,7 +647,7 @@ export const productos: Producto[] = [
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
       { etiqueta: "Froma", valor: "Rectangular" },
-      { etiqueta: "Color", valor: "Azul translucido" },
+      { etiqueta: "Color", valor: "Azul / Gris" },
     ],
     descripcion: [
       "Gafas de sol para niños(as)",

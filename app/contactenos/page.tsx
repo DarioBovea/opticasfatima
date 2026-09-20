@@ -27,7 +27,7 @@ export default function ContactenosPage() {
         <div className="w-4/5 mx-auto grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div className="mx-6">
             <p>Carrera 18 # 19b - 06 Consultorio 2</p>
-            <p>Teléfonos: 320 578 71 43 - 304 344 65 74</p>
+            <p>Teléfonos: 320 578 71 43 - 317 797 99 76</p>
             <p>Correo: info@opticasfatima.com</p>
             <p>Website: opticasfatima.com</p>
           </div>

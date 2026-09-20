@@ -12,16 +12,17 @@ const colorTipo: Record<string, string> = {
   Producto: "bg-primary text-white",
 };
 
-export default function BuscarPage({
+export default async function BuscarPage({
   searchParams,
 }: {
-  searchParams: { q?: string };
+  searchParams: Promise<{ q?: string }>;
 }) {
-  const consulta = searchParams.q ?? "";
+  const { q } = await searchParams;
+  const consulta = q ?? "";
   const resultados = buscar(consulta);
 
   return (
-    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 pb-24">
+    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 py-12">
       <div className="mx-auto max-w-3xl">
         <h1 className="mb-2 text-2xl font-bold text-primary dark:text-darktext">
           Resultados para &ldquo;{consulta}&rdquo;

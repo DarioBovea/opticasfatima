@@ -7,15 +7,13 @@ export const alt = "Ópticas Fátima — Producto";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function Image({ params }: { params: { categoria: string; slug: string } }) {
-  const producto = obtenerProducto(params.slug);
-  const categoria = obtenerCategoria(params.categoria);
+export default async function Image({ params }: { params: Promise<{ categoria: string; slug: string }> }) {
+  const { categoria: categoriaSlug, slug } = await params;
+  const producto = obtenerProducto(slug);
+  const categoria = obtenerCategoria(categoriaSlug);
   const titulo = producto?.titulo ?? "Ópticas Fátima";
   const precio = producto ? `$${producto.precio.toLocaleString("es-CO")}` : "";
   const etiqueta = categoria ? `${categoria.nombre.toUpperCase()}${producto ? " " + producto.laboratorio.toUpperCase() : ""}` : "ÓPTICAS FÁTIMA";
-  // Los productos reales usan una ruta local ("/img/..."), pero los de
-  // prueba usan una URL externa completa (placehold.co) — si ya
-  // empieza con "http", no le anteponemos el dominio del sitio.
   const urlImagen = producto?.imagen.startsWith("http")
     ? producto.imagen
     : `${SITE_URL}${producto?.imagen ?? ""}`;

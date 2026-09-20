@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useCart } from "@/context/CartContext";
 import { obtenerProductoPorId } from "@/lib/productos";
 
-const NUMERO_WHATSAPP = "573206740505";
+const NUMERO_WHATSAPP = "573043446574";
 
 function formatearRx(
   tipoFormula: "esferico" | "torico" | "multifocal",
@@ -139,7 +139,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] min-h-[calc(100vh-344px)] px-6 pb-24 md:px-[calc((100%-1180px)/2)]">
+    <div className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] min-h-[calc(100vh-344px)] px-6 py-12 md:px-[calc((100%-1180px)/2)]">
       <h2 className="mb-8 text-2xl font-bold text-primary dark:text-darktext">Carrito De Compras</h2>
 
       {filas.length === 0 ? (

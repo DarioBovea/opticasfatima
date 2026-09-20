@@ -5,8 +5,9 @@ export const alt = "Ópticas Fátima — Blog";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default async function Image({ params }: { params: { slug: string } }) {
-  const articulo = obtenerArticulo(params.slug);
+export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const articulo = obtenerArticulo(slug);
   const titulo = articulo?.titulo ?? "Ópticas Fátima";
   const categoria = articulo?.categoria ?? "Blog";
 

@@ -9,8 +9,9 @@ export function generateStaticParams() {
   return categorias.map((c) => ({ categoria: c.slug }));
 }
 
-export function generateMetadata({ params }: { params: { categoria: string } }) {
-  const categoria = obtenerCategoria(params.categoria);
+export async function generateMetadata({ params }: { params: Promise<{ categoria: string }> }) {
+  const { categoria: categoriaSlug } = await params;
+  const categoria = obtenerCategoria(categoriaSlug);
   if (!categoria) return {};
   return {
     title: categoria.nombre,
@@ -20,14 +21,15 @@ export function generateMetadata({ params }: { params: { categoria: string } }) 
   };
 }
 
-export default function CategoriaPage({ params }: { params: { categoria: string } }) {
-  const categoria = obtenerCategoria(params.categoria);
+export default async function CategoriaPage({ params }: { params: Promise<{ categoria: string }> }) {
+  const { categoria: categoriaSlug } = await params;
+  const categoria = obtenerCategoria(categoriaSlug);
   if (!categoria) notFound();
 
   const productosCategoria = obtenerProductosPorCategoria(categoria.slug);
 
   return (
-    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 pb-24">
+    <section className="mt-36 max-[820px]:mt-[7.5em] min-[1920px]:mt-[11.25rem] px-6 py-12">
       <div className="mx-auto max-w-6xl">
         <h1 className="py-8 text-3xl font-bold text-primary dark:text-darktext">{categoria.nombre}</h1>
 

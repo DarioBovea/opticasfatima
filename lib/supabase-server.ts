@@ -2,8 +2,8 @@ import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "@/lib/supabase-env";
 
-export function crearClienteSupabaseServidor() {
-  const cookieStore = cookies();
+export async function crearClienteSupabaseServidor() {
+  const cookieStore = await cookies();
 
   return createServerClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
       cookies: {
@@ -15,7 +15,7 @@ export function crearClienteSupabaseServidor() {
             cookieStore.set({ name, value, ...options });
           } catch {
             // set() puede fallar si se llama desde un Server Component
-            // puro; el middleware se encarga de refrescar la sesión.
+            // puro; el middleware (Proxy) se encarga de refrescar la sesión.
           }
         },
         remove(name: string, options: CookieOptions) {

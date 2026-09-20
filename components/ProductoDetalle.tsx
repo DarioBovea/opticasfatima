@@ -192,7 +192,7 @@ function FormularioConFormula({ producto }: { producto: Producto }) {
             </p>
           </div>
 
-          <div className="mt-5 flex flex-wrap gap-4">
+          <div className="mt-5 flex flex-wrap md:flex-nowrap gap-4">
             <button
               type="button"
               onClick={() => setMismaFormula(true)}
@@ -263,13 +263,13 @@ function FormularioConFormula({ producto }: { producto: Producto }) {
           )}
         </div>
 
-        <div className="mt-8 flex items-center justify-between">
+        <div className="mt-8 flex flex-col lg:flex-row items-center justify-around">
           <span className="text-2xl font-extrabold text-light">
             ${producto.precio.toLocaleString("es-CO")} <span className="text-sm font-normal text-primary dark:text-darktext">c/u</span>
           </span>
           <button
             type="submit"
-            className="rounded-lg bg-primary px-6 py-3 font-bold uppercase text-white shadow-btn transition hover:bg-light"
+            className="mt-4 rounded-lg bg-primary px-6 py-3 font-bold uppercase text-white shadow-btn transition hover:bg-light"
           >
             Agregar al carrito
           </button>
@@ -304,7 +304,7 @@ function FormularioSimple({ producto }: { producto: Producto }) {
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-between">
+        <div className="mt-8 flex items-center justify-aroundn">
           <span className="text-2xl font-extrabold text-light">
             ${producto.precio.toLocaleString("es-CO")} <span className="text-sm font-normal text-primary dark:text-darktext">c/u</span>
           </span>

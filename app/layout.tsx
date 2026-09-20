@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -61,10 +62,10 @@ export default function RootLayout({
   return (
     <html lang="es-CO" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: scriptTema }} />
-        {/* Datos estructurados del negocio (Schema.org) — le dicen a
-            Google explícitamente que esto es una óptica, con su
-            dirección, teléfono y horario. Aparece en todas las páginas. */}
+        <Script id="script-tema" strategy="beforeInteractive">
+          {scriptTema}
+        </Script>
+        {/* Datos estructurados del negocio (Schema.org). */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(generarSchemaNegocio()) }}
