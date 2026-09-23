@@ -3,7 +3,7 @@
 import { useRef, useState, type MouseEvent } from "react";
 
 const ZOOM = 2.5; // cuánto se amplía dentro de la lupa
-const TAMANO_LUPA = 180; // diámetro del círculo, en píxeles
+const TAMANO_LUPA = 400;
 
 export default function ImagenConLupa({
   src,
@@ -52,7 +52,7 @@ export default function ImagenConLupa({
       {activo && (
         <div
           aria-hidden
-          className="pointer-events-none absolute z-10 hidden rounded-full border-2 border-white bg-white shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:block"
+          className="pointer-events-none absolute z-10 hidden border-2 border-white bg-white shadow-[0_4px_20px_rgba(0,0,0,0.35)] sm:block"
           style={{
             width: TAMANO_LUPA,
             height: TAMANO_LUPA,

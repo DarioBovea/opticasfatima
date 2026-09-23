@@ -49,6 +49,10 @@ export const productos: Producto[] = [
       "Ideales para corregir tu visión",
       "Sentirás la libertad y comodidad que buscas",
     ],
+    galeria: [
+      "/img/catalogo/Miraflex/MF1042_M572_Side_1.avif",
+      "/img/catalogo/Miraflex/MF1042_M572_Side_2.avif",
+    ],
   },
   {
     id: "Acuvue002",
@@ -286,7 +290,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Verde / Negro" },
     ],
     descripcion: [
@@ -310,7 +314,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Transparente / Azul" },
     ],
     descripcion: [
@@ -334,7 +338,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Verde / Negro" },
     ],
     descripcion: [
@@ -358,7 +362,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Transparente / Rosada" },
     ],
     descripcion: [
@@ -382,7 +386,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Transparente / Azul" },
     ],
     descripcion: [
@@ -406,7 +410,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Rosada translucida" },
     ],
     descripcion: [
@@ -430,7 +434,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Gris translucido / Azul" },
     ],
     descripcion: [
@@ -454,7 +458,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Azul translucido" },
     ],
     descripcion: [
@@ -478,7 +482,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Azul translucido / Azul" },
     ],
     descripcion: [
@@ -502,7 +506,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Transparente / Azul" },
     ],
     descripcion: [
@@ -526,7 +530,7 @@ export const productos: Producto[] = [
     precio: 240000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Transparente / Azul" },
     ],
     descripcion: [
@@ -550,7 +554,7 @@ export const productos: Producto[] = [
     precio: 300000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Ovalada" },
+      { etiqueta: "Forma", valor: "Ovalada" },
       { etiqueta: "Color", valor: "Morado / Lila" },
     ],
     descripcion: [
@@ -574,7 +578,7 @@ export const productos: Producto[] = [
     precio: 300000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Ovalada" },
+      { etiqueta: "Forma", valor: "Ovalada" },
       { etiqueta: "Color", valor: "Rosada translucida" },
     ],
     descripcion: [
@@ -598,7 +602,7 @@ export const productos: Producto[] = [
     precio: 300000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Verde / Gris" },
     ],
     descripcion: [
@@ -622,7 +626,7 @@ export const productos: Producto[] = [
     precio: 300000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Azul / Gris" },
     ],
     descripcion: [
@@ -646,7 +650,7 @@ export const productos: Producto[] = [
     precio: 300000,
     atributos: [
       { etiqueta: "Material", valor: "Plastico Inyectado" },
-      { etiqueta: "Froma", valor: "Rectangular" },
+      { etiqueta: "Forma", valor: "Rectangular" },
       { etiqueta: "Color", valor: "Azul / Gris" },
     ],
     descripcion: [

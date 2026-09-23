@@ -7,6 +7,7 @@ import type { Producto } from "@/lib/productos";
 import { opcionesEsfera, opcionesCilindro, opcionesEje, opcionesAdicion } from "@/lib/formula";
 import { useCart } from "@/context/CartContext";
 import GaleriaImagenes from "@/components/GaleriaImagenes";
+import IconoFicha from "@/components/IconoFicha";
 
 function Select({
   label,
@@ -196,20 +197,32 @@ function FormularioConFormula({ producto }: { producto: Producto }) {
             <button
               type="button"
               onClick={() => setMismaFormula(true)}
-              className={`w-1/2 rounded border px-2 py-2 text-xs font-semibold max-[430px]:w-full ${
-                mismaFormula ? "border-light text-light" : "border-light/40 text-light/40"
+              className={`flex w-full items-center justify-center rounded-[5px] border text-light text-xs font-semibold leading-normal transition ${
+                mismaFormula
+                    ?"border-light opacity-100"
+                  : "border-light/50 text-light/50 opacity-45"
               }`}
             >
-              ¿Misma fórmula en los dos ojos?
+              <span className="shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/img/icons/lente.svg" alt="" className="pl-1 w-[4em]" />
+              </span>
+              <span className="flex items-center justify-center pr-2">¿Misma fórmula en los dos ojos?</span>
             </button>
             <button
               type="button"
               onClick={() => setMismaFormula(false)}
-              className={`w-1/2 rounded border px-2 py-2 text-xs font-semibold max-[430px]:w-full ${
-                !mismaFormula ? "border-light text-light" : "border-light/40 text-light/40"
+              className={`flex w-full items-center justify-center rounded-[5px] border text-light text-xs font-semibold leading-normal transition ${
+                !mismaFormula
+                  ?"border-light text-light opacity-100"
+                  : "border-light/50 bg-transparent text-light opacity-45"
               }`}
             >
-              ¿Diferente fórmula para cada ojo?
+              <span className="shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/img/icons/lente2.svg" alt="" className="pl-1 w-[4em]" />
+              </span>
+              <span className="pr-2]">¿Diferente fórmula para cada ojo?</span>
             </button>
           </div>
 
@@ -304,7 +317,7 @@ function FormularioSimple({ producto }: { producto: Producto }) {
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-aroundn">
+        <div className="mt-8 flex items-center justify-around">
           <span className="text-2xl font-extrabold text-light">
             ${producto.precio.toLocaleString("es-CO")} <span className="text-sm font-normal text-primary dark:text-darktext">c/u</span>
           </span>
@@ -351,26 +364,32 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
       {tieneFormula ? (
         <div className="my-10 flex flex-wrap justify-center gap-6 rounded-xl border border-line p-6 max-[550px]:gap-4 max-[550px]:p-4 dark:border-darkline">
           <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
+            <IconoFicha src="/img/icons/time.svg" alt="" />
             <h4 className="font-bold">Tiempo de uso</h4>
             <span>{producto.reemplazo}</span>
           </div>
           <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
+            <IconoFicha src="/img/icons/contenido.svg" alt="" />
             <h4 className="font-bold">Contenido</h4>
             <span>{producto.contenido}</span>
           </div>
           <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
+            <IconoFicha src="/img/icons/testing.svg" alt="" />
             <h4 className="font-bold">Afección Visual</h4>
             <span>{producto.afeccion}</span>
           </div>
           <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
+            <IconoFicha src="/img/icons/trademark.svg" alt="" />
             <h4 className="font-bold">Marca</h4>
             <span>{producto.laboratorio}</span>
           </div>
           <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
+            <IconoFicha src="/img/icons/acuoso.svg" alt="" />
             <h4 className="font-bold">Contenido en agua</h4>
             <span>{producto.contenidoAgua}</span>
           </div>
           <div className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]">
+            <IconoFicha src="/img/icons/material.svg" alt="" />
             <h4 className="font-bold">Material</h4>
             <span>{producto.material}</span>
           </div>
@@ -384,6 +403,7 @@ export default function ProductoDetalle({ producto }: { producto: Producto }) {
                 key={a.etiqueta}
                 className="flex w-32 flex-col items-center text-center text-sm text-primary dark:text-darktext max-[320px]:w-[calc(50%-1rem)]"
               >
+                {a.etiqueta === "Material" && <IconoFicha src="/img/icons/material.svg" alt="" />}
                 <h4 className="font-bold">{a.etiqueta}</h4>
                 <span>{a.valor}</span>
               </div>
